@@ -265,7 +265,7 @@
             50% { border-color: #ff6b8b; }
         }
 
-        /* GALLERY STYLES - FIXED */
+        /* GALLERY STYLES */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -445,6 +445,186 @@
             font-size: 1.2rem;
         }
 
+        /* VALENTINE'S BUTTON STYLES */
+        .valentine-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+            border: 3px solid white;
+            animation: pulse 2s infinite;
+        }
+
+        .valentine-btn:hover {
+            background: #ff3355;
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.6);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                transform: translateX(-50%) scale(1.05);
+            }
+            100% {
+                transform: translateX(-50%) scale(1);
+            }
+        }
+
+        /* Valentine Modal */
+        .valentine-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .valentine-content {
+            background: linear-gradient(145deg, #fff0f0, #ffe0e0);
+            max-width: 500px;
+            width: 90%;
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            border: 5px solid white;
+            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.3);
+            animation: valentinePop 0.5s ease;
+        }
+
+        @keyframes valentinePop {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .valentine-question {
+            font-family: 'Caveat', cursive;
+            font-size: 3rem;
+            color: #ff4d6d;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 0 white;
+        }
+
+        .valentine-hearts {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .yes-btn {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            flex: 1;
+        }
+
+        .yes-btn:hover {
+            background: #ff3355;
+            transform: scale(1.05);
+        }
+
+        .no-btn {
+            background: #c0c0c0;
+            color: #666;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid #ddd;
+            flex: 1;
+        }
+
+        .no-btn.active {
+            background: #4a4a4a;
+            color: white;
+            cursor: pointer;
+            border: 3px solid #ff4d6d;
+        }
+
+        .no-btn.disabled {
+            background: #2a2a2a;
+            color: #444;
+            cursor: not-allowed;
+            opacity: 0.3;
+            pointer-events: none;
+            border: 3px solid #111;
+        }
+
+        .valentine-message {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.5rem;
+            color: #4a3f3f;
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            border: 3px dashed #ff4d6d;
+        }
+
+        .valentine-message i {
+            color: #ff4d6d;
+            margin: 0 10px;
+        }
+
+        .close-valentine {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 2.5rem;
+            color: white;
+            cursor: pointer;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .gallery-grid {
@@ -462,6 +642,19 @@
             .modal-content {
                 padding: 20px;
                 width: 95%;
+            }
+            
+            .valentine-question {
+                font-size: 2.5rem;
+            }
+            
+            .button-container {
+                flex-direction: column;
+            }
+            
+            .valentine-btn {
+                font-size: 1.4rem;
+                padding: 12px 30px;
             }
         }
     </style>
@@ -493,6 +686,35 @@
             </div>
             <div class="caption">
                 <i class="fas fa-infinity"></i> You & Me <i class="fas fa-infinity"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Valentine's Button -->
+    <button class="valentine-btn" id="valentineBtn">
+        <i class="fas fa-heart"></i> Click Me! <i class="fas fa-heart"></i>
+    </button>
+
+    <!-- Valentine's Modal -->
+    <div class="valentine-modal" id="valentineModal">
+        <span class="close-valentine" id="closeValentine">&times;</span>
+        <div class="valentine-content">
+            <div class="valentine-hearts">
+                ❤️ ❤️ ❤️
+            </div>
+            <div class="valentine-question" id="valentineQuestion">
+                Can you be my Valentine?
+            </div>
+            
+            <div class="button-container">
+                <button class="yes-btn" id="yesBtn">YES</button>
+                <button class="no-btn" id="noBtn">NO</button>
+            </div>
+            
+            <div id="valentineResponse" style="display: none;">
+                <div class="valentine-message">
+                    <i class="fas fa-heart"></i> chat ka ng "HEART" sa convo natin <i class="fas fa-heart"></i>
+                </div>
             </div>
         </div>
     </div>
@@ -572,6 +794,75 @@ Mahal na mahal kita, palagi.
 
 ikaw at ikaw lang ang lagi,
 Dalevx ❤️`;
+
+        // Valentine's functionality
+        const valentineBtn = document.getElementById('valentineBtn');
+        const valentineModal = document.getElementById('valentineModal');
+        const closeValentine = document.getElementById('closeValentine');
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const valentineResponse = document.getElementById('valentineResponse');
+        const valentineQuestion = document.getElementById('valentineQuestion');
+        
+        let noClickCount = 0;
+        
+        // Open Valentine modal
+        valentineBtn.addEventListener('click', function() {
+            valentineModal.style.display = 'flex';
+            // Reset to initial state
+            noBtn.classList.remove('disabled');
+            noBtn.classList.add('active');
+            noBtn.textContent = 'NO';
+            valentineResponse.style.display = 'none';
+            valentineQuestion.style.display = 'block';
+            valentineQuestion.textContent = 'Can you be my Valentine?';
+            noClickCount = 0;
+        });
+        
+        // Close Valentine modal
+        closeValentine.addEventListener('click', function() {
+            valentineModal.style.display = 'none';
+        });
+        
+        // YES button
+        yesBtn.addEventListener('click', function() {
+            valentineQuestion.style.display = 'none';
+            noBtn.style.display = 'none';
+            yesBtn.style.display = 'none';
+            valentineResponse.style.display = 'block';
+        });
+        
+        // NO button - nagbabago position and eventually ma-di-disable
+        noBtn.addEventListener('click', function() {
+            noClickCount++;
+            
+            if (noClickCount === 1) {
+                // First click - move NO button to random position
+                const randomX = Math.random() * 200 - 100;
+                const randomY = Math.random() * 100 - 50;
+                noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                noBtn.textContent = 'Sigurado ka?';
+            } else if (noClickCount === 2) {
+                // Second click - move further
+                const randomX = Math.random() * 300 - 150;
+                const randomY = Math.random() * 200 - 100;
+                noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                noBtn.textContent = 'Isipin mo muna';
+            } else if (noClickCount === 3) {
+                // Third click - disable NO button
+                noBtn.classList.remove('active');
+                noBtn.classList.add('disabled');
+                noBtn.textContent = 'Wala na ❤️';
+                noBtn.style.transform = 'translate(0, 0)';
+            }
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === valentineModal) {
+                valentineModal.style.display = 'none';
+            }
+        });
 
         // Load memories from JSON file
         async function loadMemories() {

@@ -305,7 +305,7 @@
             gap: 4px;
         }
 
-        /* ===== RIGHT SIDE - POLAROID ===== */
+        /* ===== RIGHT SIDE ===== */
         .right-side {
             flex: 1;
             display: flex;
@@ -337,11 +337,10 @@
             z-index: 2;
         }
 
-        /* POLAROID DESIGN - FIXED */
         .polaroid {
             width: 340px;
-            background: #fff5f5;  /* White background para parang totoong polaroid */
-            padding: 15px 15px 35px 15px;  /* Classic polaroid spacing */
+            background: #fff5f5;
+            padding: 15px 15px 35px 15px;
             border-radius: 10px;
             box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5),
                         0 0 0 1px rgba(255, 255, 255, 0.3) inset;
@@ -354,7 +353,6 @@
         .polaroid.left { --rotate: -2deg; }
         .polaroid.right { --rotate: 2deg; }
 
-        /* Clothespin */
         .polaroid::before {
             content: '';
             position: absolute;
@@ -488,8 +486,8 @@
             box-shadow: 0 0 40px #ff69b4;
         }
 
-        /* MODALS */
-        .modal, .valentine-modal, .lightbox, .open-modal {
+        /* ===== IMPROVED GALLERY DESIGN ===== */
+        .modal {
             display: none;
             position: fixed;
             top: 0;
@@ -504,13 +502,13 @@
             padding: 20px;
         }
 
-        .modal-content, .valentine-content, .lightbox-content, .open-modal-content {
+        .modal-content {
             background: rgba(255, 255, 255, 0.95);
-            max-width: 500px;
+            max-width: 550px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
-            padding: 35px;
+            padding: 30px;
             border-radius: 30px;
             border: 2px solid white;
             box-shadow: 0 0 40px rgba(255, 105, 180, 0.3);
@@ -530,6 +528,7 @@
             justify-content: center;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.5);
+            z-index: 10;
         }
 
         .close-modal:hover {
@@ -539,7 +538,7 @@
 
         .modal-title {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.4rem;
+            font-size: 2.2rem;
             color: #b57c8c;
             margin-bottom: 20px;
             text-align: center;
@@ -547,48 +546,208 @@
             padding-bottom: 15px;
         }
 
-        .typewriter-text {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: #4a3f3f;
-            white-space: pre-wrap;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 20px;
-            border: 1px solid #ffb6c1;
-        }
-
+        /* GALLERY GRID - ENHANCED */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 10px;
+            gap: 15px;
+            margin-top: 15px;
         }
 
         .gallery-item {
-            background: white;
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 15px 15px 15px 5px; /* Parang polaroid na sulok */
             overflow: hidden;
             cursor: pointer;
-            border: 2px solid white;
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
+            border: 3px solid white;
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.2);
             aspect-ratio: 1/1;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        /* Mini clothespin for gallery items */
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 12px;
+            background: rgba(180, 140, 150, 0.3);
+            border-radius: 8px 8px 4px 4px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: all 0.4s ease;
+            display: block;
         }
 
         .gallery-item:hover {
-            transform: scale(1.02);
+            transform: translateY(-8px) scale(1.02);
             border-color: #ff69b4;
+            box-shadow: 0 15px 30px #ff69b4;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Caption overlay sa gallery (optional) */
+        .gallery-item::after {
+            content: '📸';
+            position: absolute;
+            bottom: 5px;
+            right: 8px;
+            font-size: 1rem;
+            color: white;
+            text-shadow: 0 0 5px #ff69b4;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 0.8;
+        }
+
+        /* Stack effect for gallery */
+        .gallery-grid {
+            position: relative;
+        }
+
+        .gallery-grid::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            z-index: -1;
+            filter: blur(5px);
+        }
+
+        /* Lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox-content {
+            max-width: 600px;
+            width: 90%;
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 0 50px #ff69b4;
+        }
+
+        .lightbox-image-container {
+            width: 100%;
+            max-height: 60vh;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+        .lightbox-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .lightbox-story {
+            padding: 25px;
+            background: white;
+        }
+
+        .lightbox-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #b57c8c;
+            margin-bottom: 10px;
+            border-left: 4px solid #ff69b4;
+            padding-left: 15px;
+        }
+
+        .lightbox-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #4a3f3f;
+            white-space: pre-wrap;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 105, 180, 0.3);
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+            border: 1px solid white;
+        }
+
+        .close-lightbox:hover {
+            transform: rotate(90deg);
+            background: #ff69b4;
+        }
+
+        /* Valentine Modal */
+        .valentine-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(12px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
         .valentine-content {
+            background: rgba(255, 255, 255, 0.95);
             max-width: 400px;
+            width: 90%;
+            padding: 40px;
+            border-radius: 50px;
             text-align: center;
+            border: 3px solid white;
+            box-shadow: 0 0 50px #ff69b4;
         }
 
         .valentine-question {
@@ -622,8 +781,8 @@
 
         .yes-btn:hover {
             background: #ff4d9e;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px #ff69b4;
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px #ff69b4;
         }
 
         .no-btn {
@@ -641,70 +800,30 @@
             pointer-events: none;
         }
 
-        .lightbox-content {
-            max-width: 600px;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        .lightbox-image-container {
-            width: 100%;
-            max-height: 60vh;
-            overflow: hidden;
-            background: #f5f5f5;
-        }
-
-        .lightbox-image-container img {
+        /* Open Modal */
+        .open-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain;
-        }
-
-        .lightbox-story {
-            padding: 25px;
-            background: white;
-        }
-
-        .lightbox-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: #b57c8c;
-            margin-bottom: 10px;
-            border-left: 3px solid #ff69b4;
-            padding-left: 15px;
-        }
-
-        .lightbox-description {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #4a3f3f;
-            white-space: pre-wrap;
-        }
-
-        .close-lightbox {
-            position: absolute;
-            top: 25px;
-            right: 30px;
-            color: white;
-            font-size: 2.5rem;
-            cursor: pointer;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(12px);
+            z-index: 4000;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 50%;
-            backdrop-filter: blur(5px);
-        }
-
-        .close-lightbox:hover {
-            transform: rotate(90deg);
+            align-items: center;
+            padding: 20px;
         }
 
         .open-modal-content {
+            background: rgba(255, 255, 255, 0.95);
             max-width: 450px;
+            width: 90%;
             padding: 35px;
+            border-radius: 40px;
+            border: 2px solid white;
+            box-shadow: 0 0 40px #ff69b4;
         }
 
         .open-modal-header {
@@ -751,6 +870,16 @@
             text-align: center;
             padding: 30px;
             color: #b57c8c;
+            font-size: 1.2rem;
+        }
+
+        .loading i {
+            animation: spin 1s infinite linear;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         @media (max-width: 1000px) {
@@ -796,7 +925,7 @@
                 <div class="open-when-left-grid" id="openWhenLeftGrid"></div>
             </div>
 
-            <!-- RIGHT SIDE - POLAROIDS (FIXED) -->
+            <!-- RIGHT SIDE - POLAROIDS -->
             <div class="right-side">
                 <div class="polaroid-container">
                     <div class="polaroid left" id="leftPolaroid">
@@ -874,7 +1003,7 @@
     </div>
 
     <script>
-        // ===== INTRO SPARKLE INTERACTION =====
+        // INTRO SPARKLE INTERACTION
         const introScreen = document.getElementById('intro-screen');
         const mainDashboard = document.getElementById('main-dashboard');
         const canvas = document.getElementById('intro-canvas');
@@ -883,7 +1012,6 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         
-        // 500 SPARKLES
         let particles = [];
         const particleCount = 500;
         let mouseX = canvas.width / 2;
@@ -892,7 +1020,6 @@
         let holdProgress = 0;
         let heartFormed = false;
         
-        // Create particles
         for (let i = 0; i < particleCount; i++) {
             particles.push({
                 x: Math.random() * canvas.width,
@@ -906,7 +1033,6 @@
             });
         }
         
-        // Mouse events - HOLD LANG
         canvas.addEventListener('mousemove', (e) => {
             const rect = canvas.getBoundingClientRect();
             mouseX = e.clientX - rect.left;
@@ -929,7 +1055,6 @@
             isHolding = false;
         });
         
-        // Touch events for mobile
         canvas.addEventListener('touchmove', (e) => {
             e.preventDefault();
             const rect = canvas.getBoundingClientRect();
@@ -951,7 +1076,6 @@
             }
         });
         
-        // Form heart shape
         function formHeartShape() {
             heartFormed = true;
             
@@ -984,7 +1108,6 @@
             }, 2000);
         }
         
-        // Animation loop
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
@@ -1043,7 +1166,6 @@
             canvas.height = window.innerHeight;
         });
 
-        // ===== MAIN DASHBOARD FUNCTIONS =====
         function createFloatingHearts() {
             const container = document.getElementById('floatingHearts');
             for (let i = 0; i < 30; i++) {
@@ -1057,7 +1179,6 @@
             }
         }
 
-        // ORIGINAL MESSAGE FOR LOUISE
         const messageForLouise = `My Dearest kairi(lowisie, loys, Louise),
 
 Mahal na mahal kita palagi kahit mayat maya tayo nag away hahahah tangina i miss you. Ever since the day we met, I am constantly inlove with you. YES, INLOVE hindi yung pabawas or what. SOBRA KITANG MAHAL KAHIT NA ANONG MANGYARE.
@@ -1071,51 +1192,17 @@ Mahal na mahal kita, palagi.
 ikaw at ikaw lang ang lagi,
 Dalevx ❤️`;
 
-        // OPEN WHEN LETTERS (ALL 8 MESSAGES)
         const openWhenLetters = [
-            { 
-                icon: 'fa-face-frown', 
-                title: "you're sad", 
-                message: "Remember when we are planning our future together and spend time for each other." 
-            },
-            { 
-                icon: 'fa-face-smile', 
-                title: "you're happy", 
-                message: "Always remember why we are happy, because of each other." 
-            },
-            { 
-                icon: 'fa-face-angry', 
-                title: "you're angry", 
-                message: "deep breathe and drink water. Stay calm I am always here." 
-            },
-            { 
-                icon: 'fa-face-tired', 
-                title: "you're tired", 
-                message: "Think of panpan as me. Cuddle and hug tightly so that you can think of me." 
-            },
-            { 
-                icon: 'fa-face-kiss', 
-                title: "you miss me", 
-                message: "take a look at the pictures and the time we always bond. ALSO REMEMBER THE FIRST DATE!" 
-            },
-            { 
-                icon: 'fa-star', 
-                title: "you need reminded", 
-                message: "I love you always and forever. Kahit na mamatay na ako ikaw padin ang hahanap hanapin ko. I will always stay by your side." 
-            },
-            { 
-                icon: 'fa-heart', 
-                title: "just because", 
-                message: "YOU ARE ALWAYS MY ONLY AND MY NUMBER ONE. WALANG MAG BABAGO!" 
-            },
-            { 
-                icon: 'fa-music', 
-                title: "need a song", 
-                message: "open spotify and play 'You!'" 
-            }
+            { icon: 'fa-face-frown', title: "you're sad", message: "Remember when we are planning our future together and spend time for each other." },
+            { icon: 'fa-face-smile', title: "you're happy", message: "Always remember why we are happy, because of each other." },
+            { icon: 'fa-face-angry', title: "you're angry", message: "deep breathe and drink water. Stay calm I am always here." },
+            { icon: 'fa-face-tired', title: "you're tired", message: "Think of panpan as me. Cuddle and hug tightly so that you can think of me." },
+            { icon: 'fa-face-kiss', title: "you miss me", message: "take a look at the pictures and the time we always bond. ALSO REMEMBER THE FIRST DATE!" },
+            { icon: 'fa-star', title: "you need reminded", message: "I love you always and forever. Kahit na mamatay na ako ikaw padin ang hahanap hanapin ko. I will always stay by your side." },
+            { icon: 'fa-heart', title: "just because", message: "YOU ARE ALWAYS MY ONLY AND MY NUMBER ONE. WALANG MAG BABAGO!" },
+            { icon: 'fa-music', title: "need a song", message: "open spotify and play 'You!'" }
         ];
 
-        // Load Open When letters
         const leftGrid = document.getElementById('openWhenLeftGrid');
         openWhenLetters.forEach(letter => {
             const card = document.createElement('div');
@@ -1135,7 +1222,6 @@ Dalevx ❤️`;
             leftGrid.appendChild(card);
         });
 
-        // Valentine
         const valentineBtn = document.getElementById('valentineBtn');
         const valentineModal = document.getElementById('valentineModal');
         const yesBtn = document.getElementById('yesBtn');
@@ -1186,7 +1272,6 @@ Dalevx ❤️`;
             }
         });
 
-        // Load memories from JSON
         async function loadMemories() {
             const galleryGrid = document.getElementById('galleryGrid');
             galleryGrid.innerHTML = '<div class="loading"><i class="fas fa-heart"></i><br>loading memories...</div>';
@@ -1215,7 +1300,6 @@ Dalevx ❤️`;
             }
         }
 
-        // Typewriter
         function typeWriter(element, text, speed = 15) {
             let i = 0;
             element.innerHTML = '';
@@ -1229,7 +1313,6 @@ Dalevx ❤️`;
             typing();
         }
 
-        // Event listeners
         document.getElementById('leftPolaroid').addEventListener('click', () => {
             document.getElementById('messageModal').style.display = 'flex';
             typeWriter(document.getElementById('typewriterMessage'), messageForLouise, 15);
@@ -1240,7 +1323,6 @@ Dalevx ❤️`;
             loadMemories();
         });
 
-        // Close buttons
         document.getElementById('closeMessageModal').addEventListener('click', () => {
             document.getElementById('messageModal').style.display = 'none';
         });
@@ -1254,7 +1336,6 @@ Dalevx ❤️`;
             document.getElementById('openModal').style.display = 'none';
         });
 
-        // Close on outside click
         window.addEventListener('click', (e) => {
             if (e.target.classList.contains('modal')) e.target.style.display = 'none';
             if (e.target.classList.contains('lightbox')) e.target.style.display = 'none';

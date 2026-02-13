@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Louise ❤️</title>
-    <!-- Google Fonts -->
+    <title>for louise. ❤️</title>
+    <!-- Google Fonts - Modern & Elegant -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Confetti Library -->
+    <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
     <style>
         * {
@@ -20,78 +20,75 @@
         }
 
         body {
-            font-family: 'Patrick Hand', cursive;
+            font-family: 'Quicksand', sans-serif;
             height: 100vh;
             overflow: hidden;
             position: relative;
+            background: #faf7f5;
         }
 
-        /* BACKGROUND SLIDESHOW */
-        .background-slideshow {
+        /* MODERN BACKGROUND - Soft Gradient */
+        .modern-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            background: linear-gradient(135deg, #fdf2f4 0%, #f8e8ec 50%, #f2dfe5 100%);
+            z-index: -2;
         }
 
-        .bg-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 2s ease-in-out;
-        }
-
-        .bg-image.active {
-            opacity: 0.3; /* Para kita pa rin ang content */
-        }
-
-        /* DARK OVERLAY PARA MABASA ANG TEXT */
-        .overlay {
+        /* Subtle Pattern Overlay */
+        .pattern-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.2);
+            background-image: radial-gradient(rgba(255, 200, 210, 0.2) 1px, transparent 1px);
+            background-size: 30px 30px;
             z-index: -1;
+            opacity: 0.4;
         }
 
-        /* MAIN CONTAINER - FLEX ROW */
+        /* MAIN CONTAINER */
         .main-container {
             display: flex;
             height: 100vh;
             width: 100vw;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
-        /* LEFT SIDE - OPEN WHEN LETTERS */
+        /* ===== LEFT SIDE - MODERN OPEN WHEN ===== */
         .left-side {
-            width: 280px;
-            background: rgba(255, 245, 245, 0.85);
-            backdrop-filter: blur(10px);
-            border-right: 3px solid white;
-            padding: 20px 10px;
+            width: 320px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 40px 20px;
             overflow-y: auto;
-            box-shadow: 5px 0 15px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
+            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.03);
         }
 
         .left-side h2 {
-            font-family: 'Caveat', cursive;
-            font-size: 2.2rem;
-            color: #ff4d6d;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: #2d2d2d;
             text-align: center;
-            margin-bottom: 20px;
-            border-bottom: 2px dashed #ffb6c1;
-            padding-bottom: 10px;
+            margin-bottom: 35px;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .left-side h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: #e0a5b5;
+            margin: 15px auto 0;
         }
 
         .open-when-left-grid {
@@ -101,193 +98,222 @@
         }
 
         .open-when-left-card {
-            background: white;
-            border-radius: 20px;
-            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 16px 18px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid #ffb6c1;
-            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.2);
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
+            backdrop-filter: blur(5px);
         }
 
         .open-when-left-card:hover {
-            transform: translateX(5px);
-            background: #fff0f0;
-            border-color: #ff4d6d;
-            box-shadow: 0 6px 12px rgba(255, 77, 109, 0.3);
+            background: white;
+            transform: translateX(6px);
+            border-color: #eac0c9;
+            box-shadow: 0 8px 25px rgba(220, 150, 170, 0.15);
         }
 
         .open-when-left-card i {
-            font-size: 1.8rem;
-            color: #ff6b8b;
-            width: 30px;
+            font-size: 1.6rem;
+            color: #c28b9b;
+            width: 36px;
             text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .open-when-left-card:hover i {
+            transform: scale(1.1);
+            color: #b57c8c;
         }
 
         .open-when-left-card .letter-info h3 {
-            font-family: 'Caveat', cursive;
-            font-size: 1.3rem;
-            color: #5a4e4e;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #3a3a3a;
+            margin-bottom: 4px;
         }
 
         .open-when-left-card .letter-info p {
-            font-size: 0.9rem;
-            color: #888;
+            font-size: 0.8rem;
+            color: #8f8f8f;
+            letter-spacing: 0.3px;
         }
 
-        /* RIGHT SIDE - POLAROIDS */
+        /* ===== RIGHT SIDE - MODERN POLAROIDS ===== */
         .right-side {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 40px;
         }
 
         .polaroid-container {
             display: flex;
-            gap: 40px;
-            flex-wrap: wrap;
+            gap: 50px;
             justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
+        /* MODERN POLAROID DESIGN */
         .polaroid {
-            width: 280px;
-            background: #fff9f9;
-            padding: 15px 15px 35px 15px;
-            border-radius: 8px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            transition: all 0.4s ease;
+            width: 380px;
+            background: white;
+            padding: 20px 20px 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 30px 50px -20px rgba(80, 50, 60, 0.3);
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
             cursor: pointer;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            transform: rotate(-1deg);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .polaroid.left {
+            transform: rotate(-1.5deg);
         }
 
         .polaroid.right {
-            transform: rotate(1deg);
+            transform: rotate(1.5deg);
         }
 
         .polaroid:hover {
-            transform: translateY(-10px) rotate(0deg);
-            box-shadow: 0 25px 40px rgba(255, 105, 180, 0.5);
+            transform: rotate(0deg) translateY(-15px);
+            box-shadow: 0 40px 60px -15px rgba(160, 100, 120, 0.4);
         }
 
+        /* MODERN PHOTO CONTAINER */
         .photo-container {
             width: 100%;
             aspect-ratio: 1/1;
-            background: #e0d5d5;
-            border-radius: 4px;
+            border-radius: 16px;
             overflow: hidden;
             position: relative;
+            background: #f0e6e9;
         }
 
         .photo {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.8s ease;
             display: block;
+            filter: brightness(1.02) contrast(1.02);
         }
 
         .polaroid:hover .photo {
-            transform: scale(1.05);
+            transform: scale(1.06);
         }
 
+        /* MODERN HOVER TEXT - Minimal */
         .hover-text {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.9);
-            color: #ff6b8b;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-family: 'Caveat', cursive;
-            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            color: #b57c8c;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 400;
             opacity: 0;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
-            border: 2px solid white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            letter-spacing: 1px;
+            backdrop-filter: blur(5px);
             pointer-events: none;
             white-space: nowrap;
         }
 
         .polaroid:hover .hover-text {
             opacity: 1;
-            transform: translate(-50%, -50%) scale(1.1);
+            transform: translate(-50%, -50%) scale(1.05);
         }
 
+        /* MODERN CAPTION */
         .caption {
             text-align: center;
-            margin-top: 15px;
-            font-family: 'Caveat', cursive;
-            font-size: 1.6rem;
-            color: #5a4e4e;
-            border-top: 1px dashed #ffb6c1;
-            padding-top: 10px;
+            margin-top: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #4a4a4a;
+            border-top: 1px solid #f0d9df;
+            padding-top: 18px;
+            letter-spacing: 0.5px;
         }
 
         .caption i {
-            color: #ff6b8b;
-            margin: 0 5px;
+            color: #d6a2b2;
+            margin: 0 6px;
+            font-size: 1.3rem;
         }
 
+        /* MODERN TAPE - Minimal */
         .tape {
             position: absolute;
-            top: -10px;
-            width: 50px;
-            height: 25px;
+            top: -8px;
+            width: 70px;
+            height: 30px;
             background: rgba(255, 255, 255, 0.6);
-            border-radius: 2px;
-            transform: rotate(-5deg);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 30px;
+            transform: rotate(-3deg);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(3px);
         }
 
         .left .tape {
-            left: 20px;
+            left: 25px;
         }
 
         .right .tape {
-            right: 20px;
-            transform: rotate(5deg);
+            right: 25px;
+            transform: rotate(3deg);
         }
 
-        /* Valentine Button */
+        /* MODERN VALENTINE BUTTON */
         .valentine-btn {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #ff4d6d;
-            color: white;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            color: #b57c8c;
             border: none;
-            padding: 12px 25px;
+            padding: 14px 38px;
             border-radius: 50px;
-            font-family: 'Caveat', cursive;
-            font-size: 1.4rem;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
             cursor: pointer;
-            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+            box-shadow: 0 10px 25px rgba(180, 120, 140, 0.2);
             transition: all 0.3s ease;
             z-index: 100;
-            border: 3px solid white;
-            animation: pulse 2s infinite;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            letter-spacing: 0.5px;
         }
 
         .valentine-btn:hover {
-            background: #ff3355;
-            transform: scale(1.05);
+            background: #b57c8c;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(160, 100, 120, 0.3);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .valentine-btn i {
+            margin-right: 8px;
         }
 
-        /* MODALS (same as before) */
+        /* MODERN MODALS */
         .modal {
             display: none;
             position: fixed;
@@ -295,8 +321,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -304,22 +330,24 @@
         }
 
         .modal-content {
-            background: #fff5f5;
-            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            max-width: 520px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
-            padding: 30px;
-            border-radius: 20px;
+            padding: 40px;
+            border-radius: 32px;
             position: relative;
-            border: 5px solid white;
-            animation: modalOpen 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 40px 70px -20px rgba(80, 50, 60, 0.3);
+            animation: modalFade 0.4s ease;
         }
 
-        @keyframes modalOpen {
+        @keyframes modalFade {
             from {
                 opacity: 0;
-                transform: scale(0.7);
+                transform: scale(0.9);
             }
             to {
                 opacity: 1;
@@ -329,52 +357,66 @@
 
         .close-modal {
             position: absolute;
-            top: 15px;
-            right: 20px;
+            top: 20px;
+            right: 25px;
             font-size: 2rem;
             cursor: pointer;
-            color: #ff6b8b;
-            transition: transform 0.2s;
+            color: #b0b0b0;
+            transition: all 0.2s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
         }
 
         .close-modal:hover {
-            transform: scale(1.2);
+            color: #b57c8c;
+            background: rgba(220, 150, 170, 0.1);
         }
 
         .modal-title {
-            font-family: 'Caveat', cursive;
+            font-family: 'Playfair Display', serif;
             font-size: 2rem;
-            color: #ff6b8b;
-            margin-bottom: 20px;
+            font-weight: 400;
+            color: #2d2d2d;
+            margin-bottom: 25px;
             text-align: center;
-            border-bottom: 2px dashed #ffb6c1;
-            padding-bottom: 10px;
         }
 
         .typewriter-text {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #4a3f3f;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4a4a4a;
             white-space: pre-wrap;
-            min-height: 100px;
-            padding: 5px;
+            min-height: 150px;
+            padding: 10px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 300;
         }
 
-        /* Gallery Modal */
+        /* MODERN GALLERY */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 15px;
             margin-top: 20px;
         }
 
         .gallery-item {
             background: white;
-            border-radius: 10px;
+            border-radius: 16px;
             overflow: hidden;
             cursor: pointer;
-            border: 2px solid white;
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
+            border: 1px solid #f0f0f0;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 25px rgba(180, 120, 140, 0.1);
         }
 
         .gallery-item img {
@@ -383,7 +425,7 @@
             object-fit: cover;
         }
 
-        /* Valentine Modal */
+        /* MODERN VALENTINE MODAL */
         .valentine-modal {
             display: none;
             position: fixed;
@@ -391,7 +433,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(8px);
             z-index: 3000;
             justify-content: center;
@@ -401,44 +443,61 @@
 
         .valentine-content {
             background: white;
-            max-width: 400px;
+            max-width: 420px;
             width: 90%;
-            padding: 30px;
-            border-radius: 30px;
+            padding: 45px 35px;
+            border-radius: 40px;
             text-align: center;
-            border: 5px solid #ff4d6d;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 40px 70px -20px rgba(80, 50, 60, 0.3);
+        }
+
+        .valentine-question {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: #2d2d2d;
+            margin-bottom: 30px;
+            line-height: 1.3;
         }
 
         .button-container {
             display: flex;
             gap: 15px;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .yes-btn, .no-btn {
-            padding: 10px 30px;
-            border-radius: 50px;
-            font-family: 'Caveat', cursive;
-            font-size: 1.8rem;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 500;
             cursor: pointer;
-            border: 2px solid white;
+            border: none;
+            transition: all 0.2s;
             flex: 1;
         }
 
         .yes-btn {
-            background: #ff4d6d;
+            background: #b57c8c;
             color: white;
+        }
+
+        .yes-btn:hover {
+            background: #a56c7c;
+            transform: translateY(-2px);
         }
 
         .no-btn {
-            background: #ccc;
-            color: #666;
+            background: #f0f0f0;
+            color: #8f8f8f;
         }
 
         .no-btn.active {
-            background: #4a4a4a;
-            color: white;
+            background: #d0d0d0;
+            color: #5a5a5a;
         }
 
         .no-btn.disabled {
@@ -446,7 +505,7 @@
             pointer-events: none;
         }
 
-        /* Lightbox */
+        /* MODERN LIGHTBOX */
         .lightbox {
             display: none;
             position: fixed;
@@ -454,7 +513,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
             z-index: 2000;
             justify-content: center;
             align-items: center;
@@ -462,17 +522,19 @@
         }
 
         .lightbox-content {
-            max-width: 600px;
+            max-width: 700px;
             width: 90%;
             background: white;
-            border-radius: 20px;
+            border-radius: 32px;
             overflow: hidden;
+            box-shadow: 0 50px 80px -20px rgba(0, 0, 0, 0.3);
         }
 
         .lightbox-image-container {
             width: 100%;
-            max-height: 50vh;
+            max-height: 60vh;
             overflow: hidden;
+            background: #f5f5f5;
         }
 
         .lightbox-image-container img {
@@ -482,21 +544,42 @@
         }
 
         .lightbox-story {
-            padding: 20px;
-            background: #fff5f5;
+            padding: 30px;
+            background: white;
+        }
+
+        .lightbox-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #2d2d2d;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .lightbox-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #5a5a5a;
+            font-family: 'Quicksand', sans-serif;
         }
 
         .close-lightbox {
             position: absolute;
-            top: 20px;
-            right: 30px;
+            top: 30px;
+            right: 35px;
             color: white;
-            font-size: 3rem;
+            font-size: 2.5rem;
             cursor: pointer;
             z-index: 2001;
+            opacity: 0.8;
+            transition: opacity 0.2s;
         }
 
-        /* Open When Modal */
+        .close-lightbox:hover {
+            opacity: 1;
+        }
+
+        /* MODERN OPEN MODAL */
         .open-modal {
             display: none;
             position: fixed;
@@ -504,8 +587,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
             z-index: 4000;
             justify-content: center;
             align-items: center;
@@ -513,49 +596,59 @@
         }
 
         .open-modal-content {
-            background: #fff9f9;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             max-width: 500px;
             width: 90%;
-            border-radius: 30px;
-            padding: 30px;
-            border: 5px solid white;
+            border-radius: 40px;
+            padding: 45px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 40px 70px -20px rgba(80, 50, 60, 0.2);
         }
 
         .open-modal-header {
-            font-family: 'Caveat', cursive;
-            font-size: 2.5rem;
-            color: #ff6b8b;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #2d2d2d;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-weight: 400;
         }
 
         .open-modal-body {
-            font-size: 1.3rem;
-            line-height: 1.6;
-            color: #4a3f3f;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4a4a4a;
             white-space: pre-wrap;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 20px;
-            border: 2px dashed #ffb6c1;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 28px;
+            border: 1px solid #f0d9df;
+            font-family: 'Quicksand', sans-serif;
         }
 
         .open-close-btn {
-            background: #ff6b8b;
+            background: #b57c8c;
             color: white;
             border: none;
-            padding: 10px 30px;
-            border-radius: 50px;
-            font-family: 'Caveat', cursive;
-            font-size: 1.3rem;
+            padding: 14px 35px;
+            border-radius: 40px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 25px;
             width: 100%;
+            transition: all 0.2s;
         }
 
-        /* Hide scrollbar but keep functionality */
+        .open-close-btn:hover {
+            background: #a56c7c;
+        }
+
+        /* Scrollbar Styling */
         .left-side::-webkit-scrollbar {
-            width: 5px;
+            width: 4px;
         }
 
         .left-side::-webkit-scrollbar-track {
@@ -563,11 +656,24 @@
         }
 
         .left-side::-webkit-scrollbar-thumb {
-            background: #ff6b8b;
-            border-radius: 5px;
+            background: #d6b0bc;
+            border-radius: 4px;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #b57c8c;
         }
 
         /* Mobile Responsive */
+        @media (max-width: 1000px) {
+            .polaroid {
+                width: 300px;
+            }
+        }
+
         @media (max-width: 768px) {
             .main-container {
                 flex-direction: column;
@@ -575,51 +681,49 @@
             
             .left-side {
                 width: 100%;
-                height: 200px;
+                height: 240px;
                 border-right: none;
-                border-bottom: 3px solid white;
+                border-bottom: 1px solid rgba(255,255,255,0.5);
+                padding: 25px 15px;
             }
             
             .open-when-left-grid {
                 flex-direction: row;
                 overflow-x: auto;
+                padding-bottom: 15px;
             }
             
             .open-when-left-card {
-                min-width: 200px;
-            }
-            
-            .polaroid-container {
-                gap: 20px;
+                min-width: 240px;
             }
             
             .polaroid {
-                width: 200px;
+                width: 260px;
+            }
+            
+            .polaroid-container {
+                gap: 30px;
+            }
+            
+            .valentine-btn {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 25px;
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- BACKGROUND SLIDESHOW -->
-    <div class="background-slideshow" id="bgSlideshow">
-        <img class="bg-image active" src="us1.jpeg" alt="Background 1">
-        <img class="bg-image" src="us2.jpeg" alt="Background 2">
-        <img class="bg-image" src="us3.jpeg" alt="Background 3">
-        <img class="bg-image" src="us4.jpeg" alt="Background 4">
-        <img class="bg-image" src="us5.jpeg" alt="Background 5">
-        <img class="bg-image" src="us6.jpeg" alt="Background 6">
-        <img class="bg-image" src="us7.jpeg" alt="Background 7">
-        <img class="bg-image" src="us8.jpeg" alt="Background 8">
-        <img class="bg-image" src="us9.jpeg" alt="Background 9">
-        <img class="bg-image" src="us10.jpeg" alt="Background 10">
-    </div>
-    <div class="overlay"></div>
+    <!-- MODERN BACKGROUND -->
+    <div class="modern-bg"></div>
+    <div class="pattern-overlay"></div>
 
     <!-- MAIN CONTAINER -->
     <div class="main-container">
         <!-- LEFT SIDE - OPEN WHEN LETTERS -->
         <div class="left-side">
-            <h2><i class="fas fa-envelope"></i> Open When... <i class="fas fa-envelope"></i></h2>
+            <h2>open when...</h2>
             <div class="open-when-left-grid" id="openWhenLeftGrid"></div>
         </div>
 
@@ -631,12 +735,10 @@
                     <div class="tape"></div>
                     <div class="photo-container">
                         <img src="louise.jpg" alt="Louise" class="photo">
-                        <div class="hover-text">
-                            <i class="fas fa-envelope"></i> For Louise
-                        </div>
+                        <div class="hover-text">for louise</div>
                     </div>
                     <div class="caption">
-                        <i class="fas fa-star"></i> My Louise
+                        <i class="fas fa-star"></i> louise <i class="fas fa-star"></i>
                     </div>
                 </div>
 
@@ -645,28 +747,26 @@
                     <div class="tape"></div>
                     <div class="photo-container">
                         <img src="us-main.jpg" alt="Us" class="photo">
-                        <div class="hover-text">
-                            <i class="fas fa-camera"></i> Our Memories
-                        </div>
+                        <div class="hover-text">our story</div>
                     </div>
                     <div class="caption">
-                        <i class="fas fa-infinity"></i> You & Me
+                        <i class="fas fa-heart"></i> you & me <i class="fas fa-heart"></i>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Valentine's Button -->
+    <!-- VALENTINE BUTTON -->
     <button class="valentine-btn" id="valentineBtn">
-        <i class="fas fa-heart"></i> Valentine?
+        <i class="far fa-heart"></i> valentine?
     </button>
 
     <!-- MODALS -->
     <div class="modal" id="messageModal">
         <div class="modal-content">
             <span class="close-modal" id="closeMessageModal">&times;</span>
-            <div class="modal-title">For My Love, Louise</div>
+            <div class="modal-title">for my love, louise</div>
             <div class="typewriter-text" id="typewriterMessage"></div>
         </div>
     </div>
@@ -674,20 +774,20 @@
     <div class="modal" id="galleryModal">
         <div class="modal-content">
             <span class="close-modal" id="closeGalleryModal">&times;</span>
-            <div class="modal-title">Our Memories</div>
+            <div class="modal-title">our memories</div>
             <div id="galleryGrid" class="gallery-grid"></div>
         </div>
     </div>
 
     <div class="valentine-modal" id="valentineModal">
         <div class="valentine-content">
-            <h2 class="valentine-question">Can you be my Valentine?</h2>
+            <h2 class="valentine-question">will you be my valentine?</h2>
             <div class="button-container">
-                <button class="yes-btn" id="yesBtn">YES</button>
-                <button class="no-btn" id="noBtn">NO</button>
+                <button class="yes-btn" id="yesBtn">yes</button>
+                <button class="no-btn" id="noBtn">no</button>
             </div>
-            <div id="valentineResponse" style="display: none;">
-                <p>chat ka ng "HEART" sa convo natin ❤️</p>
+            <div id="valentineResponse" style="display: none; margin-top: 25px; font-size: 1.2rem; color: #b57c8c;">
+                <i class="fas fa-heart"></i> chat me "heart" <i class="fas fa-heart"></i>
             </div>
         </div>
     </div>
@@ -709,66 +809,52 @@
         <div class="open-modal-content">
             <div class="open-modal-header" id="openModalHeader"></div>
             <div class="open-modal-body" id="openModalBody"></div>
-            <button class="open-close-btn" id="closeOpenBtn">Close Letter</button>
+            <button class="open-close-btn" id="closeOpenBtn">close letter</button>
         </div>
     </div>
 
     <script>
-        // BACKGROUND SLIDESHOW
-        const bgImages = document.querySelectorAll('.bg-image');
-        let currentBg = 0;
-
-        function changeBackground() {
-            bgImages[currentBg].classList.remove('active');
-            currentBg = (currentBg + 1) % bgImages.length;
-            bgImages[currentBg].classList.add('active');
-        }
-
-        setInterval(changeBackground, 5000); // Change every 5 seconds
-
-        // Hearts Cursor Effect
-        document.addEventListener('mousemove', function(e) {
+        // HEARTS CURSOR
+        document.addEventListener('mousemove', (e) => {
             if (Math.random() < 0.1) {
                 const heart = document.createElement('div');
-                heart.className = 'heart-cursor';
                 heart.innerHTML = '❤️';
                 heart.style.position = 'fixed';
                 heart.style.left = (e.pageX - 10) + 'px';
                 heart.style.top = (e.pageY - 10) + 'px';
-                heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+                heart.style.fontSize = Math.random() * 20 + 15 + 'px';
                 heart.style.pointerEvents = 'none';
                 heart.style.zIndex = '9999';
-                heart.style.animation = 'floatUp 1.5s ease-out forwards';
+                heart.style.opacity = '0.6';
+                heart.style.animation = 'float 1.5s ease-out forwards';
                 document.body.appendChild(heart);
 
-                setTimeout(() => {
-                    heart.remove();
-                }, 1500);
+                setTimeout(() => heart.remove(), 1500);
             }
         });
 
-        // Add float animation
+        // FLOAT ANIMATION
         const style = document.createElement('style');
         style.textContent = `
-            @keyframes floatUp {
-                0% { opacity: 1; transform: translateY(0) scale(0.5); }
-                100% { opacity: 0; transform: translateY(-100px) scale(1.2); }
+            @keyframes float {
+                0% { opacity: 0.6; transform: translateY(0) rotate(0deg); }
+                100% { opacity: 0; transform: translateY(-100px) rotate(20deg); }
             }
         `;
         document.head.appendChild(style);
 
-        // Message for Louise
-        const messageForLouise = `My Dearest Louise,
+        // MESSAGE
+        const messageForLouise = `my dearest louise,
 
-Mahal na mahal kita palagi. I miss you.
+i love you. i miss you.
 
-I'm sorry sa mga away natin. I hope magkaayos tayo.
+sorry sa mga away natin.
 
-Mahal na mahal kita, palagi.
+ikaw at ikaw pa rin.
 
-- Dalevx ❤️`;
+- dale ❤️`;
 
-        // Valentine's functionality
+        // VALENTINE
         const valentineBtn = document.getElementById('valentineBtn');
         const valentineModal = document.getElementById('valentineModal');
         const yesBtn = document.getElementById('yesBtn');
@@ -786,7 +872,7 @@ Mahal na mahal kita, palagi.
         function resetValentine() {
             noBtn.classList.remove('disabled');
             noBtn.classList.add('active');
-            noBtn.textContent = 'NO';
+            noBtn.textContent = 'no';
             noBtn.style.transform = 'translate(0, 0)';
             valentineResponse.style.display = 'none';
             valentineQuestion.style.display = 'block';
@@ -800,34 +886,34 @@ Mahal na mahal kita, palagi.
             noBtn.style.display = 'none';
             yesBtn.style.display = 'none';
             valentineResponse.style.display = 'block';
-            confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
         });
         
         noBtn.addEventListener('click', function() {
             noClickCount++;
             
             if (noClickCount === 1) {
+                const randomX = Math.random() * 150 - 75;
+                const randomY = Math.random() * 50 - 25;
+                noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                noBtn.textContent = 'sure?';
+            } else if (noClickCount === 2) {
                 const randomX = Math.random() * 200 - 100;
                 const randomY = Math.random() * 100 - 50;
                 noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
-                noBtn.textContent = 'Sure?';
-            } else if (noClickCount === 2) {
-                const randomX = Math.random() * 300 - 150;
-                const randomY = Math.random() * 200 - 100;
-                noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
-                noBtn.textContent = 'Isipin mo';
+                noBtn.textContent = 'isipin mo';
             } else if (noClickCount === 3) {
                 noBtn.classList.remove('active');
                 noBtn.classList.add('disabled');
-                noBtn.textContent = 'Wala na ❤️';
+                noBtn.textContent = '❤️';
                 noBtn.style.transform = 'translate(0, 0)';
             }
         });
 
-        // Load memories from JSON
+        // LOAD MEMORIES
         async function loadMemories() {
             const galleryGrid = document.getElementById('galleryGrid');
-            galleryGrid.innerHTML = '<div class="loading">Loading...</div>';
+            galleryGrid.innerHTML = '<div class="loading">loading...</div>';
             
             try {
                 const response = await fetch(`memories.json?t=${Date.now()}`);
@@ -850,20 +936,20 @@ Mahal na mahal kita, palagi.
                     galleryGrid.appendChild(item);
                 });
             } catch (error) {
-                galleryGrid.innerHTML = 'Error loading memories';
+                galleryGrid.innerHTML = '<div class="loading" style="color:#b57c8c;">error loading memories</div>';
             }
         }
 
-        // Open When Letters - LEFT SIDE
+        // OPEN WHEN LETTERS
         const openWhenLetters = [
-            { icon: 'fa-face-frown', title: 'You\'re Sad', message: 'Remember when we are planning our future together and spend time for each other.' },
-            { icon: 'fa-face-smile', title: 'You\'re Happy', message: 'Always remember why we are happy, because of each other.' },
-            { icon: 'fa-face-angry', title: 'You\'re Angry', message: 'Deep breath and drink water. Stay calm, I am always here.' },
-            { icon: 'fa-face-tired', title: 'You\'re Tired', message: 'Think of panpan as me. Cuddle and hug tightly so that you can think of me.' },
-            { icon: 'fa-face-kiss', title: 'You Miss Me', message: 'Take a look at the pictures and the time we always bond. ALSO REMEMBER THE FIRST DATE! ❤️' },
-            { icon: 'fa-star', title: 'You Need Reminded', message: 'I love you always and forever. Kahit na mamatay na ako, ikaw padin ang hahanap hanapin ko. I will always stay by your side.' },
-            { icon: 'fa-heart', title: 'Just Because', message: 'YOU ARE ALWAYS MY ONLY AND MY NUMBER ONE. WALANG MAG BABAGO! ❤️' },
-            { icon: 'fa-music', title: 'Need a Song', message: 'Open Spotify and play "You!"' }
+            { icon: 'fa-face-frown', title: "you're sad", message: "remember when we planned our future together? we'll get there." },
+            { icon: 'fa-face-smile', title: "you're happy", message: "your smile is my favorite. keep smiling." },
+            { icon: 'fa-face-angry', title: "you're angry", message: "breathe. drink water. i'm here." },
+            { icon: 'fa-face-tired', title: "you're tired", message: "rest now. think of me holding you." },
+            { icon: 'fa-face-kiss', title: "you miss me", message: "look at our photos. remember our first date. i miss you too." },
+            { icon: 'fa-star', title: "need reminded", message: "i love you. always. kahit anong mangyari." },
+            { icon: 'fa-heart', title: "just because", message: "you're my number one. walang magbabago." },
+            { icon: 'fa-music', title: "need a song", message: "play 'you!' by ten2five. 🎵" }
         ];
 
         const leftGrid = document.getElementById('openWhenLeftGrid');
@@ -875,7 +961,7 @@ Mahal na mahal kita, palagi.
                 <i class="fas ${letter.icon}"></i>
                 <div class="letter-info">
                     <h3>${letter.title}</h3>
-                    <p>Click to open letter</p>
+                    <p>open letter →</p>
                 </div>
             `;
             
@@ -888,7 +974,7 @@ Mahal na mahal kita, palagi.
             leftGrid.appendChild(card);
         });
 
-        // Typewriter effect
+        // TYPEWRITER
         function typeWriter(element, text, speed = 30) {
             let i = 0;
             element.innerHTML = '';
@@ -902,7 +988,7 @@ Mahal na mahal kita, palagi.
             typing();
         }
 
-        // Event listeners
+        // EVENT LISTENERS
         document.getElementById('leftPolaroid').addEventListener('click', () => {
             document.getElementById('messageModal').style.display = 'flex';
             typeWriter(document.getElementById('typewriterMessage'), messageForLouise, 30);
@@ -913,7 +999,7 @@ Mahal na mahal kita, palagi.
             loadMemories();
         });
 
-        // Close buttons
+        // CLOSE BUTTONS
         document.getElementById('closeMessageModal').addEventListener('click', () => {
             document.getElementById('messageModal').style.display = 'none';
         });
@@ -930,7 +1016,7 @@ Mahal na mahal kita, palagi.
             document.getElementById('openModal').style.display = 'none';
         });
 
-        // Close modals on outside click
+        // CLOSE ON OUTSIDE CLICK
         window.addEventListener('click', (e) => {
             if (e.target.classList.contains('modal')) e.target.style.display = 'none';
             if (e.target.classList.contains('lightbox')) e.target.style.display = 'none';

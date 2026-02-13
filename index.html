@@ -395,13 +395,13 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
-            filter: brightness(0.9) contrast(1.1);
+            transition: transform 0.3s ease; /* Binagal at binawasan ang zoom */
+            filter: brightness(0.95) contrast(1.05);
         }
 
         .polaroid:hover .photo {
-            transform: scale(1.06);
-            filter: brightness(1) contrast(1.1);
+            transform: scale(1.02); /* 2% lang imbes na 6% */
+            filter: brightness(1) contrast(1.05);
         }
 
         .hover-text {
@@ -483,7 +483,7 @@
             box-shadow: 0 0 50px #ff69b4;
         }
 
-        /* MODALS (same as before but adjusted) */
+        /* MODALS */
         .modal, .valentine-modal, .lightbox, .open-modal {
             display: none;
             position: fixed;
@@ -557,10 +557,12 @@
             border: 1px solid rgba(255, 105, 180, 0.2);
         }
 
+        /* GALLERY GRID */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
+            margin-top: 10px;
         }
 
         .gallery-item {
@@ -570,19 +572,26 @@
             cursor: pointer;
             border: 1px solid rgba(255, 105, 180, 0.3);
             aspect-ratio: 1/1;
+            transition: all 0.3s ease;
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s;
+            transition: transform 0.3s ease;
+            filter: brightness(0.95);
         }
 
         .gallery-item:hover {
             transform: scale(1.02);
             border-color: #ff69b4;
             box-shadow: 0 0 20px #ff69b4;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.03); /* Minimal zoom lang */
+            filter: brightness(1);
         }
 
         .valentine-content {
@@ -614,6 +623,7 @@
             background: rgba(255, 105, 180, 0.1);
             color: #ffb6c1;
             flex: 1;
+            transition: all 0.3s ease;
         }
 
         .yes-btn {
@@ -626,14 +636,38 @@
             box-shadow: 0 0 30px #ff69b4;
         }
 
+        .no-btn.active:hover {
+            background: rgba(255, 105, 180, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .no-btn.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
         .lightbox-content {
             max-width: 600px;
             padding: 0;
             overflow: hidden;
         }
 
+        .lightbox-image-container {
+            width: 100%;
+            max-height: 60vh;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .lightbox-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Para hindi mag-zoom, whole image kita */
+        }
+
         .lightbox-story {
             padding: 25px;
+            background: rgba(20, 10, 15, 0.9);
         }
 
         .lightbox-title {
@@ -643,6 +677,15 @@
             margin-bottom: 10px;
             border-left: 3px solid #ff69b4;
             padding-left: 15px;
+            text-shadow: 0 0 5px #ff69b4;
+        }
+
+        .lightbox-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #d88ca0;
+            font-family: 'Quicksand', sans-serif;
+            white-space: pre-wrap;
         }
 
         .open-modal-content {
@@ -658,6 +701,7 @@
             margin-bottom: 20px;
             border-bottom: 1px dashed #ff69b4;
             padding-bottom: 15px;
+            text-shadow: 0 0 8px #ff69b4;
         }
 
         .open-modal-body {
@@ -682,10 +726,12 @@
             cursor: pointer;
             margin-top: 20px;
             width: 100%;
+            transition: all 0.3s ease;
         }
 
         .open-close-btn:hover {
             background: #ff69b4;
+            transform: translateY(-2px);
             box-shadow: 0 0 30px #ff69b4;
         }
 
@@ -704,6 +750,8 @@
             background: rgba(255, 105, 180, 0.2);
             border-radius: 50%;
             backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            transition: all 0.3s ease;
         }
 
         .close-lightbox:hover {
@@ -715,6 +763,10 @@
             text-align: center;
             padding: 30px;
             color: #ffb6c1;
+        }
+
+        .loading i {
+            animation: spin 1s infinite linear;
         }
 
         @keyframes spin {
@@ -760,7 +812,7 @@
         <div class="pattern"></div>
 
         <div class="main-container">
-            <!-- LEFT SIDE - OPEN WHEN LETTERS (8 CARDS, NO SCROLL) -->
+            <!-- LEFT SIDE - OPEN WHEN LETTERS (8 CARDS) -->
             <div class="left-side">
                 <h2><i class="fas fa-envelope-open-text"></i> open when... <i class="fas fa-envelope-open-text"></i></h2>
                 <div class="open-when-left-grid" id="openWhenLeftGrid"></div>
@@ -853,7 +905,7 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         
-        // 500 SPARKLES - MAS MARAMI!
+        // 500 SPARKLES
         let particles = [];
         const particleCount = 500;
         let mouseX = canvas.width / 2;
@@ -876,7 +928,7 @@
             });
         }
         
-        // Mouse events - HOLD LANG (walang click)
+        // Mouse events - HOLD LANG
         canvas.addEventListener('mousemove', (e) => {
             const rect = canvas.getBoundingClientRect();
             mouseX = e.clientX - rect.left;
@@ -1067,7 +1119,7 @@
             }
         });
 
-        // Original messages
+        // ORIGINAL MESSAGE FOR LOUISE
         const messageForLouise = `My Dearest kairi(lowisie, loys, Louise),
 
 Mahal na mahal kita palagi kahit mayat maya tayo nag away hahahah tangina i miss you. Ever since the day we met, I am constantly inlove with you. YES, INLOVE hindi yung pabawas or what. SOBRA KITANG MAHAL KAHIT NA ANONG MANGYARE.
@@ -1081,15 +1133,48 @@ Mahal na mahal kita, palagi.
 ikaw at ikaw lang ang lagi,
 Dalevx ❤️`;
 
+        // OPEN WHEN LETTERS (ALL 8 MESSAGES INCLUDED)
         const openWhenLetters = [
-            { icon: 'fa-face-frown', title: "you're sad", message: "Remember when we are planning our future together and spend time for each other." },
-            { icon: 'fa-face-smile', title: "you're happy", message: "Always remember why we are happy, because of each other." },
-            { icon: 'fa-face-angry', title: "you're angry", message: "deep breathe and drink water. Stay calm I am always here." },
-            { icon: 'fa-face-tired', title: "you're tired", message: "Think of panpan as me. Cuddle and hug tightly so that you can think of me." },
-            { icon: 'fa-face-kiss', title: "you miss me", message: "take a look at the pictures and the time we always bond. ALSO REMEMBER THE FIRST DATE!" },
-            { icon: 'fa-star', title: "you need reminded", message: "I love you always and forever. Kahit na mamatay na ako ikaw padin ang hahanap hanapin ko. I will always stay by your side." },
-            { icon: 'fa-heart', title: "just because", message: "YOU ARE ALWAYS MY ONLY AND MY NUMBER ONE. WALANG MAG BABAGO!" },
-            { icon: 'fa-music', title: "need a song", message: "open spotify and play 'You!'" }
+            { 
+                icon: 'fa-face-frown', 
+                title: "you're sad", 
+                message: "Remember when we are planning our future together and spend time for each other." 
+            },
+            { 
+                icon: 'fa-face-smile', 
+                title: "you're happy", 
+                message: "Always remember why we are happy, because of each other." 
+            },
+            { 
+                icon: 'fa-face-angry', 
+                title: "you're angry", 
+                message: "deep breathe and drink water. Stay calm I am always here." 
+            },
+            { 
+                icon: 'fa-face-tired', 
+                title: "you're tired", 
+                message: "Think of panpan as me. Cuddle and hug tightly so that you can think of me." 
+            },
+            { 
+                icon: 'fa-face-kiss', 
+                title: "you miss me", 
+                message: "take a look at the pictures and the time we always bond. ALSO REMEMBER THE FIRST DATE!" 
+            },
+            { 
+                icon: 'fa-star', 
+                title: "you need reminded", 
+                message: "I love you always and forever. Kahit na mamatay na ako ikaw padin ang hahanap hanapin ko. I will always stay by your side." 
+            },
+            { 
+                icon: 'fa-heart', 
+                title: "just because", 
+                message: "YOU ARE ALWAYS MY ONLY AND MY NUMBER ONE. WALANG MAG BABAGO!" 
+            },
+            { 
+                icon: 'fa-music', 
+                title: "need a song", 
+                message: "open spotify and play 'You!'" 
+            }
         ];
 
         // Load Open When letters
@@ -1163,28 +1248,44 @@ Dalevx ❤️`;
             }
         });
 
-        // Load memories
+        // Load memories from JSON
         async function loadMemories() {
             const galleryGrid = document.getElementById('galleryGrid');
-            galleryGrid.innerHTML = '<div class="loading"><i class="fas fa-heart"></i><br>loading...</div>';
+            galleryGrid.innerHTML = '<div class="loading"><i class="fas fa-heart"></i><br>loading memories...</div>';
+            
             try {
                 const response = await fetch(`memories.json?t=${Date.now()}`);
+                
+                if (!response.ok) {
+                    throw new Error('memories.json not found');
+                }
+                
                 const data = await response.json();
+                
+                if (!data.memories || data.memories.length === 0) {
+                    galleryGrid.innerHTML = '<div class="loading">no memories yet</div>';
+                    return;
+                }
+                
                 galleryGrid.innerHTML = '';
+                
                 data.memories.forEach(memory => {
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
                     item.innerHTML = `<img src="${memory.url}" alt="${memory.title}">`;
+                    
                     item.addEventListener('click', () => {
                         document.getElementById('lightboxImg').src = memory.url;
                         document.getElementById('lightboxTitle').textContent = memory.title;
                         document.getElementById('lightboxDescription').textContent = memory.story;
                         document.getElementById('lightbox').style.display = 'flex';
                     });
+                    
                     galleryGrid.appendChild(item);
                 });
             } catch (error) {
-                galleryGrid.innerHTML = '<div class="loading">error</div>';
+                console.error('Error loading memories:', error);
+                galleryGrid.innerHTML = '<div class="loading">error loading memories<br><small>make sure memories.json exists</small></div>';
             }
         }
 

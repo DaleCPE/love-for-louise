@@ -24,10 +24,72 @@
             height: 100vh;
             overflow: hidden;
             position: relative;
-            background: #0a0a0a;
         }
 
-        /* ===== DARK GRADIENT BACKGROUND ===== */
+        /* ===== INTRO SCREEN ===== */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1.5s ease;
+            cursor: pointer;
+        }
+
+        #intro-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #intro-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .intro-text {
+            position: relative;
+            z-index: 10001;
+            color: rgba(255, 105, 180, 0.8);
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            text-align: center;
+            pointer-events: none;
+            text-shadow: 0 0 20px #ff69b4;
+            animation: textPulse 2s infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes textPulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .intro-text small {
+            display: block;
+            font-size: 1rem;
+            font-family: 'Quicksand', sans-serif;
+            color: rgba(255, 182, 193, 0.5);
+            margin-top: 10px;
+        }
+
+        /* ===== MAIN DASHBOARD (HIDDEN INITIALLY) ===== */
+        #main-dashboard {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* DARK GRADIENT BACKGROUND */
         .dark-bg {
             position: fixed;
             top: 0;
@@ -120,7 +182,7 @@
             z-index: 2;
         }
 
-        /* ===== LEFT SIDE - DARK ENVELOPES WITH PINK ===== */
+        /* ===== LEFT SIDE - ENVELOPES ===== */
         .left-side {
             width: 340px;
             background: rgba(20, 10, 15, 0.7);
@@ -168,7 +230,6 @@
             50% { opacity: 1; transform: scale(1.2); filter: drop-shadow(0 0 10px #ff69b4); }
         }
 
-        /* ENVELOPE STACK CARDS - DARK THEME */
         .open-when-left-grid {
             display: flex;
             flex-direction: column;
@@ -194,7 +255,6 @@
             transform: translateZ(0);
         }
 
-        /* Envelope flap effect */
         .open-when-left-card::before {
             content: '';
             position: absolute;
@@ -210,7 +270,6 @@
             transform: rotate(2deg);
         }
 
-        /* Pink envelope seal */
         .open-when-left-card::after {
             content: '❤️';
             position: absolute;
@@ -279,7 +338,7 @@
             transform: translateZ(8px);
         }
 
-        /* ===== RIGHT SIDE - DARK POLAROIDS WITH PINK ===== */
+        /* ===== RIGHT SIDE - POLAROIDS ===== */
         .right-side {
             flex: 1;
             display: flex;
@@ -289,7 +348,6 @@
             position: relative;
         }
 
-        /* Pink string for polaroid chain */
         .right-side::before {
             content: '';
             position: absolute;
@@ -326,7 +384,6 @@
             z-index: 2;
         }
 
-        /* Dark polaroids with pink glow */
         .polaroid {
             width: 380px;
             background: rgba(25, 15, 20, 0.7);
@@ -353,7 +410,6 @@
             --rotate: 2deg;
         }
 
-        /* Pink clothespin */
         .polaroid::before {
             content: '';
             position: absolute;
@@ -370,7 +426,6 @@
             z-index: 5;
         }
 
-        /* Clothespin metal part */
         .polaroid::after {
             content: '';
             position: absolute;
@@ -487,7 +542,6 @@
             filter: drop-shadow(0 0 8px #ff69b4);
         }
 
-        /* PINK VALENTINE BUTTON */
         .valentine-btn {
             position: fixed;
             bottom: 35px;
@@ -529,14 +583,7 @@
             animation: none;
         }
 
-        .valentine-btn i {
-            font-size: 1.8rem;
-            transition: transform 0.3s;
-            filter: drop-shadow(0 0 8px #ff69b4);
-        }
-
-        /* DARK MODALS WITH PINK */
-        .modal, .valentine-modal, .lightbox, .open-modal {
+        .modal {
             display: none;
             position: fixed;
             top: 0;
@@ -566,18 +613,11 @@
             border: 1px solid rgba(255, 105, 180, 0.3);
             box-shadow: 0 0 50px rgba(255, 105, 180, 0.2);
             animation: modalAppear 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
-            transform-style: preserve-3d;
         }
 
         @keyframes modalAppear {
-            0% {
-                opacity: 0;
-                transform: scale(0.8) translateY(30px) translateZ(-50px);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0) translateZ(0);
-            }
+            0% { opacity: 0; transform: scale(0.8) translateY(30px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         .close-modal {
@@ -646,12 +686,11 @@
             cursor: pointer;
             transition: all 0.4s;
             border: 1px solid rgba(255, 105, 180, 0.3);
-            transform-style: preserve-3d;
             box-shadow: 0 0 20px rgba(255, 105, 180, 0.1);
         }
 
         .gallery-item:hover {
-            transform: scale(1.05) rotate(1deg) translateZ(20px);
+            transform: scale(1.05) rotate(1deg);
             background: rgba(255, 105, 180, 0.15);
             border-color: #ff69b4;
             box-shadow: 0 0 30px #ff69b4;
@@ -721,16 +760,6 @@
         .no-btn {
             background: rgba(255, 105, 180, 0.05);
             color: #d88ca0;
-        }
-
-        .no-btn.active:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 105, 180, 0.15);
-        }
-
-        .no-btn.disabled {
-            opacity: 0.3;
-            pointer-events: none;
         }
 
         .lightbox-content {
@@ -856,7 +885,6 @@
             box-shadow: 0 0 40px #ff69b4;
         }
 
-        /* Scrollbar */
         .left-side::-webkit-scrollbar {
             width: 5px;
         }
@@ -872,7 +900,6 @@
             box-shadow: 0 0 10px #ff69b4;
         }
 
-        /* Loading */
         .loading {
             text-align: center;
             padding: 40px;
@@ -892,7 +919,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* MOBILE */
         @media (max-width: 1000px) {
             .polaroid {
                 width: 320px;
@@ -944,68 +970,80 @@
     </style>
 </head>
 <body>
-    <!-- DARK BACKGROUND -->
-    <div class="dark-bg"></div>
-    
-    <!-- PINK BUBBLES -->
-    <div class="bubbles">
-        <div class="bubble b1"></div>
-        <div class="bubble b2"></div>
-        <div class="bubble b3"></div>
-        <div class="bubble b4"></div>
-        <div class="bubble b5"></div>
-    </div>
-    
-    <!-- PINK FLOATING HEARTS -->
-    <div class="floating-hearts" id="floatingHearts"></div>
-    
-    <!-- PINK PATTERN -->
-    <div class="pattern"></div>
-
-    <!-- MAIN CONTAINER -->
-    <div class="main-container">
-        <!-- LEFT SIDE - ENVELOPE STACK OPEN WHEN LETTERS -->
-        <div class="left-side">
-            <h2>
-                <i class="fas fa-envelope-open-text"></i> 
-                open when... 
-                <i class="fas fa-envelope-open-text"></i>
-            </h2>
-            <div class="open-when-left-grid" id="openWhenLeftGrid"></div>
+    <!-- INTRO SCREEN -->
+    <div id="intro-screen">
+        <canvas id="intro-canvas"></canvas>
+        <div class="intro-text">
+            ❤️ for you, louise ❤️
+            <small>click, hold, and release</small>
         </div>
+    </div>
 
-        <!-- RIGHT SIDE - POLAROID CHAIN -->
-        <div class="right-side">
-            <div class="polaroid-container">
-                <!-- Left Polaroid - Louise -->
-                <div class="polaroid left" id="leftPolaroid">
-                    <div class="photo-container">
-                        <img src="louise.jpg" alt="Louise" class="photo">
-                        <div class="hover-text">for louise</div>
-                    </div>
-                    <div class="caption">
-                        <i class="fas fa-star"></i> my louise <i class="fas fa-star"></i>
-                    </div>
-                </div>
+    <!-- MAIN DASHBOARD (HIDDEN INITIALLY) -->
+    <div id="main-dashboard">
+        <!-- DARK BACKGROUND -->
+        <div class="dark-bg"></div>
+        
+        <!-- PINK BUBBLES -->
+        <div class="bubbles">
+            <div class="bubble b1"></div>
+            <div class="bubble b2"></div>
+            <div class="bubble b3"></div>
+            <div class="bubble b4"></div>
+            <div class="bubble b5"></div>
+        </div>
+        
+        <!-- PINK FLOATING HEARTS -->
+        <div class="floating-hearts" id="floatingHearts"></div>
+        
+        <!-- PINK PATTERN -->
+        <div class="pattern"></div>
 
-                <!-- Right Polaroid - Us -->
-                <div class="polaroid right" id="rightPolaroid">
-                    <div class="photo-container">
-                        <img src="us-main.jpg" alt="Us" class="photo">
-                        <div class="hover-text">our story</div>
+        <!-- MAIN CONTAINER -->
+        <div class="main-container">
+            <!-- LEFT SIDE - ENVELOPE STACK OPEN WHEN LETTERS -->
+            <div class="left-side">
+                <h2>
+                    <i class="fas fa-envelope-open-text"></i> 
+                    open when... 
+                    <i class="fas fa-envelope-open-text"></i>
+                </h2>
+                <div class="open-when-left-grid" id="openWhenLeftGrid"></div>
+            </div>
+
+            <!-- RIGHT SIDE - POLAROID CHAIN -->
+            <div class="right-side">
+                <div class="polaroid-container">
+                    <!-- Left Polaroid - Louise -->
+                    <div class="polaroid left" id="leftPolaroid">
+                        <div class="photo-container">
+                            <img src="louise.jpg" alt="Louise" class="photo">
+                            <div class="hover-text">for louise</div>
+                        </div>
+                        <div class="caption">
+                            <i class="fas fa-star"></i> my louise <i class="fas fa-star"></i>
+                        </div>
                     </div>
-                    <div class="caption">
-                        <i class="fas fa-heart"></i> you & me <i class="fas fa-heart"></i>
+
+                    <!-- Right Polaroid - Us -->
+                    <div class="polaroid right" id="rightPolaroid">
+                        <div class="photo-container">
+                            <img src="us-main.jpg" alt="Us" class="photo">
+                            <div class="hover-text">our story</div>
+                        </div>
+                        <div class="caption">
+                            <i class="fas fa-heart"></i> you & me <i class="fas fa-heart"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- PINK VALENTINE BUTTON -->
-    <button class="valentine-btn" id="valentineBtn">
-        <i class="far fa-heart"></i> be my valentine?
-    </button>
+        <!-- PINK VALENTINE BUTTON -->
+        <button class="valentine-btn" id="valentineBtn">
+            <i class="far fa-heart"></i> be my valentine?
+        </button>
+    </div>
 
     <!-- MODALS -->
     <div class="modal" id="messageModal">
@@ -1059,7 +1097,195 @@
     </div>
 
     <script>
-        // FLOATING HEARTS
+        // ===== INTRO SPARKLE INTERACTION =====
+        const introScreen = document.getElementById('intro-screen');
+        const mainDashboard = document.getElementById('main-dashboard');
+        const canvas = document.getElementById('intro-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Set canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        // Sparkle particles
+        let particles = [];
+        const particleCount = 200;
+        let mouseX = canvas.width / 2;
+        let mouseY = canvas.height / 2;
+        let isHolding = false;
+        let holdProgress = 0;
+        let heartFormed = false;
+        
+        // Create particles
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 2,
+                vy: (Math.random() - 0.5) * 2,
+                size: Math.random() * 3 + 1,
+                color: `rgba(255, ${Math.floor(100 + Math.random() * 80)}, 180, ${0.3 + Math.random() * 0.5})`,
+                originalX: Math.random() * canvas.width,
+                originalY: Math.random() * canvas.height
+            });
+        }
+        
+        // Mouse events
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+        });
+        
+        canvas.addEventListener('mousedown', () => {
+            isHolding = true;
+            holdProgress = 0;
+        });
+        
+        canvas.addEventListener('mouseup', () => {
+            isHolding = false;
+            if (!heartFormed) {
+                // Form heart shape
+                formHeartShape();
+            }
+        });
+        
+        canvas.addEventListener('mouseleave', () => {
+            isHolding = false;
+        });
+        
+        // Touch events for mobile
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            mouseX = e.touches[0].clientX - rect.left;
+            mouseY = e.touches[0].clientY - rect.top;
+        });
+        
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            isHolding = true;
+            holdProgress = 0;
+        });
+        
+        canvas.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            isHolding = false;
+            if (!heartFormed) {
+                formHeartShape();
+            }
+        });
+        
+        // Form heart shape
+        function formHeartShape() {
+            heartFormed = true;
+            
+            // Heart shape formula
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const scale = Math.min(canvas.width, canvas.height) / 8;
+            
+            for (let i = 0; i < particles.length; i++) {
+                const t = (i / particles.length) * Math.PI * 2;
+                // Parametric equation for heart
+                const x = 16 * Math.pow(Math.sin(t), 3);
+                const y = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t);
+                
+                particles[i].targetX = centerX + x * scale * 0.8;
+                particles[i].targetY = centerY - y * scale * 0.8; // Negative because y is inverted
+                particles[i].speed = 0.05 + Math.random() * 0.05;
+            }
+            
+            // After heart formation, show main dashboard
+            setTimeout(() => {
+                introScreen.classList.add('fade-out');
+                mainDashboard.style.display = 'block';
+                
+                // Start main dashboard animations
+                createFloatingHearts();
+                
+                // Confetti celebration
+                confetti({
+                    particleCount: 150,
+                    spread: 100,
+                    origin: { y: 0.6 },
+                    colors: ['#ff69b4', '#ffb6c1', '#ff9a9e']
+                });
+            }, 2000);
+        }
+        
+        // Animation loop
+        function animate() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Update particles
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                
+                if (heartFormed && p.targetX) {
+                    // Move towards target heart shape
+                    p.x += (p.targetX - p.x) * p.speed;
+                    p.y += (p.targetY - p.y) * p.speed;
+                } else {
+                    // Normal behavior
+                    if (isHolding) {
+                        // Move towards mouse
+                        p.x += (mouseX - p.x) * 0.05;
+                        p.y += (mouseY - p.y) * 0.05;
+                        holdProgress = Math.min(holdProgress + 0.01, 1);
+                    } else {
+                        // Random movement
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        
+                        // Bounce off edges
+                        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                        
+                        // Slowly return to original position
+                        p.x += (p.originalX - p.x) * 0.01;
+                        p.y += (p.originalY - p.y) * 0.01;
+                    }
+                }
+                
+                // Draw particle
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.shadowColor = '#ff69b4';
+                ctx.shadowBlur = 10;
+                ctx.fill();
+            }
+            
+            // Draw progress indicator when holding
+            if (isHolding && !heartFormed) {
+                ctx.beginPath();
+                ctx.arc(mouseX, mouseY, 30 + holdProgress * 20, 0, Math.PI * 2);
+                ctx.strokeStyle = '#ff69b4';
+                ctx.lineWidth = 2;
+                ctx.shadowBlur = 20;
+                ctx.stroke();
+                
+                // Draw text
+                ctx.font = '12px Quicksand';
+                ctx.fillStyle = '#ffb6c1';
+                ctx.shadowBlur = 10;
+                ctx.fillText('hold to gather', mouseX - 40, mouseY - 40);
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+        
+        // Resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // ===== MAIN DASHBOARD FUNCTIONS =====
         function createFloatingHearts() {
             const container = document.getElementById('floatingHearts');
             for (let i = 0; i < 30; i++) {
@@ -1072,7 +1298,6 @@
                 container.appendChild(heart);
             }
         }
-        createFloatingHearts();
 
         // 3D PARALLAX EFFECT
         document.addEventListener('mousemove', (e) => {
@@ -1093,7 +1318,7 @@
 
         // PINK HEARTS CURSOR
         document.addEventListener('mousemove', (e) => {
-            if (Math.random() < 0.15) {
+            if (Math.random() < 0.15 && mainDashboard.style.display === 'block') {
                 const heart = document.createElement('div');
                 heart.innerHTML = '❤️';
                 heart.style.position = 'fixed';
@@ -1136,7 +1361,7 @@ Mahal na mahal kita, palagi.
 ikaw at ikaw lang ang lagi,
 Dalevx ❤️`;
 
-        // OPEN WHEN LETTERS (ORIGINAL)
+        // OPEN WHEN LETTERS
         const openWhenLetters = [
             { 
                 icon: 'fa-face-frown', 

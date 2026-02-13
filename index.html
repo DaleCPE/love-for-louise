@@ -26,7 +26,7 @@
             position: relative;
         }
 
-        /* ===== ENHANCED BACKGROUND ===== */
+        /* BACKGROUND */
         .gradient-bg {
             position: fixed;
             top: 0;
@@ -37,7 +37,7 @@
             z-index: -3;
         }
 
-        /* ANIMATED BUBBLES */
+        /* BUBBLES */
         .bubbles {
             position: fixed;
             top: 0;
@@ -62,7 +62,6 @@
             66% { transform: translateY(20px) translateX(-20px) rotate(240deg); }
         }
 
-        /* BUBBLE POSITIONS */
         .b1 { width: 300px; height: 300px; top: 10%; left: 5%; animation-duration: 25s; }
         .b2 { width: 400px; height: 400px; bottom: 10%; right: 5%; animation-duration: 30s; background: rgba(230, 200, 210, 0.1); }
         .b3 { width: 200px; height: 200px; top: 30%; right: 20%; animation-duration: 20s; }
@@ -94,7 +93,7 @@
             100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
         }
 
-        /* PATTERN OVERLAY */
+        /* PATTERN */
         .pattern {
             position: fixed;
             top: 0;
@@ -118,12 +117,11 @@
             z-index: 2;
         }
 
-        /* ===== LEFT SIDE - ELEGANT OPEN WHEN ===== */
+        /* ===== LEFT SIDE ===== */
         .left-side {
             width: 340px;
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
             border-right: 1px solid rgba(255, 255, 255, 0.6);
             padding: 40px 25px;
             overflow-y: auto;
@@ -131,7 +129,6 @@
             position: relative;
         }
 
-        /* DECORATIVE LINE */
         .left-side::before {
             content: '';
             position: absolute;
@@ -247,7 +244,7 @@
             color: #d6a2b2;
         }
 
-        /* ===== RIGHT SIDE - ENHANCED POLAROIDS ===== */
+        /* ===== RIGHT SIDE ===== */
         .right-side {
             flex: 1;
             display: flex;
@@ -257,7 +254,6 @@
             position: relative;
         }
 
-        /* DECORATIVE FRAMES */
         .right-side::before {
             content: '✦';
             position: absolute;
@@ -292,7 +288,6 @@
             position: relative;
         }
 
-        /* GLOWING ORB BACKGROUND */
         .polaroid-container::before {
             content: '';
             position: absolute;
@@ -309,7 +304,6 @@
             50% { transform: scale(1.1); opacity: 0.5; }
         }
 
-        /* ENHANCED POLAROID */
         .polaroid {
             width: 380px;
             background: white;
@@ -341,7 +335,6 @@
                 0 0 30px rgba(230, 180, 200, 0.3);
         }
 
-        /* DECORATIVE CORNERS */
         .polaroid::before,
         .polaroid::after {
             content: '';
@@ -367,16 +360,6 @@
             border-left-color: transparent;
         }
 
-        .polaroid:hover::before {
-            animation: cornerGlow 1s ease;
-        }
-
-        @keyframes cornerGlow {
-            0% { border-color: rgba(210, 160, 180, 0.2); }
-            50% { border-color: rgba(210, 160, 180, 0.8); transform: scale(1.1); }
-            100% { border-color: rgba(210, 160, 180, 0.2); }
-        }
-
         .photo-container {
             width: 100%;
             aspect-ratio: 1/1;
@@ -400,7 +383,6 @@
             transform: scale(1.08);
         }
 
-        /* VIGNETTE EFFECT */
         .photo-container::after {
             content: '';
             position: absolute;
@@ -484,7 +466,7 @@
             transform: rotate(3deg);
         }
 
-        /* ===== ENHANCED VALENTINE BUTTON ===== */
+        /* VALENTINE BUTTON */
         .valentine-btn {
             position: fixed;
             bottom: 35px;
@@ -532,7 +514,7 @@
             transform: scale(1.2);
         }
 
-        /* ===== ENHANCED MODALS ===== */
+        /* MODALS */
         .modal {
             display: none;
             position: fixed;
@@ -623,7 +605,7 @@
             border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
-        /* ENHANCED GALLERY */
+        /* GALLERY */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -670,7 +652,7 @@
             transform: scale(1.1);
         }
 
-        /* ENHANCED VALENTINE MODAL */
+        /* VALENTINE MODAL */
         .valentine-modal {
             display: none;
             position: fixed;
@@ -794,7 +776,7 @@
             pointer-events: none;
         }
 
-        /* ENHANCED LIGHTBOX */
+        /* LIGHTBOX */
         .lightbox {
             display: none;
             position: fixed;
@@ -872,6 +854,7 @@
             font-family: 'Quicksand', sans-serif;
             font-weight: 300;
             padding: 0 10px;
+            white-space: pre-wrap;
         }
 
         .close-lightbox {
@@ -900,7 +883,7 @@
             background: rgba(0, 0, 0, 0.3);
         }
 
-        /* ENHANCED OPEN MODAL */
+        /* OPEN MODAL */
         .open-modal {
             display: none;
             position: fixed;
@@ -1081,7 +1064,7 @@
     </style>
 </head>
 <body>
-    <!-- ENHANCED BACKGROUND -->
+    <!-- BACKGROUND -->
     <div class="gradient-bg"></div>
     
     <!-- BUBBLES -->
@@ -1242,16 +1225,86 @@
         `;
         document.head.appendChild(style);
 
-        // MESSAGE
-        const messageForLouise = `my dearest louise,
+        // ===== ORIGINAL MESSAGE FOR LOUISE =====
+        const messageForLouise = `My Dearest kairi(lowisie, loys, Louise),
 
-i love you. i miss you.
+Mahal na mahal kita palagi kahit mayat maya tayo nag away hahahah tangina i miss you. Ever since the day we met, I am constantly inlove with you. YES, INLOVE hindi yung pabawas or what. SOBRA KITANG MAHAL KAHIT NA ANONG MANGYARE.
+I always say sa sarili ko "how to be better for you without having any changes sa mga behaviors na gusto mo. I'm sorry if sometimes we go through hell before coming back into what is us talaga. Pero love really is like that diba po?
+Pasensya kana sa mga araw na hindi tayo ayos lalo na sa mga kasalanan ko. I hope magkaayos tayo after this. hehe
 
-sorry sa mga away natin. hindi kita kayang mawala.
+This is the only thing I could give to you as of now. I dont have any money or materials to give to you. I only have knowledge and this para lang ma express ko yung pag mamahal ko sayo. I miss you, love. Balik kana sa akin.
 
-ikaw at ikaw pa rin palagi.
+Mahal na mahal kita, palagi.
 
-- dale ❤️`;
+ikaw at ikaw lang ang lagi,
+Dalevx ❤️`;
+
+        // ===== ORIGINAL OPEN WHEN MESSAGES =====
+        const openWhenLetters = [
+            { 
+                icon: 'fa-face-frown', 
+                title: "you're sad", 
+                message: "Remember when we are planning our future together and spend time for each other." 
+            },
+            { 
+                icon: 'fa-face-smile', 
+                title: "you're happy", 
+                message: "Always remember why we are happy, because of each other." 
+            },
+            { 
+                icon: 'fa-face-angry', 
+                title: "you're angry", 
+                message: "deep breathe and drink water. Stay calm I am always here." 
+            },
+            { 
+                icon: 'fa-face-tired', 
+                title: "you're tired", 
+                message: "Think of panpan as me. Cuddle and hug tightly so that you can think of me." 
+            },
+            { 
+                icon: 'fa-face-kiss', 
+                title: "you miss me", 
+                message: "take a look at the pictures and the time we always bond. ALSO REMEMBER THE FIRST DATE!" 
+            },
+            { 
+                icon: 'fa-star', 
+                title: "you need reminded", 
+                message: "I love you always and forever. Kahit na mamatay na ako ikaw padin ang hahanap hanapin ko. I will always stay by your side." 
+            },
+            { 
+                icon: 'fa-heart', 
+                title: "just because", 
+                message: "YOU ARE ALWAYS MY ONLY AND MY NUMBER ONE. WALANG MAG BABAGO!" 
+            },
+            { 
+                icon: 'fa-music', 
+                title: "need a song", 
+                message: "open spotify and play 'You!'" 
+            }
+        ];
+
+        // LOAD OPEN WHEN LETTERS
+        const leftGrid = document.getElementById('openWhenLeftGrid');
+        
+        openWhenLetters.forEach(letter => {
+            const card = document.createElement('div');
+            card.className = 'open-when-left-card';
+            card.innerHTML = `
+                <i class="fas ${letter.icon}"></i>
+                <div class="letter-info">
+                    <h3>${letter.title}</h3>
+                    <p><i class="fas fa-arrow-right"></i> open this letter</p>
+                </div>
+            `;
+            
+            card.addEventListener('click', () => {
+                document.getElementById('openModalHeader').textContent = letter.title;
+                document.getElementById('openModalBody').textContent = letter.message;
+                document.getElementById('openModal').style.display = 'flex';
+            });
+            
+            leftGrid.appendChild(card);
+        });
 
         // VALENTINE
         const valentineBtn = document.getElementById('valentineBtn');
@@ -1314,7 +1367,7 @@ ikaw at ikaw pa rin palagi.
             }
         });
 
-        // LOAD MEMORIES
+        // LOAD MEMORIES FROM JSON
         async function loadMemories() {
             const galleryGrid = document.getElementById('galleryGrid');
             galleryGrid.innerHTML = '<div class="loading"><i class="fas fa-heart"></i><br>loading memories...</div>';
@@ -1341,45 +1394,12 @@ ikaw at ikaw pa rin palagi.
                 });
             } catch (error) {
                 galleryGrid.innerHTML = '<div class="loading" style="color:#b57c8c;">error loading memories</div>';
+                console.error('Error loading memories:', error);
             }
         }
 
-        // OPEN WHEN LETTERS
-        const openWhenLetters = [
-            { icon: 'fa-face-frown', title: "you're sad", message: "remember when we planned our future together? we'll get there. i promise." },
-            { icon: 'fa-face-smile', title: "you're happy", message: "your smile is my favorite thing in the world. keep smiling, love." },
-            { icon: 'fa-face-angry', title: "you're angry", message: "breathe. drink water. i'm here. we'll talk when you're ready." },
-            { icon: 'fa-face-tired', title: "you're tired", message: "rest now. think of me holding you close. i'm always here." },
-            { icon: 'fa-face-kiss', title: "you miss me", message: "look at our photos. remember our first date. i miss you too, so much." },
-            { icon: 'fa-star', title: "need reminded", message: "i love you. always. kahit anong mangyari, ikaw pa rin." },
-            { icon: 'fa-heart', title: "just because", message: "you're my number one. walang magbabago. i love you." },
-            { icon: 'fa-music', title: "need a song", message: "play 'you!' by ten2five. close your eyes. that's for you." }
-        ];
-
-        const leftGrid = document.getElementById('openWhenLeftGrid');
-        
-        openWhenLetters.forEach(letter => {
-            const card = document.createElement('div');
-            card.className = 'open-when-left-card';
-            card.innerHTML = `
-                <i class="fas ${letter.icon}"></i>
-                <div class="letter-info">
-                    <h3>${letter.title}</h3>
-                    <p><i class="fas fa-arrow-right"></i> open this letter</p>
-                </div>
-            `;
-            
-            card.addEventListener('click', () => {
-                document.getElementById('openModalHeader').textContent = letter.title;
-                document.getElementById('openModalBody').textContent = letter.message;
-                document.getElementById('openModal').style.display = 'flex';
-            });
-            
-            leftGrid.appendChild(card);
-        });
-
         // TYPEWRITER
-        function typeWriter(element, text, speed = 25) {
+        function typeWriter(element, text, speed = 20) {
             let i = 0;
             element.innerHTML = '';
             function typing() {
@@ -1395,7 +1415,7 @@ ikaw at ikaw pa rin palagi.
         // EVENT LISTENERS
         document.getElementById('leftPolaroid').addEventListener('click', () => {
             document.getElementById('messageModal').style.display = 'flex';
-            typeWriter(document.getElementById('typewriterMessage'), messageForLouise, 25);
+            typeWriter(document.getElementById('typewriterMessage'), messageForLouise, 20);
         });
 
         document.getElementById('rightPolaroid').addEventListener('click', () => {

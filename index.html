@@ -26,6 +26,18 @@
             position: relative;
         }
 
+        /* HEARTS CURSOR ANIMATION */
+        @keyframes floatUp {
+            0% {
+                opacity: 0.6;
+                transform: translateY(0) scale(0.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(1.2);
+            }
+        }
+
         /* ===== INTRO SCREEN ===== */
         #intro-screen {
             position: fixed;
@@ -179,7 +191,7 @@
             overflow: hidden;
         }
 
-        /* ===== LEFT SIDE - NO SCROLL, PERFECT SIZE ===== */
+        /* ===== LEFT SIDE - OPEN WHEN ===== */
         .left-side {
             width: 360px;
             background: rgba(20, 10, 15, 0.7);
@@ -189,7 +201,7 @@
             display: flex;
             flex-direction: column;
             height: 100vh;
-            overflow: hidden; /* NO SCROLL */
+            overflow: hidden;
         }
 
         .left-side h2 {
@@ -214,7 +226,6 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* GRID - EXACTLY FITS 8 CARDS WITH PERFECT SIZE */
         .open-when-left-grid {
             display: flex;
             flex-direction: column;
@@ -238,7 +249,7 @@
             gap: 15px;
             position: relative;
             flex-shrink: 0;
-            height: 85px; /* Perfect size - hindi masyadong maliit */
+            height: 85px;
             width: 100%;
         }
 
@@ -488,7 +499,7 @@
             box-shadow: 0 0 45px #ff69b4;
         }
 
-        /* MODALS (keep existing modal styles) */
+        /* MODALS */
         .modal, .valentine-modal, .lightbox, .open-modal {
             display: none;
             position: fixed;
@@ -909,7 +920,7 @@
         <div class="pattern"></div>
 
         <div class="main-container">
-            <!-- LEFT SIDE - OPEN WHEN LETTERS (NO SCROLL, PERFECT SIZE) -->
+            <!-- LEFT SIDE - OPEN WHEN LETTERS -->
             <div class="left-side">
                 <h2><i class="fas fa-envelope-open-text"></i> open when... <i class="fas fa-envelope-open-text"></i></h2>
                 <div class="open-when-left-grid" id="openWhenLeftGrid"></div>
@@ -993,6 +1004,29 @@
     </div>
 
     <script>
+        // HEARTS CURSOR EFFECT - BALIK NA!
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() < 0.15) { // 15% chance na mag-appear ang heart
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'fixed';
+                heart.style.left = (e.pageX - 10) + 'px';
+                heart.style.top = (e.pageY - 10) + 'px';
+                heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
+                heart.style.color = '#ff69b4';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '9999';
+                heart.style.opacity = '0.6';
+                heart.style.filter = 'drop-shadow(0 0 5px #ff69b4)';
+                heart.style.animation = 'floatUp 1.5s ease-out forwards';
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 1500);
+            }
+        });
+
         // INTRO SPARKLE INTERACTION
         const introScreen = document.getElementById('intro-screen');
         const mainDashboard = document.getElementById('main-dashboard');

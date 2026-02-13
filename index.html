@@ -21,70 +21,149 @@
 
         body {
             font-family: 'Patrick Hand', cursive;
-            background: linear-gradient(145deg, #fce4e4 0%, #ffe9e9 50%, #fef0f0 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
+            height: 100vh;
+            overflow: hidden;
             position: relative;
-            overflow-x: hidden;
         }
 
-        /* Hearts Cursor Effect */
-        .heart-cursor {
+        /* BACKGROUND SLIDESHOW */
+        .background-slideshow {
             position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            font-size: 20px;
-            animation: floatUp 1.5s ease-out forwards;
-        }
-
-        @keyframes floatUp {
-            0% {
-                opacity: 1;
-                transform: translateY(0) scale(0.5);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-100px) scale(1.2);
-            }
-        }
-
-        .container {
-            max-width: 1200px;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .bg-image.active {
+            opacity: 0.3; /* Para kita pa rin ang content */
+        }
+
+        /* DARK OVERLAY PARA MABASA ANG TEXT */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: -1;
+        }
+
+        /* MAIN CONTAINER - FLEX ROW */
+        .main-container {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            padding: 20px;
+            height: 100vh;
+            width: 100vw;
             position: relative;
             z-index: 1;
         }
 
-        /* Polaroid Frames */
+        /* LEFT SIDE - OPEN WHEN LETTERS */
+        .left-side {
+            width: 280px;
+            background: rgba(255, 245, 245, 0.85);
+            backdrop-filter: blur(10px);
+            border-right: 3px solid white;
+            padding: 20px 10px;
+            overflow-y: auto;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .left-side h2 {
+            font-family: 'Caveat', cursive;
+            font-size: 2.2rem;
+            color: #ff4d6d;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px dashed #ffb6c1;
+            padding-bottom: 10px;
+        }
+
+        .open-when-left-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .open-when-left-card {
+            background: white;
+            border-radius: 20px;
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #ffb6c1;
+            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .open-when-left-card:hover {
+            transform: translateX(5px);
+            background: #fff0f0;
+            border-color: #ff4d6d;
+            box-shadow: 0 6px 12px rgba(255, 77, 109, 0.3);
+        }
+
+        .open-when-left-card i {
+            font-size: 1.8rem;
+            color: #ff6b8b;
+            width: 30px;
+            text-align: center;
+        }
+
+        .open-when-left-card .letter-info h3 {
+            font-family: 'Caveat', cursive;
+            font-size: 1.3rem;
+            color: #5a4e4e;
+        }
+
+        .open-when-left-card .letter-info p {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* RIGHT SIDE - POLAROIDS */
+        .right-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .polaroid-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
         .polaroid {
-            flex: 1 1 300px;
-            min-width: 280px;
-            max-width: 450px;
+            width: 280px;
             background: #fff9f9;
             padding: 15px 15px 35px 15px;
             border-radius: 8px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
             transition: all 0.4s ease;
             cursor: pointer;
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.8);
-        }
-
-        .polaroid:hover {
-            transform: translateY(-10px) rotate(1deg);
-            box-shadow: 0 25px 40px rgba(255, 105, 180, 0.3);
-        }
-
-        .polaroid.left {
             transform: rotate(-1deg);
         }
 
@@ -92,15 +171,11 @@
             transform: rotate(1deg);
         }
 
-        .polaroid.left:hover {
-            transform: rotate(0deg) translateY(-10px);
+        .polaroid:hover {
+            transform: translateY(-10px) rotate(0deg);
+            box-shadow: 0 25px 40px rgba(255, 105, 180, 0.5);
         }
 
-        .polaroid.right:hover {
-            transform: rotate(0deg) translateY(-10px);
-        }
-
-        /* Photo Container */
         .photo-container {
             width: 100%;
             aspect-ratio: 1/1;
@@ -122,7 +197,6 @@
             transform: scale(1.05);
         }
 
-        /* Hover Text */
         .hover-text {
             position: absolute;
             top: 50%;
@@ -147,7 +221,6 @@
             transform: translate(-50%, -50%) scale(1.1);
         }
 
-        /* Caption */
         .caption {
             text-align: center;
             margin-top: 15px;
@@ -163,7 +236,6 @@
             margin: 0 5px;
         }
 
-        /* Tape Effect */
         .tape {
             position: absolute;
             top: -10px;
@@ -184,7 +256,38 @@
             transform: rotate(5deg);
         }
 
-        /* Modal Styles */
+        /* Valentine Button */
+        .valentine-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.4rem;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+            border: 3px solid white;
+            animation: pulse 2s infinite;
+        }
+
+        .valentine-btn:hover {
+            background: #ff3355;
+            transform: scale(1.05);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* MODALS (same as before) */
         .modal {
             display: none;
             position: fixed;
@@ -202,7 +305,7 @@
 
         .modal-content {
             background: #fff5f5;
-            max-width: 600px;
+            max-width: 500px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
@@ -240,7 +343,7 @@
 
         .modal-title {
             font-family: 'Caveat', cursive;
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: #ff6b8b;
             margin-bottom: 20px;
             text-align: center;
@@ -248,241 +351,36 @@
             padding-bottom: 10px;
         }
 
-        /* Typewriter Effect */
         .typewriter-text {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             line-height: 1.6;
             color: #4a3f3f;
             white-space: pre-wrap;
-            word-wrap: break-word;
             min-height: 100px;
-            border-right: 3px solid #ff6b8b;
-            animation: blink 0.75s step-end infinite;
             padding: 5px;
         }
 
-        @keyframes blink {
-            from, to { border-color: transparent; }
-            50% { border-color: #ff6b8b; }
-        }
-
-        /* GALLERY STYLES */
+        /* Gallery Modal */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 10px;
             margin-top: 20px;
         }
 
         .gallery-item {
             background: white;
-            border-radius: 15px;
+            border-radius: 10px;
             overflow: hidden;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 3px solid white;
+            border: 2px solid white;
             box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
         }
 
-        .gallery-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
-        }
-
-        .gallery-image-container {
+        .gallery-item img {
             width: 100%;
             aspect-ratio: 1/1;
-            overflow: hidden;
-            background: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .gallery-image-container img {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover .gallery-image-container img {
-            transform: scale(1.1);
-        }
-
-        .gallery-caption {
-            padding: 10px;
-            background: linear-gradient(145deg, #fff5f5, #ffe9e9);
-            font-family: 'Caveat', cursive;
-            font-size: 1rem;
-            color: #5a4e4e;
-            text-align: center;
-            border-top: 2px dashed #ffb6c1;
-            min-height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Lightbox with Story */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .lightbox-content {
-            max-width: 800px;
-            width: 100%;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            animation: modalOpen 0.4s ease;
-        }
-
-        .lightbox-image-container {
-            width: 100%;
-            max-height: 60vh;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #f0f0f0;
-        }
-
-        .lightbox-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            max-height: 60vh;
-        }
-
-        .lightbox-story {
-            padding: 25px;
-            background: #fff5f5;
-            font-family: 'Patrick Hand', cursive;
-        }
-
-        .lightbox-title {
-            font-family: 'Caveat', cursive;
-            font-size: 2rem;
-            color: #ff6b8b;
-            margin-bottom: 10px;
-            border-bottom: 2px dashed #ffb6c1;
-            padding-bottom: 10px;
-        }
-
-        .lightbox-description {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #4a3f3f;
-            white-space: pre-wrap;
-        }
-
-        .close-lightbox {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 3rem;
-            cursor: pointer;
-            z-index: 2001;
-            text-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
-
-        /* Loading Spinner */
-        .loading {
-            text-align: center;
-            padding: 30px;
-            color: #ff6b8b;
-            font-size: 1.2rem;
-        }
-
-        .loading i {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Upload Button */
-        .upload-btn {
-            background: #ff6b8b;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-family: 'Caveat', cursive;
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .upload-btn:hover {
-            background: #ff8aa7;
-            transform: scale(1.05);
-        }
-
-        .error-message {
-            color: #ff6b8b;
-            text-align: center;
-            padding: 20px;
-            font-size: 1.2rem;
-        }
-
-        /* VALENTINE'S BUTTON STYLES */
-        .valentine-btn {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #ff4d6d;
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-family: 'Caveat', cursive;
-            font-size: 1.8rem;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
-            transition: all 0.3s ease;
-            z-index: 100;
-            border: 3px solid white;
-            animation: pulse 2s infinite;
-        }
-
-        .valentine-btn:hover {
-            background: #ff3355;
-            transform: translateX(-50%) scale(1.05);
-            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.6);
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: translateX(-50%) scale(1);
-            }
-            50% {
-                transform: translateX(-50%) scale(1.05);
-            }
-            100% {
-                transform: translateX(-50%) scale(1);
-            }
         }
 
         /* Valentine Modal */
@@ -502,238 +400,103 @@
         }
 
         .valentine-content {
-            background: linear-gradient(145deg, #fff0f0, #ffe0e0);
-            max-width: 500px;
+            background: white;
+            max-width: 400px;
             width: 90%;
-            padding: 40px;
+            padding: 30px;
             border-radius: 30px;
             text-align: center;
-            border: 5px solid white;
-            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.3);
-            animation: valentinePop 0.5s ease;
-        }
-
-        @keyframes valentinePop {
-            0% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .valentine-question {
-            font-family: 'Caveat', cursive;
-            font-size: 3rem;
-            color: #ff4d6d;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 0 white;
-        }
-
-        .valentine-hearts {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            animation: bounce 1s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            border: 5px solid #ff4d6d;
         }
 
         .button-container {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
-            margin-top: 30px;
+            margin-top: 20px;
+        }
+
+        .yes-btn, .no-btn {
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            cursor: pointer;
+            border: 2px solid white;
+            flex: 1;
         }
 
         .yes-btn {
             background: #ff4d6d;
             color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-family: 'Caveat', cursive;
-            font-size: 2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 3px solid white;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
-            flex: 1;
-        }
-
-        .yes-btn:hover {
-            background: #ff3355;
-            transform: scale(1.05);
         }
 
         .no-btn {
-            background: #c0c0c0;
+            background: #ccc;
             color: #666;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-family: 'Caveat', cursive;
-            font-size: 2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 3px solid #ddd;
-            flex: 1;
         }
 
         .no-btn.active {
             background: #4a4a4a;
             color: white;
-            cursor: pointer;
-            border: 3px solid #ff4d6d;
         }
 
         .no-btn.disabled {
-            background: #2a2a2a;
-            color: #444;
-            cursor: not-allowed;
             opacity: 0.3;
             pointer-events: none;
-            border: 3px solid #111;
         }
 
-        .valentine-message {
-            font-family: 'Patrick Hand', cursive;
-            font-size: 1.5rem;
-            color: #4a3f3f;
-            margin-top: 30px;
-            padding: 20px;
-            background: white;
-            border-radius: 15px;
-            border: 3px dashed #ff4d6d;
-        }
-
-        .valentine-message i {
-            color: #ff4d6d;
-            margin: 0 10px;
-        }
-
-        .close-valentine {
-            position: absolute;
-            top: 15px;
-            right: 25px;
-            font-size: 2.5rem;
-            color: white;
-            cursor: pointer;
-            text-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
-
-        /* OPEN WHEN... STYLES */
-        .open-when-section {
-            max-width: 1200px;
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            margin: 80px auto 50px;
-            padding: 40px 30px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.2);
-            border: 2px solid white;
-        }
-
-        .open-when-title {
-            font-family: 'Caveat', cursive;
-            font-size: 3.5rem;
-            color: #ff6b8b;
-            text-align: center;
-            margin-bottom: 40px;
-            text-shadow: 3px 3px 0 white;
-            position: relative;
-        }
-
-        .open-when-title i {
-            margin: 0 20px;
-            animation: heartbeat 1.5s ease-in-out infinite;
-            color: #ff4d6d;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        .open-when-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
         }
 
-        .open-when-card {
-            background: linear-gradient(145deg, #ffffff, #fff0f0);
-            border-radius: 30px;
-            padding: 30px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            border: 4px solid white;
-            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
-            position: relative;
+        .lightbox-content {
+            max-width: 600px;
+            width: 90%;
+            background: white;
+            border-radius: 20px;
             overflow: hidden;
         }
 
-        .open-when-card::before {
-            content: '💌';
+        .lightbox-image-container {
+            width: 100%;
+            max-height: 50vh;
+            overflow: hidden;
+        }
+
+        .lightbox-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .lightbox-story {
+            padding: 20px;
+            background: #fff5f5;
+        }
+
+        .close-lightbox {
             position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 5rem;
-            opacity: 0.1;
-            transform: rotate(15deg);
-        }
-
-        .open-when-card:hover {
-            transform: translateY(-15px) rotate(2deg);
-            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.4);
-            background: linear-gradient(145deg, #fff5f5, #ffe0e0);
-        }
-
-        .open-when-card i {
-            font-size: 3.5rem;
-            color: #ff6b8b;
-            margin-bottom: 15px;
-            transition: transform 0.3s ease;
-        }
-
-        .open-when-card:hover i {
-            transform: scale(1.2);
-        }
-
-        .open-when-card h3 {
-            font-family: 'Caveat', cursive;
-            font-size: 2rem;
-            color: #5a4e4e;
-            margin-bottom: 10px;
-        }
-
-        .open-when-card p {
-            font-family: 'Patrick Hand', cursive;
-            font-size: 1.1rem;
-            color: #888;
-        }
-
-        .open-when-card .seal {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: #ff6b8b;
+            top: 20px;
+            right: 30px;
             color: white;
-            padding: 5px 15px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            transform: rotate(-5deg);
-            border: 2px solid white;
+            font-size: 3rem;
+            cursor: pointer;
+            z-index: 2001;
         }
 
-        /* Open Modal */
+        /* Open When Modal */
         .open-modal {
             display: none;
             position: fixed;
@@ -751,232 +514,184 @@
 
         .open-modal-content {
             background: #fff9f9;
-            max-width: 600px;
+            max-width: 500px;
             width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            border-radius: 40px;
-            padding: 40px;
-            position: relative;
-            border: 6px solid white;
-            box-shadow: 0 30px 60px rgba(255, 77, 109, 0.4);
-            animation: openLetter 0.6s ease;
-        }
-
-        @keyframes openLetter {
-            0% {
-                opacity: 0;
-                transform: scale(0.3) rotate(-10deg);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) rotate(0);
-            }
-        }
-
-        .close-open {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 2.5rem;
-            cursor: pointer;
-            color: #ff6b8b;
-            transition: transform 0.3s;
-            z-index: 10;
-        }
-
-        .close-open:hover {
-            transform: rotate(90deg) scale(1.2);
+            border-radius: 30px;
+            padding: 30px;
+            border: 5px solid white;
         }
 
         .open-modal-header {
             font-family: 'Caveat', cursive;
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: #ff6b8b;
             text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 3px dashed #ffb6c1;
-            padding-bottom: 20px;
+            margin-bottom: 20px;
         }
 
         .open-modal-body {
-            font-family: 'Patrick Hand', cursive;
-            font-size: 1.4rem;
-            line-height: 1.8;
+            font-size: 1.3rem;
+            line-height: 1.6;
             color: #4a3f3f;
             white-space: pre-wrap;
-            min-height: 200px;
             padding: 20px;
             background: rgba(255, 255, 255, 0.8);
-            border-radius: 30px;
+            border-radius: 20px;
             border: 2px dashed #ffb6c1;
-        }
-
-        .open-modal-footer {
-            text-align: center;
-            margin-top: 30px;
         }
 
         .open-close-btn {
             background: #ff6b8b;
             color: white;
             border: none;
-            padding: 15px 40px;
+            padding: 10px 30px;
             border-radius: 50px;
             font-family: 'Caveat', cursive;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            transition: all 0.3s;
-            border: 3px solid white;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            margin-top: 20px;
+            width: 100%;
         }
 
-        .open-close-btn:hover {
-            background: #ff4d6d;
-            transform: scale(1.05);
+        /* Hide scrollbar but keep functionality */
+        .left-side::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .left-side::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .left-side::-webkit-scrollbar-thumb {
+            background: #ff6b8b;
+            border-radius: 5px;
         }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .lightbox-title {
-                font-size: 1.6rem;
-            }
-            
-            .lightbox-description {
-                font-size: 1rem;
-            }
-            
-            .modal-content {
-                padding: 20px;
-                width: 95%;
-            }
-            
-            .valentine-question {
-                font-size: 2.5rem;
-            }
-            
-            .button-container {
+            .main-container {
                 flex-direction: column;
             }
             
-            .valentine-btn {
-                font-size: 1.4rem;
-                padding: 12px 30px;
+            .left-side {
+                width: 100%;
+                height: 200px;
+                border-right: none;
+                border-bottom: 3px solid white;
             }
             
-            .open-when-title {
-                font-size: 2.5rem;
+            .open-when-left-grid {
+                flex-direction: row;
+                overflow-x: auto;
             }
             
-            .open-when-grid {
-                grid-template-columns: 1fr;
+            .open-when-left-card {
+                min-width: 200px;
             }
             
-            .open-modal-header {
-                font-size: 2.2rem;
+            .polaroid-container {
+                gap: 20px;
             }
             
-            .open-modal-body {
-                font-size: 1.2rem;
+            .polaroid {
+                width: 200px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Left Polaroid - Louise -->
-        <div class="polaroid left" id="leftPolaroid">
-            <div class="tape"></div>
-            <div class="photo-container">
-                <img src="louise.jpg" alt="Louise" class="photo">
-                <div class="hover-text">
-                    <i class="fas fa-envelope"></i> For Louise <i class="fas fa-heart"></i>
-                </div>
-            </div>
-            <div class="caption">
-                <i class="fas fa-star"></i> My Louise <i class="fas fa-star"></i>
-            </div>
+    <!-- BACKGROUND SLIDESHOW -->
+    <div class="background-slideshow" id="bgSlideshow">
+        <img class="bg-image active" src="us1.jpeg" alt="Background 1">
+        <img class="bg-image" src="us2.jpeg" alt="Background 2">
+        <img class="bg-image" src="us3.jpeg" alt="Background 3">
+        <img class="bg-image" src="us4.jpeg" alt="Background 4">
+        <img class="bg-image" src="us5.jpeg" alt="Background 5">
+        <img class="bg-image" src="us6.jpeg" alt="Background 6">
+        <img class="bg-image" src="us7.jpeg" alt="Background 7">
+        <img class="bg-image" src="us8.jpeg" alt="Background 8">
+        <img class="bg-image" src="us9.jpeg" alt="Background 9">
+        <img class="bg-image" src="us10.jpeg" alt="Background 10">
+    </div>
+    <div class="overlay"></div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="main-container">
+        <!-- LEFT SIDE - OPEN WHEN LETTERS -->
+        <div class="left-side">
+            <h2><i class="fas fa-envelope"></i> Open When... <i class="fas fa-envelope"></i></h2>
+            <div class="open-when-left-grid" id="openWhenLeftGrid"></div>
         </div>
 
-        <!-- Right Polaroid - Us -->
-        <div class="polaroid right" id="rightPolaroid">
-            <div class="tape"></div>
-            <div class="photo-container">
-                <img src="us-main.jpg" alt="Us" class="photo">
-                <div class="hover-text">
-                    <i class="fas fa-camera"></i> Our Memories <i class="fas fa-heart"></i>
+        <!-- RIGHT SIDE - POLAROIDS -->
+        <div class="right-side">
+            <div class="polaroid-container">
+                <!-- Left Polaroid - Louise -->
+                <div class="polaroid left" id="leftPolaroid">
+                    <div class="tape"></div>
+                    <div class="photo-container">
+                        <img src="louise.jpg" alt="Louise" class="photo">
+                        <div class="hover-text">
+                            <i class="fas fa-envelope"></i> For Louise
+                        </div>
+                    </div>
+                    <div class="caption">
+                        <i class="fas fa-star"></i> My Louise
+                    </div>
                 </div>
-            </div>
-            <div class="caption">
-                <i class="fas fa-infinity"></i> You & Me <i class="fas fa-infinity"></i>
+
+                <!-- Right Polaroid - Us -->
+                <div class="polaroid right" id="rightPolaroid">
+                    <div class="tape"></div>
+                    <div class="photo-container">
+                        <img src="us-main.jpg" alt="Us" class="photo">
+                        <div class="hover-text">
+                            <i class="fas fa-camera"></i> Our Memories
+                        </div>
+                    </div>
+                    <div class="caption">
+                        <i class="fas fa-infinity"></i> You & Me
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Valentine's Button -->
     <button class="valentine-btn" id="valentineBtn">
-        <i class="fas fa-heart"></i> Click Me! <i class="fas fa-heart"></i>
+        <i class="fas fa-heart"></i> Valentine?
     </button>
 
-    <!-- Valentine's Modal -->
-    <div class="valentine-modal" id="valentineModal">
-        <span class="close-valentine" id="closeValentine">&times;</span>
-        <div class="valentine-content">
-            <div class="valentine-hearts">
-                ❤️ ❤️ ❤️
-            </div>
-            <div class="valentine-question" id="valentineQuestion">
-                Can you be my Valentine?
-            </div>
-            
-            <div class="button-container">
-                <button class="yes-btn" id="yesBtn">YES</button>
-                <button class="no-btn" id="noBtn">NO</button>
-            </div>
-            
-            <div id="valentineResponse" style="display: none;">
-                <div class="valentine-message">
-                    <i class="fas fa-heart"></i> chat ka ng "HEART" sa convo natin <i class="fas fa-heart"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Message Modal -->
+    <!-- MODALS -->
     <div class="modal" id="messageModal">
         <div class="modal-content">
             <span class="close-modal" id="closeMessageModal">&times;</span>
-            <div class="modal-title">
-                <i class="fas fa-envelope-open-text"></i> For My Love, Louise
-            </div>
+            <div class="modal-title">For My Love, Louise</div>
             <div class="typewriter-text" id="typewriterMessage"></div>
         </div>
     </div>
 
-    <!-- Gallery Modal -->
     <div class="modal" id="galleryModal">
         <div class="modal-content">
             <span class="close-modal" id="closeGalleryModal">&times;</span>
-            <div class="modal-title">
-                <i class="fas fa-images"></i> Our Memories
-            </div>
+            <div class="modal-title">Our Memories</div>
             <div id="galleryGrid" class="gallery-grid"></div>
-            <div style="text-align: center; margin-top: 20px;">
-                <button class="upload-btn" onclick="window.location.href='https://github.com/dalecpe/love-for-louise/upload/main'">
-                    <i class="fas fa-upload"></i> Add New Memory
-                </button>
-                <p style="color: #888; margin-top: 10px; font-size: 0.9rem;">
-                    <i class="fas fa-info-circle"></i> Click to upload new pictures, then edit memories.json
-                </p>
+        </div>
+    </div>
+
+    <div class="valentine-modal" id="valentineModal">
+        <div class="valentine-content">
+            <h2 class="valentine-question">Can you be my Valentine?</h2>
+            <div class="button-container">
+                <button class="yes-btn" id="yesBtn">YES</button>
+                <button class="no-btn" id="noBtn">NO</button>
+            </div>
+            <div id="valentineResponse" style="display: none;">
+                <p>chat ka ng "HEART" sa convo natin ❤️</p>
             </div>
         </div>
     </div>
 
-    <!-- Lightbox with Story -->
     <div class="lightbox" id="lightbox">
         <span class="close-lightbox" id="closeLightbox">&times;</span>
         <div class="lightbox-content">
@@ -990,36 +705,40 @@
         </div>
     </div>
 
-    <!-- OPEN WHEN... Section -->
-    <div class="open-when-section">
-        <h2 class="open-when-title">
-            <i class="fas fa-envelope"></i> Open When... <i class="fas fa-envelope"></i>
-        </h2>
-        <div class="open-when-grid" id="openWhenGrid"></div>
-    </div>
-
-    <!-- Open When Modal -->
     <div class="open-modal" id="openModal">
         <div class="open-modal-content">
-            <span class="close-open" id="closeOpen">&times;</span>
             <div class="open-modal-header" id="openModalHeader"></div>
             <div class="open-modal-body" id="openModalBody"></div>
-            <div class="open-modal-footer">
-                <button class="open-close-btn" id="closeOpenBtn">Close Letter</button>
-            </div>
+            <button class="open-close-btn" id="closeOpenBtn">Close Letter</button>
         </div>
     </div>
 
     <script>
+        // BACKGROUND SLIDESHOW
+        const bgImages = document.querySelectorAll('.bg-image');
+        let currentBg = 0;
+
+        function changeBackground() {
+            bgImages[currentBg].classList.remove('active');
+            currentBg = (currentBg + 1) % bgImages.length;
+            bgImages[currentBg].classList.add('active');
+        }
+
+        setInterval(changeBackground, 5000); // Change every 5 seconds
+
         // Hearts Cursor Effect
         document.addEventListener('mousemove', function(e) {
             if (Math.random() < 0.1) {
                 const heart = document.createElement('div');
                 heart.className = 'heart-cursor';
                 heart.innerHTML = '❤️';
+                heart.style.position = 'fixed';
                 heart.style.left = (e.pageX - 10) + 'px';
                 heart.style.top = (e.pageY - 10) + 'px';
                 heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '9999';
+                heart.style.animation = 'floatUp 1.5s ease-out forwards';
                 document.body.appendChild(heart);
 
                 setTimeout(() => {
@@ -1028,85 +747,76 @@
             }
         });
 
+        // Add float animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                0% { opacity: 1; transform: translateY(0) scale(0.5); }
+                100% { opacity: 0; transform: translateY(-100px) scale(1.2); }
+            }
+        `;
+        document.head.appendChild(style);
+
         // Message for Louise
-        const messageForLouise = `My Dearest kairi(lowisie, loys, Louise),
+        const messageForLouise = `My Dearest Louise,
 
-Mahal na mahal kita palagi kahit mayat maya tayo nag away hahahah tangina i miss you. Ever since the day we met, I am constantly inlove with you. YES, INLOVE hindi yung pabawas or what. SOBRA KITANG MAHAL KAHIT NA ANONG MANGYARE.
-I always say sa sarili ko "how to be better for you without having any changes sa mga behaviors na gusto mo. I'm sorry if sometimes we go through hell before coming back into what is us talaga. Pero love really is like that diba po?
-Pasensya kana sa mga araw na hindi tayo ayos lalo na sa mga kasalanan ko. I hope magkaayos tayo after this. hehe
+Mahal na mahal kita palagi. I miss you.
 
-This is the only thing I could give to you as of now. I dont have any money or materials to give to you. I only have knowledge and this para lang ma express ko yung pag mamahal ko sayo. I miss you, love. Balik kana sa akin.
+I'm sorry sa mga away natin. I hope magkaayos tayo.
 
 Mahal na mahal kita, palagi.
 
-ikaw at ikaw lang ang lagi,
-Dalevx ❤️`;
+- Dalevx ❤️`;
 
         // Valentine's functionality
         const valentineBtn = document.getElementById('valentineBtn');
         const valentineModal = document.getElementById('valentineModal');
-        const closeValentine = document.getElementById('closeValentine');
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
         const valentineResponse = document.getElementById('valentineResponse');
-        const valentineQuestion = document.getElementById('valentineQuestion');
+        const valentineQuestion = document.querySelector('.valentine-question');
         
         let noClickCount = 0;
         
-        // Open Valentine modal
-        valentineBtn.addEventListener('click', function() {
+        valentineBtn.addEventListener('click', () => {
             valentineModal.style.display = 'flex';
-            // Reset to initial state
+            resetValentine();
+        });
+        
+        function resetValentine() {
             noBtn.classList.remove('disabled');
             noBtn.classList.add('active');
             noBtn.textContent = 'NO';
             noBtn.style.transform = 'translate(0, 0)';
             valentineResponse.style.display = 'none';
             valentineQuestion.style.display = 'block';
-            valentineQuestion.textContent = 'Can you be my Valentine?';
             yesBtn.style.display = 'block';
             noBtn.style.display = 'block';
             noClickCount = 0;
-        });
+        }
         
-        // Close Valentine modal
-        closeValentine.addEventListener('click', function() {
-            valentineModal.style.display = 'none';
-        });
-        
-        // YES button
-        yesBtn.addEventListener('click', function() {
+        yesBtn.addEventListener('click', () => {
             valentineQuestion.style.display = 'none';
             noBtn.style.display = 'none';
             yesBtn.style.display = 'none';
             valentineResponse.style.display = 'block';
-            
-            // Confetti effect
-            confetti({
-                particleCount: 150,
-                spread: 100,
-                origin: { y: 0.6 }
-            });
+            confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
         });
         
-        // NO button
         noBtn.addEventListener('click', function() {
             noClickCount++;
             
             if (noClickCount === 1) {
-                // First click - move NO button to random position
                 const randomX = Math.random() * 200 - 100;
                 const randomY = Math.random() * 100 - 50;
                 noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
-                noBtn.textContent = 'Sigurado ka?';
+                noBtn.textContent = 'Sure?';
             } else if (noClickCount === 2) {
-                // Second click - move further
                 const randomX = Math.random() * 300 - 150;
                 const randomY = Math.random() * 200 - 100;
                 noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
-                noBtn.textContent = 'Isipin mo muna';
+                noBtn.textContent = 'Isipin mo';
             } else if (noClickCount === 3) {
-                // Third click - disable NO button
                 noBtn.classList.remove('active');
                 noBtn.classList.add('disabled');
                 noBtn.textContent = 'Wala na ❤️';
@@ -1114,55 +824,21 @@ Dalevx ❤️`;
             }
         });
 
-        // Load memories from JSON file
+        // Load memories from JSON
         async function loadMemories() {
             const galleryGrid = document.getElementById('galleryGrid');
-            galleryGrid.innerHTML = '<div class="loading"><i class="fas fa-heart"></i><br>Loading memories...</div>';
+            galleryGrid.innerHTML = '<div class="loading">Loading...</div>';
             
             try {
-                // Add timestamp to prevent caching
                 const response = await fetch(`memories.json?t=${Date.now()}`);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
                 const data = await response.json();
-                
-                if (!data.memories || data.memories.length === 0) {
-                    galleryGrid.innerHTML = '<div class="error-message">No memories yet. Click "Add New Memory" to start!</div>';
-                    return;
-                }
                 
                 galleryGrid.innerHTML = '';
                 
-                // Sort memories by id to ensure order
-                const sortedMemories = data.memories.sort((a, b) => a.id - b.id);
-                
-                sortedMemories.forEach(memory => {
+                data.memories.forEach(memory => {
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
-                    
-                    // Create image with error handling
-                    const img = document.createElement('img');
-                    img.src = memory.url;
-                    img.alt = memory.title;
-                    img.onerror = function() {
-                        this.onerror = null;
-                        this.src = 'https://via.placeholder.com/300x300/ffb6c1/ffffff?text=Photo+Not+Found';
-                        console.log(`Failed to load: ${memory.url}`);
-                    };
-                    
-                    const imgContainer = document.createElement('div');
-                    imgContainer.className = 'gallery-image-container';
-                    imgContainer.appendChild(img);
-                    
-                    const caption = document.createElement('div');
-                    caption.className = 'gallery-caption';
-                    caption.innerHTML = `<i class="fas fa-heart"></i> ${memory.title} <i class="fas fa-heart"></i>`;
-                    
-                    item.appendChild(imgContainer);
-                    item.appendChild(caption);
+                    item.innerHTML = `<img src="${memory.url}" alt="${memory.title}">`;
                     
                     item.addEventListener('click', () => {
                         document.getElementById('lightboxImg').src = memory.url;
@@ -1173,88 +849,47 @@ Dalevx ❤️`;
                     
                     galleryGrid.appendChild(item);
                 });
-                
-                console.log(`Loaded ${sortedMemories.length} memories successfully`);
-                
             } catch (error) {
-                console.error('Error loading memories:', error);
-                galleryGrid.innerHTML = `<div class="error-message">
-                    <i class="fas fa-exclamation-circle"></i><br>
-                    Failed to load memories.<br>
-                    <small>${error.message}</small>
-                </div>`;
+                galleryGrid.innerHTML = 'Error loading memories';
             }
         }
 
-        // OPEN WHEN... Letters Data - UPDATED WITH YOUR MESSAGES
+        // Open When Letters - LEFT SIDE
         const openWhenLetters = [
-            {
-                icon: 'fa-face-frown',
-                title: 'You\'re Sad',
-                message: `Remember when we are planning our future together and spend time for each other.`
-            },
-            {
-                icon: 'fa-face-smile',
-                title: 'You\'re Happy',
-                message: `Always remember why we are happy, because of each other.`
-            },
-            {
-                icon: 'fa-face-angry',
-                title: 'You\'re Angry',
-                message: `Deep breath and drink water. Stay calm, I am always here.`
-            },
-            {
-                icon: 'fa-face-tired',
-                title: 'You\'re Tired',
-                message: `Think of panpan as me. Cuddle and hug tightly so that you can think of me.`
-            },
-            {
-                icon: 'fa-face-kiss',
-                title: 'You Miss Me',
-                message: `Take a look at the pictures and the time we always bond. ALSO REMEMBER THE FIRST DATE! ❤️`
-            },
-            {
-                icon: 'fa-star',
-                title: 'You Need Reminded',
-                message: `I love you always and forever. Kahit na mamatay na ako, ikaw padin ang hahanap hanapin ko. I will always stay by your side.`
-            },
-            {
-                icon: 'fa-heart',
-                title: 'Just Because',
-                message: `YOU ARE ALWAYS MY ONLY AND MY NUMBER ONE. WALANG MAG BABAGO! ❤️`
-            },
-            {
-                icon: 'fa-music',
-                title: 'Need a Song',
-                message: `Open Spotify and play "You!"`
-            }
+            { icon: 'fa-face-frown', title: 'You\'re Sad', message: 'Remember when we are planning our future together and spend time for each other.' },
+            { icon: 'fa-face-smile', title: 'You\'re Happy', message: 'Always remember why we are happy, because of each other.' },
+            { icon: 'fa-face-angry', title: 'You\'re Angry', message: 'Deep breath and drink water. Stay calm, I am always here.' },
+            { icon: 'fa-face-tired', title: 'You\'re Tired', message: 'Think of panpan as me. Cuddle and hug tightly so that you can think of me.' },
+            { icon: 'fa-face-kiss', title: 'You Miss Me', message: 'Take a look at the pictures and the time we always bond. ALSO REMEMBER THE FIRST DATE! ❤️' },
+            { icon: 'fa-star', title: 'You Need Reminded', message: 'I love you always and forever. Kahit na mamatay na ako, ikaw padin ang hahanap hanapin ko. I will always stay by your side.' },
+            { icon: 'fa-heart', title: 'Just Because', message: 'YOU ARE ALWAYS MY ONLY AND MY NUMBER ONE. WALANG MAG BABAGO! ❤️' },
+            { icon: 'fa-music', title: 'Need a Song', message: 'Open Spotify and play "You!"' }
         ];
 
-        // Load Open When letters
-        const openWhenGrid = document.getElementById('openWhenGrid');
+        const leftGrid = document.getElementById('openWhenLeftGrid');
         
         openWhenLetters.forEach(letter => {
             const card = document.createElement('div');
-            card.className = 'open-when-card';
-            
+            card.className = 'open-when-left-card';
             card.innerHTML = `
                 <i class="fas ${letter.icon}"></i>
-                <h3>Open When...</h3>
-                <p>${letter.title}</p>
-                <div class="seal">💌</div>
+                <div class="letter-info">
+                    <h3>${letter.title}</h3>
+                    <p>Click to open letter</p>
+                </div>
             `;
             
             card.addEventListener('click', () => {
-                document.getElementById('openModalHeader').textContent = `Open When ${letter.title}`;
+                document.getElementById('openModalHeader').textContent = letter.title;
                 document.getElementById('openModalBody').textContent = letter.message;
                 document.getElementById('openModal').style.display = 'flex';
             });
             
-            openWhenGrid.appendChild(card);
+            leftGrid.appendChild(card);
         });
 
         // Typewriter effect
-        function typeWriter(element, text, speed = 50) {
+        function typeWriter(element, text, speed = 30) {
             let i = 0;
             element.innerHTML = '';
             function typing() {
@@ -1268,69 +903,39 @@ Dalevx ❤️`;
         }
 
         // Event listeners
-        document.getElementById('leftPolaroid').addEventListener('click', function() {
-            const modal = document.getElementById('messageModal');
-            const typewriterEl = document.getElementById('typewriterMessage');
-            modal.style.display = 'flex';
-            typeWriter(typewriterEl, messageForLouise, 30);
+        document.getElementById('leftPolaroid').addEventListener('click', () => {
+            document.getElementById('messageModal').style.display = 'flex';
+            typeWriter(document.getElementById('typewriterMessage'), messageForLouise, 30);
         });
 
-        document.getElementById('rightPolaroid').addEventListener('click', function() {
+        document.getElementById('rightPolaroid').addEventListener('click', () => {
             document.getElementById('galleryModal').style.display = 'flex';
-            loadMemories(); // Load memories every time gallery opens
+            loadMemories();
         });
 
         // Close buttons
-        document.getElementById('closeMessageModal').addEventListener('click', function() {
+        document.getElementById('closeMessageModal').addEventListener('click', () => {
             document.getElementById('messageModal').style.display = 'none';
         });
 
-        document.getElementById('closeGalleryModal').addEventListener('click', function() {
+        document.getElementById('closeGalleryModal').addEventListener('click', () => {
             document.getElementById('galleryModal').style.display = 'none';
         });
 
-        document.getElementById('closeLightbox').addEventListener('click', function() {
+        document.getElementById('closeLightbox').addEventListener('click', () => {
             document.getElementById('lightbox').style.display = 'none';
         });
 
-        // Close modal when clicking outside
-        window.addEventListener('click', function(e) {
-            if (e.target.classList.contains('modal')) {
-                e.target.style.display = 'none';
-            }
-            if (e.target.classList.contains('lightbox')) {
-                e.target.style.display = 'none';
-            }
-            if (e.target.classList.contains('valentine-modal') && e.target !== valentineModal) {
-                valentineModal.style.display = 'none';
-            }
+        document.getElementById('closeOpenBtn').addEventListener('click', () => {
+            document.getElementById('openModal').style.display = 'none';
         });
 
-        // Open When modal close
-        const openModal = document.getElementById('openModal');
-        const closeOpen = document.getElementById('closeOpen');
-        const closeOpenBtn = document.getElementById('closeOpenBtn');
-
-        function closeOpenModal() {
-            openModal.style.display = 'none';
-        }
-
-        closeOpen.addEventListener('click', closeOpenModal);
-        closeOpenBtn.addEventListener('click', closeOpenModal);
-
-        window.addEventListener('click', function(e) {
-            if (e.target === openModal) {
-                closeOpenModal();
-            }
-        });
-
-        // Pre-load images for better performance
-        window.addEventListener('load', function() {
-            const imagesToPreload = ['us1.jpeg', 'us2.jpeg', 'us3.jpeg', 'us4.jpeg'];
-            imagesToPreload.forEach(src => {
-                const img = new Image();
-                img.src = src;
-            });
+        // Close modals on outside click
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) e.target.style.display = 'none';
+            if (e.target.classList.contains('lightbox')) e.target.style.display = 'none';
+            if (e.target.classList.contains('valentine-modal')) e.target.style.display = 'none';
+            if (e.target.classList.contains('open-modal')) e.target.style.display = 'none';
         });
     </script>
 </body>

@@ -24,20 +24,21 @@
             height: 100vh;
             overflow: hidden;
             position: relative;
+            background: #0a0a0a;
         }
 
-        /* BACKGROUND */
-        .gradient-bg {
+        /* ===== DARK GRADIENT BACKGROUND ===== */
+        .dark-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(125deg, #fdf2f4 0%, #f9e6ec 40%, #f5dde5 70%, #f2d5df 100%);
+            background: radial-gradient(circle at 30% 40%, #1a0c12 0%, #0a0507 50%, #000000 100%);
             z-index: -3;
         }
 
-        /* BUBBLES */
+        /* PINK BUBBLES */
         .bubbles {
             position: fixed;
             top: 0;
@@ -50,10 +51,11 @@
 
         .bubble {
             position: absolute;
-            background: rgba(255, 220, 230, 0.15);
+            background: rgba(255, 105, 180, 0.05);
             border-radius: 50%;
             backdrop-filter: blur(1px);
             animation: float 20s infinite ease-in-out;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.1);
         }
 
         @keyframes float {
@@ -62,13 +64,13 @@
             66% { transform: translateY(20px) translateX(-20px) rotate(240deg); }
         }
 
-        .b1 { width: 300px; height: 300px; top: 10%; left: 5%; animation-duration: 25s; }
-        .b2 { width: 400px; height: 400px; bottom: 10%; right: 5%; animation-duration: 30s; background: rgba(230, 200, 210, 0.1); }
-        .b3 { width: 200px; height: 200px; top: 30%; right: 20%; animation-duration: 20s; }
-        .b4 { width: 350px; height: 350px; bottom: 20%; left: 15%; animation-duration: 28s; background: rgba(240, 210, 220, 0.1); }
-        .b5 { width: 150px; height: 150px; top: 70%; right: 30%; animation-duration: 18s; }
+        .b1 { width: 300px; height: 300px; top: 10%; left: 5%; animation-duration: 25s; background: rgba(255, 105, 180, 0.03); }
+        .b2 { width: 400px; height: 400px; bottom: 10%; right: 5%; animation-duration: 30s; background: rgba(255, 182, 193, 0.02); }
+        .b3 { width: 200px; height: 200px; top: 30%; right: 20%; animation-duration: 20s; background: rgba(255, 105, 180, 0.03); }
+        .b4 { width: 350px; height: 350px; bottom: 20%; left: 15%; animation-duration: 28s; background: rgba(255, 182, 193, 0.02); }
+        .b5 { width: 150px; height: 150px; top: 70%; right: 30%; animation-duration: 18s; background: rgba(255, 105, 180, 0.04); }
 
-        /* FLOATING HEARTS */
+        /* PINK FLOATING HEARTS */
         .floating-hearts {
             position: fixed;
             top: 0;
@@ -81,9 +83,10 @@
 
         .floating-heart {
             position: absolute;
-            color: rgba(255, 180, 200, 0.15);
+            color: rgba(255, 105, 180, 0.1);
             font-size: 24px;
             animation: floatHeart 15s infinite linear;
+            filter: drop-shadow(0 0 5px #ff69b4);
         }
 
         @keyframes floatHeart {
@@ -93,7 +96,7 @@
             100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
         }
 
-        /* PATTERN */
+        /* PINK SPARKLE PATTERN */
         .pattern {
             position: fixed;
             top: 0;
@@ -101,8 +104,8 @@
             width: 100%;
             height: 100%;
             background-image: 
-                radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-                radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+                radial-gradient(circle at 30% 40%, rgba(255, 105, 180, 0.05) 1px, transparent 1px),
+                radial-gradient(circle at 70% 60%, rgba(255, 182, 193, 0.05) 1px, transparent 1px);
             background-size: 50px 50px, 80px 80px;
             z-index: -1;
             opacity: 0.5;
@@ -117,16 +120,16 @@
             z-index: 2;
         }
 
-        /* ===== LEFT SIDE - ENVELOPE STACK DESIGN (#9) ===== */
+        /* ===== LEFT SIDE - DARK ENVELOPES WITH PINK ===== */
         .left-side {
             width: 340px;
-            background: rgba(255, 255, 255, 0.6); /* Glass morphism #1 */
+            background: rgba(20, 10, 15, 0.7);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border-right: 1px solid rgba(255, 255, 255, 0.5);
+            border-right: 1px solid rgba(255, 105, 180, 0.2);
             padding: 40px 25px;
             overflow-y: auto;
-            box-shadow: 5px 0 40px rgba(0, 0, 0, 0.03);
+            box-shadow: 5px 0 40px rgba(255, 105, 180, 0.05);
             position: relative;
         }
 
@@ -136,35 +139,36 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, transparent, #e8b8c8, #d8a8b8, #e8b8c8, transparent);
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff69b4, #ffb6c1, #ff69b4, transparent);
         }
 
         .left-side h2 {
             font-family: 'Dancing Script', cursive;
             font-size: 2.5rem;
             font-weight: 400;
-            color: #6d4c5c;
+            color: #ffb6c1;
             text-align: center;
             margin-bottom: 30px;
             letter-spacing: 1px;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 0 10px #ff69b4, 2px 2px 4px rgba(0, 0, 0, 0.5);
             position: relative;
         }
 
         .left-side h2 i {
-            color: #d68e9e;
+            color: #ff69b4;
             margin: 0 10px;
             font-size: 2rem;
             animation: sparkle 2s infinite;
+            filter: drop-shadow(0 0 5px #ff69b4);
         }
 
         @keyframes sparkle {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); filter: drop-shadow(0 0 10px #ff69b4); }
         }
 
-        /* ENVELOPE STACK CARDS */
+        /* ENVELOPE STACK CARDS - DARK THEME */
         .open-when-left-grid {
             display: flex;
             flex-direction: column;
@@ -173,15 +177,15 @@
         }
 
         .open-when-left-card {
-            background: rgba(255, 255, 255, 0.8); /* Glass morphism */
+            background: rgba(30, 15, 20, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-radius: 20px 20px 20px 8px; /* Parang envelope flap */
+            border-radius: 20px 20px 20px 8px;
             padding: 18px 20px;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 8px 25px rgba(180, 140, 150, 0.1);
+            border: 1px solid rgba(255, 105, 180, 0.2);
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.1);
             display: flex;
             align-items: center;
             gap: 18px;
@@ -198,30 +202,30 @@
             left: 20px;
             width: 30px;
             height: 10px;
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 105, 180, 0.2);
             backdrop-filter: blur(5px);
             border-radius: 10px 10px 0 0;
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 105, 180, 0.3);
             border-bottom: none;
             transform: rotate(2deg);
         }
 
-        /* Envelope seal */
+        /* Pink envelope seal */
         .open-when-left-card::after {
             content: '❤️';
             position: absolute;
             top: -8px;
             right: 30px;
             font-size: 14px;
-            background: #ffb6c1;
+            background: #ff69b4;
             width: 25px;
             height: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            border: 2px solid white;
-            box-shadow: 0 2px 8px rgba(255, 105, 180, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 15px #ff69b4;
             opacity: 0.8;
             transition: opacity 0.3s;
         }
@@ -229,51 +233,53 @@
         .open-when-left-card:hover::after {
             opacity: 1;
             transform: scale(1.1);
+            box-shadow: 0 0 20px #ff69b4;
         }
 
-        /* 3D Parallax effect (#3) */
         .open-when-left-card:hover {
             transform: translateX(8px) translateY(-2px) scale(1.02);
-            background: rgba(255, 255, 255, 0.95);
-            border-color: #eac0d0;
-            box-shadow: 0 15px 35px rgba(200, 150, 170, 0.2);
+            background: rgba(40, 20, 25, 0.8);
+            border-color: #ff69b4;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.2);
         }
 
         .open-when-left-card i {
             font-size: 2rem;
-            color: #c28b9b;
+            color: #ffb6c1;
             width: 45px;
             text-align: center;
             transition: all 0.3s;
-            filter: drop-shadow(0 2px 5px rgba(200, 150, 170, 0.3));
-            transform: translateZ(10px); /* 3D effect */
+            filter: drop-shadow(0 0 8px #ff69b4);
+            transform: translateZ(10px);
         }
 
         .open-when-left-card:hover i {
             transform: scale(1.2) rotate(5deg) translateZ(20px);
-            color: #b57c8c;
+            color: #ff69b4;
+            filter: drop-shadow(0 0 15px #ff69b4);
         }
 
         .open-when-left-card .letter-info h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem;
             font-weight: 500;
-            color: #4a3a3a;
+            color: #ffb6c1;
             margin-bottom: 5px;
-            transform: translateZ(5px); /* 3D effect */
+            transform: translateZ(5px);
+            text-shadow: 0 0 5px rgba(255, 105, 180, 0.3);
         }
 
         .open-when-left-card .letter-info p {
             font-size: 0.8rem;
-            color: #a98d95;
+            color: #d88ca0;
             letter-spacing: 0.5px;
             display: flex;
             align-items: center;
             gap: 5px;
-            transform: translateZ(8px); /* 3D effect */
+            transform: translateZ(8px);
         }
 
-        /* ===== RIGHT SIDE - POLAROID CHAIN (#8) ===== */
+        /* ===== RIGHT SIDE - DARK POLAROIDS WITH PINK ===== */
         .right-side {
             flex: 1;
             display: flex;
@@ -283,7 +289,7 @@
             position: relative;
         }
 
-        /* String for polaroid chain */
+        /* Pink string for polaroid chain */
         .right-side::before {
             content: '';
             position: absolute;
@@ -291,9 +297,10 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #e8b8c8, #d8a8b8, #e8b8c8, transparent);
+            background: linear-gradient(90deg, transparent, #ff69b4, #ffb6c1, #ff69b4, transparent);
             transform: translateY(-50%);
             z-index: 0;
+            box-shadow: 0 0 10px #ff69b4;
         }
 
         .right-side::after {
@@ -303,10 +310,10 @@
             left: 50%;
             width: 4px;
             height: 4px;
-            background: #d8a8b8;
+            background: #ff69b4;
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px #ffb6c1;
+            box-shadow: 0 0 15px #ff69b4;
         }
 
         .polaroid-container {
@@ -319,17 +326,18 @@
             z-index: 2;
         }
 
-        /* Clothespins for polaroid chain */
+        /* Dark polaroids with pink glow */
         .polaroid {
             width: 380px;
-            background: rgba(255, 255, 255, 0.7); /* Glass morphism */
+            background: rgba(25, 15, 20, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             padding: 20px 20px 35px 20px;
             border-radius: 24px;
             box-shadow: 
-                0 30px 50px -20px rgba(100, 70, 80, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+                0 30px 50px -20px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(255, 105, 180, 0.2) inset,
+                0 0 30px rgba(255, 105, 180, 0.1);
             transition: all 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
             cursor: pointer;
             position: relative;
@@ -345,7 +353,7 @@
             --rotate: 2deg;
         }
 
-        /* Clothespin */
+        /* Pink clothespin */
         .polaroid::before {
             content: '';
             position: absolute;
@@ -354,11 +362,11 @@
             transform: translateX(-50%);
             width: 40px;
             height: 20px;
-            background: rgba(180, 140, 150, 0.3);
+            background: rgba(255, 105, 180, 0.2);
             backdrop-filter: blur(5px);
             border-radius: 10px 10px 5px 5px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            box-shadow: 0 2px 10px rgba(255, 105, 180, 0.2);
             z-index: 5;
         }
 
@@ -371,20 +379,21 @@
             transform: translateX(-50%);
             width: 20px;
             height: 6px;
-            background: rgba(200, 170, 180, 0.5);
+            background: rgba(255, 182, 193, 0.3);
             backdrop-filter: blur(5px);
             border-radius: 3px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            box-shadow: 0 0 10px #ff69b4;
             z-index: 6;
         }
 
-        /* 3D Parallax on hover */
         .polaroid:hover {
             transform: rotate(0deg) translateY(-20px) scale(1.02) translateZ(20px);
             box-shadow: 
-                0 40px 70px -15px rgba(150, 100, 120, 0.4),
-                0 0 0 1px rgba(255, 255, 255, 0.8) inset;
-            background: rgba(255, 255, 255, 0.85);
+                0 40px 70px -15px rgba(0, 0, 0, 0.9),
+                0 0 0 1px rgba(255, 105, 180, 0.4) inset,
+                0 0 40px #ff69b4;
+            background: rgba(35, 20, 25, 0.8);
         }
 
         .photo-container {
@@ -393,9 +402,9 @@
             border-radius: 18px;
             overflow: hidden;
             position: relative;
-            background: #f0e6e9;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-            transform: translateZ(5px); /* 3D effect */
+            background: #1a0f12;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transform: translateZ(5px);
         }
 
         .photo {
@@ -404,11 +413,12 @@
             object-fit: cover;
             transition: transform 0.8s ease;
             display: block;
-            filter: brightness(1.02) contrast(1.02) saturate(1.05);
+            filter: brightness(0.9) contrast(1.1) saturate(1.1);
         }
 
         .polaroid:hover .photo {
             transform: scale(1.08) translateZ(10px);
+            filter: brightness(1) contrast(1.1) saturate(1.2);
         }
 
         .photo-container::after {
@@ -418,7 +428,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 0 50px rgba(255, 105, 180, 0.1);
             pointer-events: none;
             border-radius: 18px;
         }
@@ -428,9 +438,9 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) translateZ(30px);
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 105, 180, 0.2);
             backdrop-filter: blur(10px);
-            color: #b57c8c;
+            color: #ffb6c1;
             padding: 15px 35px;
             border-radius: 60px;
             font-family: 'Dancing Script', cursive;
@@ -438,18 +448,20 @@
             font-weight: 400;
             opacity: 0;
             transition: all 0.4s ease;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 30px #ff69b4;
+            border: 1px solid rgba(255, 105, 180, 0.5);
             letter-spacing: 1px;
             pointer-events: none;
             white-space: nowrap;
             z-index: 10;
+            text-shadow: 0 0 10px #ff69b4;
         }
 
         .polaroid:hover .hover-text {
             opacity: 1;
             transform: translate(-50%, -50%) scale(1.1) translateZ(40px);
-            box-shadow: 0 20px 45px rgba(180, 120, 140, 0.3);
+            box-shadow: 0 0 50px #ff69b4;
+            background: rgba(255, 105, 180, 0.3);
         }
 
         .caption {
@@ -458,30 +470,32 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
             font-weight: 400;
-            color: #5a4a4a;
-            border-top: 2px solid rgba(255, 255, 255, 0.5);
+            color: #ffb6c1;
+            border-top: 1px solid rgba(255, 105, 180, 0.3);
             padding-top: 20px;
             letter-spacing: 0.5px;
             position: relative;
             transform: translateZ(8px);
+            text-shadow: 0 0 8px #ff69b4;
         }
 
         .caption i {
-            color: #d6a2b2;
+            color: #ff69b4;
             margin: 0 8px;
             font-size: 1.4rem;
             animation: sparkle 3s infinite;
+            filter: drop-shadow(0 0 8px #ff69b4);
         }
 
-        /* VALENTINE BUTTON - with glass morphism */
+        /* PINK VALENTINE BUTTON */
         .valentine-btn {
             position: fixed;
             bottom: 35px;
             right: 35px;
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 105, 180, 0.2);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            color: #b57c8c;
+            color: #ffb6c1;
             border: none;
             padding: 16px 40px;
             border-radius: 60px;
@@ -489,33 +503,39 @@
             font-size: 1.6rem;
             font-weight: 400;
             cursor: pointer;
-            box-shadow: 0 15px 35px rgba(180, 130, 150, 0.15);
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
             transition: all 0.4s ease;
             z-index: 100;
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 105, 180, 0.3);
             letter-spacing: 1px;
             display: flex;
             align-items: center;
             gap: 12px;
             animation: buttonPulse 3s infinite;
             transform-style: preserve-3d;
+            text-shadow: 0 0 8px #ff69b4;
         }
 
         @keyframes buttonPulse {
-            0%, 100% { transform: scale(1) translateZ(0); }
-            50% { transform: scale(1.05) translateZ(10px); }
+            0%, 100% { transform: scale(1) translateZ(0); box-shadow: 0 0 30px rgba(255, 105, 180, 0.3); }
+            50% { transform: scale(1.05) translateZ(10px); box-shadow: 0 0 50px #ff69b4; }
         }
 
         .valentine-btn:hover {
-            background: rgba(181, 124, 140, 0.8);
-            backdrop-filter: blur(15px);
+            background: rgba(255, 105, 180, 0.3);
             color: white;
             transform: translateY(-5px) scale(1.05) translateZ(20px);
-            box-shadow: 0 25px 45px rgba(160, 110, 130, 0.2);
+            box-shadow: 0 0 70px #ff69b4;
             animation: none;
         }
 
-        /* MODALS - with glass morphism */
+        .valentine-btn i {
+            font-size: 1.8rem;
+            transition: transform 0.3s;
+            filter: drop-shadow(0 0 8px #ff69b4);
+        }
+
+        /* DARK MODALS WITH PINK */
         .modal, .valentine-modal, .lightbox, .open-modal {
             display: none;
             position: fixed;
@@ -523,7 +543,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             z-index: 1000;
@@ -533,7 +553,7 @@
         }
 
         .modal-content, .valentine-content, .lightbox-content, .open-modal-content {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(20, 10, 15, 0.8);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             max-width: 550px;
@@ -543,8 +563,8 @@
             padding: 45px;
             border-radius: 50px;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 50px 100px -30px rgba(100, 70, 80, 0.2);
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            box-shadow: 0 0 50px rgba(255, 105, 180, 0.2);
             animation: modalAppear 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
             transform-style: preserve-3d;
         }
@@ -568,45 +588,47 @@
             height: 45px;
             font-size: 2.2rem;
             cursor: pointer;
-            color: #b0b0b0;
+            color: #ffb6c1;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 105, 180, 0.1);
             backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 105, 180, 0.3);
         }
 
         .close-modal:hover {
-            color: #b57c8c;
-            background: white;
+            color: #ff69b4;
+            background: rgba(255, 105, 180, 0.2);
             transform: rotate(90deg) scale(1.1);
+            box-shadow: 0 0 20px #ff69b4;
         }
 
-        /* REST OF THE STYLES (same as before) */
         .modal-title {
             font-family: 'Dancing Script', cursive;
             font-size: 2.8rem;
-            color: #6d4c5c;
+            color: #ffb6c1;
             margin-bottom: 25px;
             text-align: center;
-            border-bottom: 2px dashed rgba(255, 255, 255, 0.5);
+            border-bottom: 1px dashed #ff69b4;
             padding-bottom: 20px;
+            text-shadow: 0 0 10px #ff69b4;
         }
 
         .typewriter-text {
             font-size: 1.1rem;
             line-height: 1.9;
-            color: #5a4a4a;
+            color: #ffb6c1;
             white-space: pre-wrap;
             min-height: 150px;
             padding: 15px;
             font-family: 'Quicksand', sans-serif;
             font-weight: 300;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 105, 180, 0.05);
             border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 105, 180, 0.2);
         }
 
         .gallery-grid {
@@ -617,20 +639,22 @@
         }
 
         .gallery-item {
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 105, 180, 0.1);
             backdrop-filter: blur(5px);
             border-radius: 25px;
             overflow: hidden;
             cursor: pointer;
             transition: all 0.4s;
-            border: 2px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 105, 180, 0.3);
             transform-style: preserve-3d;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.1);
         }
 
         .gallery-item:hover {
             transform: scale(1.05) rotate(1deg) translateZ(20px);
-            background: rgba(255, 255, 255, 0.8);
-            border-color: white;
+            background: rgba(255, 105, 180, 0.15);
+            border-color: #ff69b4;
+            box-shadow: 0 0 30px #ff69b4;
         }
 
         .gallery-item img {
@@ -638,6 +662,12 @@
             aspect-ratio: 1/1;
             object-fit: cover;
             transition: transform 0.5s;
+            filter: brightness(0.9);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(1);
         }
 
         .valentine-content {
@@ -650,8 +680,9 @@
         .valentine-question {
             font-family: 'Dancing Script', cursive;
             font-size: 3rem;
-            color: #6d4c5c;
+            color: #ffb6c1;
             margin-bottom: 30px;
+            text-shadow: 0 0 15px #ff69b4;
         }
 
         .button-container {
@@ -668,30 +699,33 @@
             font-size: 1.5rem;
             font-weight: 600;
             cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 105, 180, 0.3);
             transition: all 0.3s;
             flex: 1;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 105, 180, 0.1);
             backdrop-filter: blur(5px);
+            color: #ffb6c1;
         }
 
         .yes-btn {
-            background: rgba(181, 124, 140, 0.7);
+            background: rgba(255, 105, 180, 0.2);
             color: white;
         }
 
         .yes-btn:hover {
-            background: #b57c8c;
+            background: #ff69b4;
             transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 40px #ff69b4;
         }
 
         .no-btn {
-            background: rgba(240, 240, 240, 0.5);
-            color: #8f8f8f;
+            background: rgba(255, 105, 180, 0.05);
+            color: #d88ca0;
         }
 
         .no-btn.active:hover {
             transform: translateY(-3px);
+            background: rgba(255, 105, 180, 0.15);
         }
 
         .no-btn.disabled {
@@ -709,7 +743,7 @@
             width: 100%;
             max-height: 60vh;
             overflow: hidden;
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.5);
         }
 
         .lightbox-image-container img {
@@ -720,22 +754,23 @@
 
         .lightbox-story {
             padding: 35px;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(20, 10, 15, 0.9);
         }
 
         .lightbox-title {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
-            color: #6d4c5c;
+            color: #ffb6c1;
             margin-bottom: 15px;
-            border-left: 4px solid rgba(255, 255, 255, 0.5);
+            border-left: 4px solid #ff69b4;
             padding-left: 20px;
+            text-shadow: 0 0 8px #ff69b4;
         }
 
         .lightbox-description {
             font-size: 1.1rem;
             line-height: 1.8;
-            color: #5a5a5a;
+            color: #d88ca0;
             font-family: 'Quicksand', sans-serif;
             font-weight: 300;
             white-space: pre-wrap;
@@ -745,7 +780,7 @@
             position: absolute;
             top: 35px;
             right: 40px;
-            color: white;
+            color: #ffb6c1;
             font-size: 3rem;
             cursor: pointer;
             z-index: 2001;
@@ -756,14 +791,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(255, 105, 180, 0.1);
             border-radius: 50%;
             backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 105, 180, 0.3);
         }
 
         .close-lightbox:hover {
             opacity: 1;
             transform: rotate(90deg) scale(1.1);
+            background: rgba(255, 105, 180, 0.2);
+            box-shadow: 0 0 30px #ff69b4;
         }
 
         .open-modal-content {
@@ -775,31 +813,32 @@
         .open-modal-header {
             font-family: 'Dancing Script', cursive;
             font-size: 2.8rem;
-            color: #6d4c5c;
+            color: #ffb6c1;
             text-align: center;
             margin-bottom: 30px;
-            border-bottom: 2px dashed rgba(255, 255, 255, 0.5);
+            border-bottom: 1px dashed #ff69b4;
             padding-bottom: 20px;
+            text-shadow: 0 0 10px #ff69b4;
         }
 
         .open-modal-body {
             font-size: 1.2rem;
             line-height: 1.9;
-            color: #5a4a4a;
+            color: #d88ca0;
             white-space: pre-wrap;
             padding: 25px;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 105, 180, 0.05);
             border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 105, 180, 0.2);
             font-family: 'Quicksand', sans-serif;
             font-weight: 300;
         }
 
         .open-close-btn {
-            background: rgba(181, 124, 140, 0.7);
+            background: rgba(255, 105, 180, 0.2);
             backdrop-filter: blur(5px);
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 105, 180, 0.3);
             padding: 16px 40px;
             border-radius: 60px;
             font-family: 'Quicksand', sans-serif;
@@ -812,8 +851,9 @@
         }
 
         .open-close-btn:hover {
-            background: #b57c8c;
+            background: #ff69b4;
             transform: translateY(-3px);
+            box-shadow: 0 0 40px #ff69b4;
         }
 
         /* Scrollbar */
@@ -822,20 +862,21 @@
         }
 
         .left-side::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 105, 180, 0.05);
             border-radius: 5px;
         }
 
         .left-side::-webkit-scrollbar-thumb {
-            background: rgba(210, 160, 180, 0.5);
+            background: #ff69b4;
             border-radius: 5px;
+            box-shadow: 0 0 10px #ff69b4;
         }
 
         /* Loading */
         .loading {
             text-align: center;
             padding: 40px;
-            color: #b57c8c;
+            color: #ffb6c1;
             font-size: 1.2rem;
         }
 
@@ -843,6 +884,7 @@
             font-size: 2.5rem;
             margin-bottom: 15px;
             animation: spin 2s infinite linear;
+            filter: drop-shadow(0 0 10px #ff69b4);
         }
 
         @keyframes spin {
@@ -866,7 +908,7 @@
                 width: 100%;
                 height: 250px;
                 border-right: none;
-                border-bottom: 1px solid rgba(255,255,255,0.5);
+                border-bottom: 1px solid rgba(255, 105, 180, 0.2);
                 padding: 25px 15px;
             }
             
@@ -902,10 +944,10 @@
     </style>
 </head>
 <body>
-    <!-- BACKGROUND -->
-    <div class="gradient-bg"></div>
+    <!-- DARK BACKGROUND -->
+    <div class="dark-bg"></div>
     
-    <!-- BUBBLES -->
+    <!-- PINK BUBBLES -->
     <div class="bubbles">
         <div class="bubble b1"></div>
         <div class="bubble b2"></div>
@@ -914,10 +956,10 @@
         <div class="bubble b5"></div>
     </div>
     
-    <!-- FLOATING HEARTS -->
+    <!-- PINK FLOATING HEARTS -->
     <div class="floating-hearts" id="floatingHearts"></div>
     
-    <!-- PATTERN -->
+    <!-- PINK PATTERN -->
     <div class="pattern"></div>
 
     <!-- MAIN CONTAINER -->
@@ -960,7 +1002,7 @@
         </div>
     </div>
 
-    <!-- VALENTINE BUTTON -->
+    <!-- PINK VALENTINE BUTTON -->
     <button class="valentine-btn" id="valentineBtn">
         <i class="far fa-heart"></i> be my valentine?
     </button>
@@ -989,7 +1031,7 @@
                 <button class="yes-btn" id="yesBtn">yes</button>
                 <button class="no-btn" id="noBtn">no</button>
             </div>
-            <div id="valentineResponse" style="display: none; margin-top: 30px; font-size: 1.4rem; color: #b57c8c; font-family: 'Dancing Script', cursive;">
+            <div id="valentineResponse" style="display: none; margin-top: 30px; font-size: 1.4rem; color: #ffb6c1; font-family: 'Dancing Script', cursive; text-shadow: 0 0 10px #ff69b4;">
                 <i class="fas fa-heart"></i> chat me "heart" <i class="fas fa-heart"></i>
             </div>
         </div>
@@ -1049,7 +1091,7 @@
             });
         });
 
-        // HEARTS CURSOR
+        // PINK HEARTS CURSOR
         document.addEventListener('mousemove', (e) => {
             if (Math.random() < 0.15) {
                 const heart = document.createElement('div');
@@ -1061,6 +1103,8 @@
                 heart.style.pointerEvents = 'none';
                 heart.style.zIndex = '9999';
                 heart.style.opacity = '0.5';
+                heart.style.color = '#ff69b4';
+                heart.style.filter = 'drop-shadow(0 0 5px #ff69b4)';
                 heart.style.animation = 'float 1.8s ease-out forwards';
                 document.body.appendChild(heart);
 
@@ -1195,7 +1239,7 @@ Dalevx ❤️`;
                 particleCount: 200,
                 spread: 120,
                 origin: { y: 0.6 },
-                colors: ['#ff9a9e', '#fad0c4', '#fbc2c2', '#fecfef']
+                colors: ['#ff69b4', '#ffb6c1', '#ff9a9e', '#fad0c4']
             });
         });
         
@@ -1246,7 +1290,7 @@ Dalevx ❤️`;
                     galleryGrid.appendChild(item);
                 });
             } catch (error) {
-                galleryGrid.innerHTML = '<div class="loading" style="color:#b57c8c;">error loading memories</div>';
+                galleryGrid.innerHTML = '<div class="loading" style="color:#ffb6c1;">error loading memories</div>';
             }
         }
 

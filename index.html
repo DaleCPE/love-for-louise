@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
     <style>
         * {
             margin: 0;
@@ -23,7 +25,6 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             padding: 20px;
             position: relative;
@@ -625,6 +626,216 @@
             text-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
 
+        /* OPEN WHEN... STYLES */
+        .open-when-section {
+            max-width: 1200px;
+            width: 100%;
+            margin: 80px auto 50px;
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(255, 105, 180, 0.2);
+            border: 2px solid white;
+        }
+
+        .open-when-title {
+            font-family: 'Caveat', cursive;
+            font-size: 3.5rem;
+            color: #ff6b8b;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 3px 3px 0 white;
+            position: relative;
+        }
+
+        .open-when-title i {
+            margin: 0 20px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            color: #ff4d6d;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .open-when-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .open-when-card {
+            background: linear-gradient(145deg, #ffffff, #fff0f0);
+            border-radius: 30px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 4px solid white;
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .open-when-card::before {
+            content: '💌';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 5rem;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+
+        .open-when-card:hover {
+            transform: translateY(-15px) rotate(2deg);
+            box-shadow: 0 20px 40px rgba(255, 77, 109, 0.4);
+            background: linear-gradient(145deg, #fff5f5, #ffe0e0);
+        }
+
+        .open-when-card i {
+            font-size: 3.5rem;
+            color: #ff6b8b;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .open-when-card:hover i {
+            transform: scale(1.2);
+        }
+
+        .open-when-card h3 {
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            color: #5a4e4e;
+            margin-bottom: 10px;
+        }
+
+        .open-when-card p {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.1rem;
+            color: #888;
+        }
+
+        .open-when-card .seal {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: #ff6b8b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            transform: rotate(-5deg);
+            border: 2px solid white;
+        }
+
+        /* Open Modal */
+        .open-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 4000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .open-modal-content {
+            background: #fff9f9;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 40px;
+            padding: 40px;
+            position: relative;
+            border: 6px solid white;
+            box-shadow: 0 30px 60px rgba(255, 77, 109, 0.4);
+            animation: openLetter 0.6s ease;
+        }
+
+        @keyframes openLetter {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotate(-10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        .close-open {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2.5rem;
+            cursor: pointer;
+            color: #ff6b8b;
+            transition: transform 0.3s;
+            z-index: 10;
+        }
+
+        .close-open:hover {
+            transform: rotate(90deg) scale(1.2);
+        }
+
+        .open-modal-header {
+            font-family: 'Caveat', cursive;
+            font-size: 3rem;
+            color: #ff6b8b;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px dashed #ffb6c1;
+            padding-bottom: 20px;
+        }
+
+        .open-modal-body {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: #4a3f3f;
+            white-space: pre-wrap;
+            min-height: 200px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 30px;
+            border: 2px dashed #ffb6c1;
+        }
+
+        .open-modal-footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .open-close-btn {
+            background: #ff6b8b;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        .open-close-btn:hover {
+            background: #ff4d6d;
+            transform: scale(1.05);
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .gallery-grid {
@@ -655,6 +866,22 @@
             .valentine-btn {
                 font-size: 1.4rem;
                 padding: 12px 30px;
+            }
+            
+            .open-when-title {
+                font-size: 2.5rem;
+            }
+            
+            .open-when-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .open-modal-header {
+                font-size: 2.2rem;
+            }
+            
+            .open-modal-body {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -763,6 +990,26 @@
         </div>
     </div>
 
+    <!-- OPEN WHEN... Section -->
+    <div class="open-when-section">
+        <h2 class="open-when-title">
+            <i class="fas fa-envelope"></i> Open When... <i class="fas fa-envelope"></i>
+        </h2>
+        <div class="open-when-grid" id="openWhenGrid"></div>
+    </div>
+
+    <!-- Open When Modal -->
+    <div class="open-modal" id="openModal">
+        <div class="open-modal-content">
+            <span class="close-open" id="closeOpen">&times;</span>
+            <div class="open-modal-header" id="openModalHeader"></div>
+            <div class="open-modal-body" id="openModalBody"></div>
+            <div class="open-modal-footer">
+                <button class="open-close-btn" id="closeOpenBtn">Close Letter</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Hearts Cursor Effect
         document.addEventListener('mousemove', function(e) {
@@ -813,9 +1060,12 @@ Dalevx ❤️`;
             noBtn.classList.remove('disabled');
             noBtn.classList.add('active');
             noBtn.textContent = 'NO';
+            noBtn.style.transform = 'translate(0, 0)';
             valentineResponse.style.display = 'none';
             valentineQuestion.style.display = 'block';
             valentineQuestion.textContent = 'Can you be my Valentine?';
+            yesBtn.style.display = 'block';
+            noBtn.style.display = 'block';
             noClickCount = 0;
         });
         
@@ -830,9 +1080,16 @@ Dalevx ❤️`;
             noBtn.style.display = 'none';
             yesBtn.style.display = 'none';
             valentineResponse.style.display = 'block';
+            
+            // Confetti effect
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.6 }
+            });
         });
         
-        // NO button - nagbabago position and eventually ma-di-disable
+        // NO button
         noBtn.addEventListener('click', function() {
             noClickCount++;
             
@@ -854,13 +1111,6 @@ Dalevx ❤️`;
                 noBtn.classList.add('disabled');
                 noBtn.textContent = 'Wala na ❤️';
                 noBtn.style.transform = 'translate(0, 0)';
-            }
-        });
-
-        // Close modal when clicking outside
-        window.addEventListener('click', function(e) {
-            if (e.target === valentineModal) {
-                valentineModal.style.display = 'none';
             }
         });
 
@@ -936,6 +1186,73 @@ Dalevx ❤️`;
             }
         }
 
+        // OPEN WHEN... Letters Data - UPDATED WITH YOUR MESSAGES
+        const openWhenLetters = [
+            {
+                icon: 'fa-face-frown',
+                title: 'You\'re Sad',
+                message: `Remember when we are planning our future together and spend time for each other.`
+            },
+            {
+                icon: 'fa-face-smile',
+                title: 'You\'re Happy',
+                message: `Always remember why we are happy, because of each other.`
+            },
+            {
+                icon: 'fa-face-angry',
+                title: 'You\'re Angry',
+                message: `Deep breath and drink water. Stay calm, I am always here.`
+            },
+            {
+                icon: 'fa-face-tired',
+                title: 'You\'re Tired',
+                message: `Think of panpan as me. Cuddle and hug tightly so that you can think of me.`
+            },
+            {
+                icon: 'fa-face-kiss',
+                title: 'You Miss Me',
+                message: `Take a look at the pictures and the time we always bond. ALSO REMEMBER THE FIRST DATE! ❤️`
+            },
+            {
+                icon: 'fa-star',
+                title: 'You Need Reminded',
+                message: `I love you always and forever. Kahit na mamatay na ako, ikaw padin ang hahanap hanapin ko. I will always stay by your side.`
+            },
+            {
+                icon: 'fa-heart',
+                title: 'Just Because',
+                message: `YOU ARE ALWAYS MY ONLY AND MY NUMBER ONE. WALANG MAG BABAGO! ❤️`
+            },
+            {
+                icon: 'fa-music',
+                title: 'Need a Song',
+                message: `Open Spotify and play "You!"`
+            }
+        ];
+
+        // Load Open When letters
+        const openWhenGrid = document.getElementById('openWhenGrid');
+        
+        openWhenLetters.forEach(letter => {
+            const card = document.createElement('div');
+            card.className = 'open-when-card';
+            
+            card.innerHTML = `
+                <i class="fas ${letter.icon}"></i>
+                <h3>Open When...</h3>
+                <p>${letter.title}</p>
+                <div class="seal">💌</div>
+            `;
+            
+            card.addEventListener('click', () => {
+                document.getElementById('openModalHeader').textContent = `Open When ${letter.title}`;
+                document.getElementById('openModalBody').textContent = letter.message;
+                document.getElementById('openModal').style.display = 'flex';
+            });
+            
+            openWhenGrid.appendChild(card);
+        });
+
         // Typewriter effect
         function typeWriter(element, text, speed = 50) {
             let i = 0;
@@ -976,7 +1293,7 @@ Dalevx ❤️`;
             document.getElementById('lightbox').style.display = 'none';
         });
 
-        // Close when clicking outside
+        // Close modal when clicking outside
         window.addEventListener('click', function(e) {
             if (e.target.classList.contains('modal')) {
                 e.target.style.display = 'none';
@@ -984,11 +1301,31 @@ Dalevx ❤️`;
             if (e.target.classList.contains('lightbox')) {
                 e.target.style.display = 'none';
             }
+            if (e.target.classList.contains('valentine-modal') && e.target !== valentineModal) {
+                valentineModal.style.display = 'none';
+            }
         });
 
-        // Pre-load first few images for better performance
+        // Open When modal close
+        const openModal = document.getElementById('openModal');
+        const closeOpen = document.getElementById('closeOpen');
+        const closeOpenBtn = document.getElementById('closeOpenBtn');
+
+        function closeOpenModal() {
+            openModal.style.display = 'none';
+        }
+
+        closeOpen.addEventListener('click', closeOpenModal);
+        closeOpenBtn.addEventListener('click', closeOpenModal);
+
+        window.addEventListener('click', function(e) {
+            if (e.target === openModal) {
+                closeOpenModal();
+            }
+        });
+
+        // Pre-load images for better performance
         window.addEventListener('load', function() {
-            // Optional: pre-load first 4 images
             const imagesToPreload = ['us1.jpeg', 'us2.jpeg', 'us3.jpeg', 'us4.jpeg'];
             imagesToPreload.forEach(src => {
                 const img = new Image();

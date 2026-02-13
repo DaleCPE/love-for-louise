@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Louise ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Same CSS as before - paste mo lang yung nasa previous code ko */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Patrick Hand', cursive;
+            background: linear-gradient(145deg, #fce4e4 0%, #ffe9e9 50%, #fef0f0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        /* I-paste mo lahat ng CSS from previous code here */
+        .container { /* ... */ }
+        .polaroid { /* ... */ }
+        /* ... and all other styles ... */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Polaroid - Louise -->
+        <div class="polaroid left" id="leftPolaroid">
+            <div class="tape"></div>
+            <div class="photo-container">
+                <!-- ITO ANG IMAGES - relative paths lang -->
+                <img src="louise.jpg" alt="Louise" class="photo">
+                <div class="hover-text">
+                    <i class="fas fa-envelope"></i> For Louise <i class="fas fa-heart"></i>
+                </div>
+            </div>
+            <div class="caption">
+                <i class="fas fa-star"></i> My Louise <i class="fas fa-star"></i>
+            </div>
+        </div>
+
+        <!-- Right Polaroid - Us -->
+        <div class="polaroid right" id="rightPolaroid">
+            <div class="tape"></div>
+            <div class="photo-container">
+                <img src="us-main.jpg" alt="Us" class="photo">
+                <div class="hover-text">
+                    <i class="fas fa-camera"></i> Our Memories <i class="fas fa-heart"></i>
+                </div>
+            </div>
+            <div class="caption">
+                <i class="fas fa-infinity"></i> You & Me <i class="fas fa-infinity"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Modal -->
+    <div class="modal" id="messageModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeMessageModal">&times;</span>
+            <div class="modal-title">
+                <i class="fas fa-envelope-open-text"></i> For My Love, Louise
+            </div>
+            <div class="typewriter-text" id="typewriterMessage"></div>
+        </div>
+    </div>
+
+    <!-- Gallery Modal -->
+    <div class="modal" id="galleryModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeGalleryModal">&times;</span>
+            <div class="modal-title">
+                <i class="fas fa-images"></i> Our Memories
+            </div>
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="close-lightbox" id="closeLightbox">&times;</span>
+        <img src="" alt="Enlarged" id="lightboxImg">
+    </div>
+
+    <script>
+        // Hearts cursor effect
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() < 0.1) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-cursor';
+                heart.innerHTML = '❤️';
+                heart.style.left = (e.pageX - 10) + 'px';
+                heart.style.top = (e.pageY - 10) + 'px';
+                heart.style.position = 'fixed';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '9999';
+                heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+                heart.style.animation = 'floatUp 1.5s ease-out forwards';
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 1500);
+            }
+        });
+
+        // Message for Louise - I-EDIT MO ITO!
+        const messageForLouise = `My Dearest Louise,
+
+    Mahal na mahal kita. 
+
+    Hindi ko maipaliwanag ang saya na dala mo sa buhay ko. Sa bawat araw na kasama kita, lalo kitang minamahal.
+
+    Ikaw ang:
+    • Dahilan ng aking ngiti
+    • Kausap sa mga panaginip
+    • Tahanan ng puso ko
+
+    Mahal na mahal kita, palagi.
+
+    Forever yours,
+    [Name mo] ❤️`;
+
+        // Gallery images - relative paths lang
+        const galleryImages = [
+            { url: 'us1.jpg', caption: 'Us 1' },
+            { url: 'us2.jpg', caption: 'Us 2' },
+            { url: 'us3.jpg', caption: 'Us 3' },
+            { url: 'us4.jpg', caption: 'Us 4' }
+        ];
+
+        // Populate gallery
+        const galleryGrid = document.getElementById('galleryGrid');
+        galleryImages.forEach(img => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.innerHTML = `<img src="${img.url}" alt="${img.caption}">`;
+            item.addEventListener('click', function() {
+                document.getElementById('lightboxImg').src = this.querySelector('img').src;
+                document.getElementById('lightbox').style.display = 'flex';
+            });
+            galleryGrid.appendChild(item);
+        });
+
+        // Typewriter effect
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            function typing() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                }
+            }
+            typing();
+        }
+
+        // Event listeners
+        document.getElementById('leftPolaroid').addEventListener('click', function() {
+            const modal = document.getElementById('messageModal');
+            const typewriterEl = document.getElementById('typewriterMessage');
+            modal.style.display = 'flex';
+            typeWriter(typewriterEl, messageForLouise, 30);
+        });
+
+        document.getElementById('rightPolaroid').addEventListener('click', function() {
+            document.getElementById('galleryModal').style.display = 'flex';
+        });
+
+        // Close buttons
+        document.getElementById('closeMessageModal').addEventListener('click', function() {
+            document.getElementById('messageModal').style.display = 'none';
+        });
+
+        document.getElementById('closeGalleryModal').addEventListener('click', function() {
+            document.getElementById('galleryModal').style.display = 'none';
+        });
+
+        document.getElementById('closeLightbox').addEventListener('click', function() {
+            document.getElementById('lightbox').style.display = 'none';
+        });
+
+        // Close when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+            if (e.target.classList.contains('lightbox')) {
+                e.target.style.display = 'none';
+            }
+        });
+
+        // Add animation style
+        const style = document.createElement('style');
+        style.textContent = `
+            .heart-cursor {
+                position: fixed;
+                pointer-events: none;
+                z-index: 9999;
+                font-size: 20px;
+                animation: floatUp 1.5s ease-out forwards;
+            }
+            @keyframes floatUp {
+                0% {
+                    opacity: 1;
+                    transform: translateY(0) scale(0.5);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-100px) scale(1.2);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

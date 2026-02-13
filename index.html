@@ -169,7 +169,7 @@
             opacity: 0.5;
         }
 
-        /* MAIN CONTAINER - NO SCROLL */
+        /* MAIN CONTAINER */
         .main-container {
             display: flex;
             height: 100vh;
@@ -179,7 +179,7 @@
             overflow: hidden;
         }
 
-        /* ===== LEFT SIDE - FIXED HEIGHT, NO SCROLL ===== */
+        /* ===== LEFT SIDE ===== */
         .left-side {
             width: 340px;
             background: rgba(20, 10, 15, 0.7);
@@ -214,7 +214,6 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* GRID - FITS EXACTLY 8 CARDS */
         .open-when-left-grid {
             display: flex;
             flex-direction: column;
@@ -239,11 +238,6 @@
             position: relative;
             flex-shrink: 0;
             height: 75px;
-        }
-
-        /* Make cards slightly smaller to fit 8 */
-        .open-when-left-card:nth-child(n+8) {
-            margin-top: auto;
         }
 
         .open-when-left-card::before {
@@ -311,7 +305,7 @@
             gap: 4px;
         }
 
-        /* ===== RIGHT SIDE ===== */
+        /* ===== RIGHT SIDE - POLAROID ===== */
         .right-side {
             flex: 1;
             display: flex;
@@ -343,65 +337,80 @@
             z-index: 2;
         }
 
+        /* POLAROID DESIGN - FIXED */
         .polaroid {
             width: 340px;
-            background: rgba(25, 15, 20, 0.7);
-            backdrop-filter: blur(10px);
-            padding: 18px 18px 30px 18px;
-            border-radius: 20px;
-            box-shadow: 0 25px 40px -15px rgba(0, 0, 0, 0.8),
-                        0 0 0 1px rgba(255, 105, 180, 0.2) inset,
-                        0 0 20px rgba(255, 105, 180, 0.1);
+            background: #fff5f5;  /* White background para parang totoong polaroid */
+            padding: 15px 15px 35px 15px;  /* Classic polaroid spacing */
+            border-radius: 10px;
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5),
+                        0 0 0 1px rgba(255, 255, 255, 0.3) inset;
             transition: all 0.4s ease;
             cursor: pointer;
             transform: rotate(var(--rotate, -2deg));
+            position: relative;
         }
 
         .polaroid.left { --rotate: -2deg; }
         .polaroid.right { --rotate: 2deg; }
 
+        /* Clothespin */
         .polaroid::before {
             content: '';
             position: absolute;
             top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 35px;
-            height: 18px;
-            background: rgba(255, 105, 180, 0.2);
+            width: 40px;
+            height: 20px;
+            background: rgba(180, 140, 150, 0.4);
             border-radius: 8px 8px 4px 4px;
-            border: 1px solid rgba(255, 105, 180, 0.3);
-            box-shadow: 0 2px 8px rgba(255, 105, 180, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 5;
+        }
+
+        .polaroid::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 6px;
+            background: rgba(200, 170, 180, 0.5);
+            border-radius: 3px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            z-index: 6;
         }
 
         .polaroid:hover {
             transform: rotate(0deg) translateY(-15px) scale(1.02);
-            box-shadow: 0 35px 50px -15px rgba(0, 0, 0, 0.9),
-                        0 0 0 1px rgba(255, 105, 180, 0.4) inset,
+            box-shadow: 0 30px 40px -12px rgba(0, 0, 0, 0.7),
+                        0 0 0 2px rgba(255, 255, 255, 0.5) inset,
                         0 0 30px #ff69b4;
-            background: rgba(35, 20, 25, 0.8);
+            background: #ffffff;
         }
 
         .photo-container {
             width: 100%;
             aspect-ratio: 1/1;
-            border-radius: 16px;
             overflow: hidden;
-            background: #1a0f12;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+            background: #e0d5d5;
+            border-radius: 5px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .photo {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease; /* Binagal at binawasan ang zoom */
-            filter: brightness(0.95) contrast(1.05);
+            transition: transform 0.3s ease;
+            display: block;
         }
 
         .polaroid:hover .photo {
-            transform: scale(1.02); /* 2% lang imbes na 6% */
-            filter: brightness(1) contrast(1.05);
+            transform: scale(1.02);
         }
 
         .hover-text {
@@ -409,61 +418,57 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(255, 105, 180, 0.2);
-            backdrop-filter: blur(8px);
-            color: #ffb6c1;
-            padding: 12px 28px;
-            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #ff69b4;
+            padding: 10px 25px;
+            border-radius: 40px;
             font-family: 'Dancing Script', cursive;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
+            font-weight: 400;
             opacity: 0;
             transition: all 0.3s ease;
-            box-shadow: 0 0 25px #ff69b4;
-            border: 1px solid rgba(255, 105, 180, 0.4);
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.5);
+            border: 2px solid white;
             pointer-events: none;
             white-space: nowrap;
-            text-shadow: 0 0 8px #ff69b4;
+            z-index: 10;
         }
 
         .polaroid:hover .hover-text {
             opacity: 1;
             transform: translate(-50%, -50%) scale(1.05);
-            box-shadow: 0 0 35px #ff69b4;
         }
 
         .caption {
             text-align: center;
-            margin-top: 18px;
+            margin-top: 15px;
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: #ffb6c1;
-            border-top: 1px solid rgba(255, 105, 180, 0.3);
-            padding-top: 15px;
-            text-shadow: 0 0 6px #ff69b4;
+            font-size: 1.3rem;
+            color: #5a4a4a;
+            border-top: 1px solid #ffb6c1;
+            padding-top: 12px;
         }
 
         .caption i {
             color: #ff69b4;
-            margin: 0 6px;
-            font-size: 1.2rem;
-            animation: sparkle 3s infinite;
+            margin: 0 5px;
+            font-size: 1.1rem;
         }
 
         .valentine-btn {
             position: fixed;
             bottom: 25px;
             right: 25px;
-            background: rgba(255, 105, 180, 0.2);
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             color: #ffb6c1;
-            border: none;
+            border: 1px solid rgba(255, 105, 180, 0.3);
             padding: 14px 32px;
             border-radius: 50px;
             font-family: 'Dancing Script', cursive;
             font-size: 1.4rem;
             cursor: pointer;
             box-shadow: 0 0 25px rgba(255, 105, 180, 0.3);
-            border: 1px solid rgba(255, 105, 180, 0.3);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -472,15 +477,15 @@
         }
 
         @keyframes buttonPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 25px rgba(255, 105, 180, 0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 0 40px #ff69b4; }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .valentine-btn:hover {
             background: rgba(255, 105, 180, 0.3);
             color: white;
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 0 50px #ff69b4;
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px #ff69b4;
         }
 
         /* MODALS */
@@ -500,16 +505,15 @@
         }
 
         .modal-content, .valentine-content, .lightbox-content, .open-modal-content {
-            background: rgba(20, 10, 15, 0.8);
-            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
             max-width: 500px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
             padding: 35px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 105, 180, 0.3);
-            box-shadow: 0 0 40px rgba(255, 105, 180, 0.2);
+            border-radius: 30px;
+            border: 2px solid white;
+            box-shadow: 0 0 40px rgba(255, 105, 180, 0.3);
         }
 
         .close-modal {
@@ -520,44 +524,40 @@
             height: 40px;
             font-size: 2rem;
             cursor: pointer;
-            color: #ffb6c1;
+            color: #b57c8c;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background: rgba(255, 105, 180, 0.1);
-            border: 1px solid rgba(255, 105, 180, 0.3);
+            background: rgba(255, 255, 255, 0.5);
         }
 
         .close-modal:hover {
             color: #ff69b4;
             transform: rotate(90deg);
-            box-shadow: 0 0 15px #ff69b4;
         }
 
         .modal-title {
             font-family: 'Dancing Script', cursive;
             font-size: 2.4rem;
-            color: #ffb6c1;
+            color: #b57c8c;
             margin-bottom: 20px;
             text-align: center;
-            border-bottom: 1px dashed #ff69b4;
+            border-bottom: 1px dashed #ffb6c1;
             padding-bottom: 15px;
-            text-shadow: 0 0 8px #ff69b4;
         }
 
         .typewriter-text {
             font-size: 1rem;
             line-height: 1.7;
-            color: #ffb6c1;
+            color: #4a3f3f;
             white-space: pre-wrap;
             padding: 15px;
-            background: rgba(255, 105, 180, 0.05);
-            border-radius: 25px;
-            border: 1px solid rgba(255, 105, 180, 0.2);
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            border: 1px solid #ffb6c1;
         }
 
-        /* GALLERY GRID */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -566,32 +566,24 @@
         }
 
         .gallery-item {
-            background: rgba(255, 105, 180, 0.1);
-            border-radius: 18px;
+            background: white;
+            border-radius: 15px;
             overflow: hidden;
             cursor: pointer;
-            border: 1px solid rgba(255, 105, 180, 0.3);
+            border: 2px solid white;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
             aspect-ratio: 1/1;
-            transition: all 0.3s ease;
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
-            filter: brightness(0.95);
         }
 
         .gallery-item:hover {
             transform: scale(1.02);
             border-color: #ff69b4;
-            box-shadow: 0 0 20px #ff69b4;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.03); /* Minimal zoom lang */
-            filter: brightness(1);
         }
 
         .valentine-content {
@@ -602,9 +594,8 @@
         .valentine-question {
             font-family: 'Dancing Script', cursive;
             font-size: 2.5rem;
-            color: #ffb6c1;
+            color: #b57c8c;
             margin-bottom: 25px;
-            text-shadow: 0 0 12px #ff69b4;
         }
 
         .button-container {
@@ -619,25 +610,29 @@
             font-family: 'Quicksand', sans-serif;
             font-size: 1.3rem;
             cursor: pointer;
-            border: 1px solid rgba(255, 105, 180, 0.3);
-            background: rgba(255, 105, 180, 0.1);
-            color: #ffb6c1;
+            border: none;
+            transition: all 0.3s;
             flex: 1;
-            transition: all 0.3s ease;
         }
 
         .yes-btn {
-            background: rgba(255, 105, 180, 0.2);
+            background: #ff69b4;
+            color: white;
         }
 
         .yes-btn:hover {
-            background: #ff69b4;
+            background: #ff4d9e;
             transform: translateY(-2px);
-            box-shadow: 0 0 30px #ff69b4;
+            box-shadow: 0 0 20px #ff69b4;
+        }
+
+        .no-btn {
+            background: #f0f0f0;
+            color: #666;
         }
 
         .no-btn.active:hover {
-            background: rgba(255, 105, 180, 0.2);
+            background: #e0e0e0;
             transform: translateY(-2px);
         }
 
@@ -656,83 +651,34 @@
             width: 100%;
             max-height: 60vh;
             overflow: hidden;
-            background: rgba(0, 0, 0, 0.3);
+            background: #f5f5f5;
         }
 
         .lightbox-image-container img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Para hindi mag-zoom, whole image kita */
+            object-fit: contain;
         }
 
         .lightbox-story {
             padding: 25px;
-            background: rgba(20, 10, 15, 0.9);
+            background: white;
         }
 
         .lightbox-title {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
-            color: #ffb6c1;
+            color: #b57c8c;
             margin-bottom: 10px;
             border-left: 3px solid #ff69b4;
             padding-left: 15px;
-            text-shadow: 0 0 5px #ff69b4;
         }
 
         .lightbox-description {
             font-size: 1rem;
             line-height: 1.6;
-            color: #d88ca0;
-            font-family: 'Quicksand', sans-serif;
+            color: #4a3f3f;
             white-space: pre-wrap;
-        }
-
-        .open-modal-content {
-            max-width: 450px;
-            padding: 35px;
-        }
-
-        .open-modal-header {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.2rem;
-            color: #ffb6c1;
-            text-align: center;
-            margin-bottom: 20px;
-            border-bottom: 1px dashed #ff69b4;
-            padding-bottom: 15px;
-            text-shadow: 0 0 8px #ff69b4;
-        }
-
-        .open-modal-body {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: #d88ca0;
-            white-space: pre-wrap;
-            padding: 20px;
-            background: rgba(255, 105, 180, 0.05);
-            border-radius: 30px;
-            border: 1px solid rgba(255, 105, 180, 0.2);
-        }
-
-        .open-close-btn {
-            background: rgba(255, 105, 180, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 105, 180, 0.3);
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-family: 'Quicksand', sans-serif;
-            font-size: 1rem;
-            cursor: pointer;
-            margin-top: 20px;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        .open-close-btn:hover {
-            background: #ff69b4;
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px #ff69b4;
         }
 
         .close-lightbox {
@@ -747,31 +693,64 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 105, 180, 0.2);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 50%;
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 105, 180, 0.3);
-            transition: all 0.3s ease;
         }
 
         .close-lightbox:hover {
             transform: rotate(90deg);
+        }
+
+        .open-modal-content {
+            max-width: 450px;
+            padding: 35px;
+        }
+
+        .open-modal-header {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #b57c8c;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px dashed #ffb6c1;
+            padding-bottom: 15px;
+        }
+
+        .open-modal-body {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #4a3f3f;
+            white-space: pre-wrap;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            border: 1px solid #ffb6c1;
+        }
+
+        .open-close-btn {
+            background: #ff69b4;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .open-close-btn:hover {
+            background: #ff4d9e;
+            transform: translateY(-2px);
             box-shadow: 0 0 20px #ff69b4;
         }
 
         .loading {
             text-align: center;
             padding: 30px;
-            color: #ffb6c1;
-        }
-
-        .loading i {
-            animation: spin 1s infinite linear;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            color: #b57c8c;
         }
 
         @media (max-width: 1000px) {
@@ -781,8 +760,7 @@
 
         @media (max-width: 768px) {
             .main-container { flex-direction: column; }
-            .left-side { width: 100%; height: auto; border-right: none; border-bottom: 1px solid rgba(255,105,180,0.2); }
-            .open-when-left-grid { height: auto; }
+            .left-side { width: 100%; height: auto; border-right: none; }
             .polaroid { width: 240px; }
             .polaroid-container { gap: 20px; }
         }
@@ -812,13 +790,13 @@
         <div class="pattern"></div>
 
         <div class="main-container">
-            <!-- LEFT SIDE - OPEN WHEN LETTERS (8 CARDS) -->
+            <!-- LEFT SIDE - OPEN WHEN LETTERS -->
             <div class="left-side">
                 <h2><i class="fas fa-envelope-open-text"></i> open when... <i class="fas fa-envelope-open-text"></i></h2>
                 <div class="open-when-left-grid" id="openWhenLeftGrid"></div>
             </div>
 
-            <!-- RIGHT SIDE - POLAROIDS -->
+            <!-- RIGHT SIDE - POLAROIDS (FIXED) -->
             <div class="right-side">
                 <div class="polaroid-container">
                     <div class="polaroid left" id="leftPolaroid">
@@ -868,7 +846,7 @@
                 <button class="yes-btn" id="yesBtn">yes</button>
                 <button class="no-btn" id="noBtn">no</button>
             </div>
-            <div id="valentineResponse" style="display: none; margin-top: 20px; font-size: 1.2rem; color: #ffb6c1;">
+            <div id="valentineResponse" style="display: none; margin-top: 20px; font-size: 1.2rem; color: #b57c8c;">
                 <i class="fas fa-heart"></i> chat me "heart" <i class="fas fa-heart"></i>
             </div>
         </div>
@@ -1079,46 +1057,6 @@
             }
         }
 
-        // 3D PARALLAX
-        document.addEventListener('mousemove', (e) => {
-            if (mainDashboard.style.display !== 'block') return;
-            
-            const x = (e.clientX / window.innerWidth - 0.5) * 15;
-            const y = (e.clientY / window.innerHeight - 0.5) * 15;
-            
-            const polaroids = document.querySelectorAll('.polaroid');
-            const cards = document.querySelectorAll('.open-when-left-card');
-            
-            polaroids.forEach(polaroid => {
-                polaroid.style.transform = `rotate(${polaroid.classList.contains('left') ? -2 : 2}deg) translateX(${x * 0.3}px) translateY(${y * 0.3}px)`;
-            });
-            
-            cards.forEach(card => {
-                card.style.transform = `translateX(${x * 0.2}px) translateY(${y * 0.2}px)`;
-            });
-        });
-
-        // Hearts cursor
-        document.addEventListener('mousemove', (e) => {
-            if (mainDashboard.style.display !== 'block') return;
-            if (Math.random() < 0.1) {
-                const heart = document.createElement('div');
-                heart.innerHTML = '❤️';
-                heart.style.position = 'fixed';
-                heart.style.left = (e.pageX - 8) + 'px';
-                heart.style.top = (e.pageY - 8) + 'px';
-                heart.style.fontSize = (Math.random() * 20 + 12) + 'px';
-                heart.style.pointerEvents = 'none';
-                heart.style.zIndex = '9999';
-                heart.style.opacity = '0.4';
-                heart.style.color = '#ff69b4';
-                heart.style.filter = 'drop-shadow(0 0 3px #ff69b4)';
-                heart.style.animation = 'float 1.5s ease-out forwards';
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 1500);
-            }
-        });
-
         // ORIGINAL MESSAGE FOR LOUISE
         const messageForLouise = `My Dearest kairi(lowisie, loys, Louise),
 
@@ -1133,7 +1071,7 @@ Mahal na mahal kita, palagi.
 ikaw at ikaw lang ang lagi,
 Dalevx ❤️`;
 
-        // OPEN WHEN LETTERS (ALL 8 MESSAGES INCLUDED)
+        // OPEN WHEN LETTERS (ALL 8 MESSAGES)
         const openWhenLetters = [
             { 
                 icon: 'fa-face-frown', 
@@ -1255,18 +1193,7 @@ Dalevx ❤️`;
             
             try {
                 const response = await fetch(`memories.json?t=${Date.now()}`);
-                
-                if (!response.ok) {
-                    throw new Error('memories.json not found');
-                }
-                
                 const data = await response.json();
-                
-                if (!data.memories || data.memories.length === 0) {
-                    galleryGrid.innerHTML = '<div class="loading">no memories yet</div>';
-                    return;
-                }
-                
                 galleryGrid.innerHTML = '';
                 
                 data.memories.forEach(memory => {
@@ -1284,8 +1211,7 @@ Dalevx ❤️`;
                     galleryGrid.appendChild(item);
                 });
             } catch (error) {
-                console.error('Error loading memories:', error);
-                galleryGrid.innerHTML = '<div class="loading">error loading memories<br><small>make sure memories.json exists</small></div>';
+                galleryGrid.innerHTML = '<div class="loading">error loading memories</div>';
             }
         }
 

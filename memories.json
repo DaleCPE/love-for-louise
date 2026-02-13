@@ -1,0 +1,28 @@
+{
+  "memories": [
+    {
+      "id": 1,
+      "url": "us1.jpeg",
+      "title": "📸 Our First Date",
+      "story": "I'll never forget this day. It was when I knew you were special.\n\nAng saya saya ko nun kasi kasama kita. Kinakabahan pero masaya.\n\nSana lagi tayong ganito - masaya at magkasama. ❤️"
+    },
+    {
+      "id": 2,
+      "url": "us2.jpeg",
+      "title": "🎬 Movie Night",
+      "story": "Sobrang saya manood ng movie kasama ka. Kahit anong movie, basta ikaw katabi ko, masaya na ako.\n\nMiss ko na ang mga ganitong simpleng moments."
+    },
+    {
+      "id": 3,
+      "url": "us3.jpeg",
+      "title": "☕ Coffee Date",
+      "story": "Coffee dates with you are the best. Hindi dahil sa kape, kundi dahil sa kausap ko.\n\nWalang katulad ang tawa mo, Louise. Miss na miss ko na yun."
+    },
+    {
+      "id": 4,
+      "url": "us4.jpeg",
+      "title": "🌅 Sunset with You",
+      "story": "Ang ganda ng sunset, pero mas gumaganda dahil kasama kita.\n\nSana hanggang pagtanda, ikaw pa rin kasama ko sa mga sunset."
+    }
+  ]
+}

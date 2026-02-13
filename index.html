@@ -117,12 +117,13 @@
             z-index: 2;
         }
 
-        /* ===== LEFT SIDE ===== */
+        /* ===== LEFT SIDE - ENVELOPE STACK DESIGN (#9) ===== */
         .left-side {
             width: 340px;
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.6); /* Glass morphism #1 */
             backdrop-filter: blur(15px);
-            border-right: 1px solid rgba(255, 255, 255, 0.6);
+            -webkit-backdrop-filter: blur(15px);
+            border-right: 1px solid rgba(255, 255, 255, 0.5);
             padding: 40px 25px;
             overflow-y: auto;
             box-shadow: 5px 0 40px rgba(0, 0, 0, 0.03);
@@ -163,46 +164,77 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
+        /* ENVELOPE STACK CARDS */
         .open-when-left-grid {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
+            position: relative;
         }
 
         .open-when-left-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.8); /* Glass morphism */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px 20px 20px 8px; /* Parang envelope flap */
             padding: 18px 20px;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
             border: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 5px 20px rgba(180, 140, 150, 0.05);
+            box-shadow: 0 8px 25px rgba(180, 140, 150, 0.1);
             display: flex;
             align-items: center;
             gap: 18px;
-            backdrop-filter: blur(5px);
             position: relative;
-            overflow: hidden;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
         }
 
+        /* Envelope flap effect */
         .open-when-left-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
+            top: -5px;
+            left: 20px;
+            width: 30px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 10px 10px 0 0;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-bottom: none;
+            transform: rotate(2deg);
         }
 
-        .open-when-left-card:hover::before {
-            left: 100%;
+        /* Envelope seal */
+        .open-when-left-card::after {
+            content: '❤️';
+            position: absolute;
+            top: -8px;
+            right: 30px;
+            font-size: 14px;
+            background: #ffb6c1;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 8px rgba(255, 105, 180, 0.3);
+            opacity: 0.8;
+            transition: opacity 0.3s;
         }
 
+        .open-when-left-card:hover::after {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* 3D Parallax effect (#3) */
         .open-when-left-card:hover {
-            background: white;
-            transform: translateX(8px) scale(1.02);
+            transform: translateX(8px) translateY(-2px) scale(1.02);
+            background: rgba(255, 255, 255, 0.95);
             border-color: #eac0d0;
             box-shadow: 0 15px 35px rgba(200, 150, 170, 0.2);
         }
@@ -214,10 +246,11 @@
             text-align: center;
             transition: all 0.3s;
             filter: drop-shadow(0 2px 5px rgba(200, 150, 170, 0.3));
+            transform: translateZ(10px); /* 3D effect */
         }
 
         .open-when-left-card:hover i {
-            transform: scale(1.2) rotate(5deg);
+            transform: scale(1.2) rotate(5deg) translateZ(20px);
             color: #b57c8c;
         }
 
@@ -227,6 +260,7 @@
             font-weight: 500;
             color: #4a3a3a;
             margin-bottom: 5px;
+            transform: translateZ(5px); /* 3D effect */
         }
 
         .open-when-left-card .letter-info p {
@@ -236,15 +270,10 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            transform: translateZ(8px); /* 3D effect */
         }
 
-        .open-when-left-card .letter-info p i {
-            font-size: 0.7rem;
-            width: auto;
-            color: #d6a2b2;
-        }
-
-        /* ===== RIGHT SIDE ===== */
+        /* ===== RIGHT SIDE - POLAROID CHAIN (#8) ===== */
         .right-side {
             flex: 1;
             display: flex;
@@ -254,29 +283,30 @@
             position: relative;
         }
 
+        /* String for polaroid chain */
         .right-side::before {
-            content: '✦';
+            content: '';
             position: absolute;
-            top: 30px;
-            right: 50px;
-            font-size: 2rem;
-            color: rgba(200, 150, 170, 0.3);
-            animation: rotate 20s linear infinite;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e8b8c8, #d8a8b8, #e8b8c8, transparent);
+            transform: translateY(-50%);
+            z-index: 0;
         }
 
         .right-side::after {
-            content: '✧';
+            content: '';
             position: absolute;
-            bottom: 30px;
-            left: 50px;
-            font-size: 2.5rem;
-            color: rgba(200, 150, 170, 0.3);
-            animation: rotate 15s linear infinite reverse;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            top: 50px;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            background: #d8a8b8;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px #ffb6c1;
         }
 
         .polaroid-container {
@@ -286,78 +316,75 @@
             align-items: center;
             flex-wrap: wrap;
             position: relative;
+            z-index: 2;
         }
 
-        .polaroid-container::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(240, 210, 220, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-            z-index: -1;
-            animation: pulse 5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.1); opacity: 0.5; }
-        }
-
+        /* Clothespins for polaroid chain */
         .polaroid {
             width: 380px;
-            background: white;
+            background: rgba(255, 255, 255, 0.7); /* Glass morphism */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 20px 20px 35px 20px;
             border-radius: 24px;
             box-shadow: 
-                0 30px 50px -20px rgba(100, 70, 80, 0.4),
-                0 0 0 1px rgba(255, 255, 255, 0.8) inset,
-                0 0 20px rgba(255, 255, 255, 0.5);
+                0 30px 50px -20px rgba(100, 70, 80, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.5) inset;
             transition: all 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
             cursor: pointer;
             position: relative;
-            backdrop-filter: blur(2px);
+            transform-style: preserve-3d;
+            transform: rotate(var(--rotate, -2deg)) translateZ(0);
         }
 
         .polaroid.left {
-            transform: rotate(-2deg);
+            --rotate: -2deg;
         }
 
         .polaroid.right {
-            transform: rotate(2deg);
+            --rotate: 2deg;
         }
 
-        .polaroid:hover {
-            transform: rotate(0deg) translateY(-20px) scale(1.02);
-            box-shadow: 
-                0 40px 70px -15px rgba(150, 100, 120, 0.5),
-                0 0 0 2px rgba(255, 255, 255, 0.9) inset,
-                0 0 30px rgba(230, 180, 200, 0.3);
+        /* Clothespin */
+        .polaroid::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 20px;
+            background: rgba(180, 140, 150, 0.3);
+            backdrop-filter: blur(5px);
+            border-radius: 10px 10px 5px 5px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 5;
         }
 
-        .polaroid::before,
+        /* Clothespin metal part */
         .polaroid::after {
             content: '';
             position: absolute;
-            width: 30px;
-            height: 30px;
-            border: 2px solid rgba(210, 160, 180, 0.2);
-            border-radius: 50%;
-            pointer-events: none;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 6px;
+            background: rgba(200, 170, 180, 0.5);
+            backdrop-filter: blur(5px);
+            border-radius: 3px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            z-index: 6;
         }
 
-        .polaroid::before {
-            top: 10px;
-            left: 10px;
-            border-top-color: transparent;
-            border-right-color: transparent;
-        }
-
-        .polaroid::after {
-            bottom: 10px;
-            right: 10px;
-            border-bottom-color: transparent;
-            border-left-color: transparent;
+        /* 3D Parallax on hover */
+        .polaroid:hover {
+            transform: rotate(0deg) translateY(-20px) scale(1.02) translateZ(20px);
+            box-shadow: 
+                0 40px 70px -15px rgba(150, 100, 120, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+            background: rgba(255, 255, 255, 0.85);
         }
 
         .photo-container {
@@ -368,6 +395,7 @@
             position: relative;
             background: #f0e6e9;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transform: translateZ(5px); /* 3D effect */
         }
 
         .photo {
@@ -380,7 +408,7 @@
         }
 
         .polaroid:hover .photo {
-            transform: scale(1.08);
+            transform: scale(1.08) translateZ(10px);
         }
 
         .photo-container::after {
@@ -399,8 +427,9 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.95);
+            transform: translate(-50%, -50%) translateZ(30px);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
             color: #b57c8c;
             padding: 15px 35px;
             border-radius: 60px;
@@ -412,7 +441,6 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.8);
             letter-spacing: 1px;
-            backdrop-filter: blur(5px);
             pointer-events: none;
             white-space: nowrap;
             z-index: 10;
@@ -420,7 +448,7 @@
 
         .polaroid:hover .hover-text {
             opacity: 1;
-            transform: translate(-50%, -50%) scale(1.1);
+            transform: translate(-50%, -50%) scale(1.1) translateZ(40px);
             box-shadow: 0 20px 45px rgba(180, 120, 140, 0.3);
         }
 
@@ -431,10 +459,11 @@
             font-size: 1.6rem;
             font-weight: 400;
             color: #5a4a4a;
-            border-top: 2px solid #f8e0e8;
+            border-top: 2px solid rgba(255, 255, 255, 0.5);
             padding-top: 20px;
             letter-spacing: 0.5px;
             position: relative;
+            transform: translateZ(8px);
         }
 
         .caption i {
@@ -444,35 +473,14 @@
             animation: sparkle 3s infinite;
         }
 
-        .tape {
-            position: absolute;
-            top: -10px;
-            width: 90px;
-            height: 35px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 30px;
-            transform: rotate(-3deg);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-            backdrop-filter: blur(3px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .left .tape {
-            left: 20px;
-        }
-
-        .right .tape {
-            right: 20px;
-            transform: rotate(3deg);
-        }
-
-        /* VALENTINE BUTTON */
+        /* VALENTINE BUTTON - with glass morphism */
         .valentine-btn {
             position: fixed;
             bottom: 35px;
             right: 35px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             color: #b57c8c;
             border: none;
             padding: 16px 40px;
@@ -481,41 +489,34 @@
             font-size: 1.6rem;
             font-weight: 400;
             cursor: pointer;
-            box-shadow: 0 15px 35px rgba(180, 130, 150, 0.2);
+            box-shadow: 0 15px 35px rgba(180, 130, 150, 0.15);
             transition: all 0.4s ease;
             z-index: 100;
-            border: 2px solid rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             letter-spacing: 1px;
             display: flex;
             align-items: center;
             gap: 12px;
             animation: buttonPulse 3s infinite;
+            transform-style: preserve-3d;
         }
 
         @keyframes buttonPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            0%, 100% { transform: scale(1) translateZ(0); }
+            50% { transform: scale(1.05) translateZ(10px); }
         }
 
         .valentine-btn:hover {
-            background: #b57c8c;
+            background: rgba(181, 124, 140, 0.8);
+            backdrop-filter: blur(15px);
             color: white;
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 25px 45px rgba(160, 110, 130, 0.3);
+            transform: translateY(-5px) scale(1.05) translateZ(20px);
+            box-shadow: 0 25px 45px rgba(160, 110, 130, 0.2);
             animation: none;
         }
 
-        .valentine-btn i {
-            font-size: 1.8rem;
-            transition: transform 0.3s;
-        }
-
-        .valentine-btn:hover i {
-            transform: scale(1.2);
-        }
-
-        /* MODALS */
-        .modal {
+        /* MODALS - with glass morphism */
+        .modal, .valentine-modal, .lightbox, .open-modal {
             display: none;
             position: fixed;
             top: 0;
@@ -523,16 +524,18 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
 
-        .modal-content {
-            background: rgba(255, 255, 255, 0.95);
+        .modal-content, .valentine-content, .lightbox-content, .open-modal-content {
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             max-width: 550px;
             width: 90%;
             max-height: 80vh;
@@ -540,19 +543,20 @@
             padding: 45px;
             border-radius: 50px;
             position: relative;
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 50px 100px -30px rgba(100, 70, 80, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 50px 100px -30px rgba(100, 70, 80, 0.2);
             animation: modalAppear 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+            transform-style: preserve-3d;
         }
 
         @keyframes modalAppear {
             0% {
                 opacity: 0;
-                transform: scale(0.8) translateY(30px);
+                transform: scale(0.8) translateY(30px) translateZ(-50px);
             }
             100% {
                 opacity: 1;
-                transform: scale(1) translateY(0);
+                transform: scale(1) translateY(0) translateZ(0);
             }
         }
 
@@ -577,18 +581,18 @@
         .close-modal:hover {
             color: #b57c8c;
             background: white;
-            transform: rotate(90deg);
+            transform: rotate(90deg) scale(1.1);
         }
 
+        /* REST OF THE STYLES (same as before) */
         .modal-title {
             font-family: 'Dancing Script', cursive;
             font-size: 2.8rem;
             color: #6d4c5c;
             margin-bottom: 25px;
             text-align: center;
-            border-bottom: 2px dashed #eac0d0;
+            border-bottom: 2px dashed rgba(255, 255, 255, 0.5);
             padding-bottom: 20px;
-            line-height: 1.2;
         }
 
         .typewriter-text {
@@ -600,12 +604,11 @@
             padding: 15px;
             font-family: 'Quicksand', sans-serif;
             font-weight: 300;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
-        /* GALLERY */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -614,31 +617,20 @@
         }
 
         .gallery-item {
-            background: white;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
             border-radius: 25px;
             overflow: hidden;
             cursor: pointer;
             transition: all 0.4s;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
-            border: 3px solid white;
-            position: relative;
-        }
-
-        .gallery-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 60%, rgba(255, 255, 255, 0.3));
-            pointer-events: none;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            transform-style: preserve-3d;
         }
 
         .gallery-item:hover {
-            transform: scale(1.05) rotate(1deg);
-            box-shadow: 0 20px 35px rgba(180, 130, 150, 0.2);
-            border-color: #eac0d0;
+            transform: scale(1.05) rotate(1deg) translateZ(20px);
+            background: rgba(255, 255, 255, 0.8);
+            border-color: white;
         }
 
         .gallery-item img {
@@ -648,69 +640,11 @@
             transition: transform 0.5s;
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        /* VALENTINE MODAL */
-        .valentine-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(10px);
-            z-index: 3000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
         .valentine-content {
-            background: rgba(255, 255, 255, 0.98);
             max-width: 450px;
-            width: 90%;
             padding: 50px 40px;
             border-radius: 80px 80px 40px 40px;
             text-align: center;
-            border: 3px solid white;
-            box-shadow: 0 50px 100px -30px rgba(150, 100, 120, 0.5);
-            animation: valentinePop 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .valentine-content::before {
-            content: '❤️';
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            font-size: 100px;
-            opacity: 0.05;
-            transform: rotate(15deg);
-        }
-
-        .valentine-content::after {
-            content: '❤️';
-            position: absolute;
-            bottom: -30px;
-            right: -30px;
-            font-size: 120px;
-            opacity: 0.05;
-            transform: rotate(-15deg);
-        }
-
-        @keyframes valentinePop {
-            0% {
-                opacity: 0;
-                transform: scale(0.5) rotate(-10deg);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
-            }
         }
 
         .valentine-question {
@@ -718,9 +652,6 @@
             font-size: 3rem;
             color: #6d4c5c;
             margin-bottom: 30px;
-            line-height: 1.2;
-            position: relative;
-            z-index: 1;
         }
 
         .button-container {
@@ -728,8 +659,6 @@
             gap: 20px;
             justify-content: center;
             margin-top: 30px;
-            position: relative;
-            z-index: 1;
         }
 
         .yes-btn, .no-btn {
@@ -739,32 +668,26 @@
             font-size: 1.5rem;
             font-weight: 600;
             cursor: pointer;
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.5);
             transition: all 0.3s;
             flex: 1;
-            letter-spacing: 1px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
         }
 
         .yes-btn {
-            background: #b57c8c;
+            background: rgba(181, 124, 140, 0.7);
             color: white;
         }
 
         .yes-btn:hover {
-            background: #a56c7c;
+            background: #b57c8c;
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(180, 120, 140, 0.3);
         }
 
         .no-btn {
-            background: #f0f0f0;
+            background: rgba(240, 240, 240, 0.5);
             color: #8f8f8f;
-        }
-
-        .no-btn.active {
-            background: #d0d0d0;
-            color: #5a5a5a;
         }
 
         .no-btn.active:hover {
@@ -776,54 +699,17 @@
             pointer-events: none;
         }
 
-        /* LIGHTBOX */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(15px);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
         .lightbox-content {
             max-width: 700px;
-            width: 90%;
-            background: white;
-            border-radius: 50px;
+            padding: 0;
             overflow: hidden;
-            box-shadow: 0 60px 120px -40px rgba(0, 0, 0, 0.4);
-            animation: lightboxAppear 0.5s;
-        }
-
-        @keyframes lightboxAppear {
-            0% { opacity: 0; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1); }
         }
 
         .lightbox-image-container {
             width: 100%;
             max-height: 60vh;
             overflow: hidden;
-            background: #f5f5f5;
-            position: relative;
-        }
-
-        .lightbox-image-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1);
-            pointer-events: none;
+            background: rgba(0, 0, 0, 0.1);
         }
 
         .lightbox-image-container img {
@@ -834,7 +720,7 @@
 
         .lightbox-story {
             padding: 35px;
-            background: white;
+            background: rgba(255, 255, 255, 0.3);
         }
 
         .lightbox-title {
@@ -842,8 +728,7 @@
             font-size: 2rem;
             color: #6d4c5c;
             margin-bottom: 15px;
-            font-weight: 400;
-            border-left: 4px solid #eac0d0;
+            border-left: 4px solid rgba(255, 255, 255, 0.5);
             padding-left: 20px;
         }
 
@@ -853,7 +738,6 @@
             color: #5a5a5a;
             font-family: 'Quicksand', sans-serif;
             font-weight: 300;
-            padding: 0 10px;
             white-space: pre-wrap;
         }
 
@@ -880,41 +764,12 @@
         .close-lightbox:hover {
             opacity: 1;
             transform: rotate(90deg) scale(1.1);
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        /* OPEN MODAL */
-        .open-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(15px);
-            z-index: 4000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
         }
 
         .open-modal-content {
-            background: rgba(255, 255, 255, 0.97);
-            backdrop-filter: blur(20px);
             max-width: 520px;
-            width: 90%;
-            border-radius: 70px 70px 40px 40px;
             padding: 50px 45px;
-            border: 3px solid white;
-            box-shadow: 0 50px 100px -30px rgba(120, 80, 100, 0.4);
-            animation: openAppear 0.6s;
-            position: relative;
-        }
-
-        @keyframes openAppear {
-            0% { opacity: 0; transform: translateY(50px) scale(0.9); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
+            border-radius: 70px 70px 40px 40px;
         }
 
         .open-modal-header {
@@ -923,7 +778,7 @@
             color: #6d4c5c;
             text-align: center;
             margin-bottom: 30px;
-            border-bottom: 2px dashed #eac0d0;
+            border-bottom: 2px dashed rgba(255, 255, 255, 0.5);
             padding-bottom: 20px;
         }
 
@@ -933,17 +788,18 @@
             color: #5a4a4a;
             white-space: pre-wrap;
             padding: 25px;
-            background: rgba(250, 240, 245, 0.5);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 40px;
-            border: 2px solid white;
+            border: 1px solid rgba(255, 255, 255, 0.5);
             font-family: 'Quicksand', sans-serif;
             font-weight: 300;
         }
 
         .open-close-btn {
-            background: #b57c8c;
+            background: rgba(181, 124, 140, 0.7);
+            backdrop-filter: blur(5px);
             color: white;
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.5);
             padding: 16px 40px;
             border-radius: 60px;
             font-family: 'Quicksand', sans-serif;
@@ -953,36 +809,29 @@
             margin-top: 30px;
             width: 100%;
             transition: all 0.3s;
-            letter-spacing: 1px;
-            box-shadow: 0 10px 25px rgba(180, 130, 150, 0.2);
         }
 
         .open-close-btn:hover {
-            background: #a56c7c;
+            background: #b57c8c;
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(160, 110, 130, 0.3);
         }
 
-        /* SCROLLBAR */
+        /* Scrollbar */
         .left-side::-webkit-scrollbar {
             width: 5px;
         }
 
         .left-side::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 5px;
         }
 
         .left-side::-webkit-scrollbar-thumb {
-            background: #d6b0bc;
+            background: rgba(210, 160, 180, 0.5);
             border-radius: 5px;
         }
 
-        .left-side::-webkit-scrollbar-thumb:hover {
-            background: #c28b9b;
-        }
-
-        /* LOADING */
+        /* Loading */
         .loading {
             text-align: center;
             padding: 40px;
@@ -1017,7 +866,7 @@
                 width: 100%;
                 height: 250px;
                 border-right: none;
-                border-bottom: 2px solid rgba(255,255,255,0.6);
+                border-bottom: 1px solid rgba(255,255,255,0.5);
                 padding: 25px 15px;
             }
             
@@ -1031,8 +880,7 @@
                 min-width: 260px;
             }
             
-            .right-side::before,
-            .right-side::after {
+            .right-side::before {
                 display: none;
             }
             
@@ -1049,16 +897,6 @@
                 right: 20px;
                 padding: 12px 25px;
                 font-size: 1.3rem;
-            }
-            
-            .modal-content,
-            .open-modal-content {
-                padding: 30px 20px;
-            }
-            
-            .modal-title,
-            .open-modal-header {
-                font-size: 2.2rem;
             }
         }
     </style>
@@ -1084,7 +922,7 @@
 
     <!-- MAIN CONTAINER -->
     <div class="main-container">
-        <!-- LEFT SIDE - OPEN WHEN LETTERS -->
+        <!-- LEFT SIDE - ENVELOPE STACK OPEN WHEN LETTERS -->
         <div class="left-side">
             <h2>
                 <i class="fas fa-envelope-open-text"></i> 
@@ -1094,12 +932,11 @@
             <div class="open-when-left-grid" id="openWhenLeftGrid"></div>
         </div>
 
-        <!-- RIGHT SIDE - POLAROIDS -->
+        <!-- RIGHT SIDE - POLAROID CHAIN -->
         <div class="right-side">
             <div class="polaroid-container">
                 <!-- Left Polaroid - Louise -->
                 <div class="polaroid left" id="leftPolaroid">
-                    <div class="tape"></div>
                     <div class="photo-container">
                         <img src="louise.jpg" alt="Louise" class="photo">
                         <div class="hover-text">for louise</div>
@@ -1111,7 +948,6 @@
 
                 <!-- Right Polaroid - Us -->
                 <div class="polaroid right" id="rightPolaroid">
-                    <div class="tape"></div>
                     <div class="photo-container">
                         <img src="us-main.jpg" alt="Us" class="photo">
                         <div class="hover-text">our story</div>
@@ -1196,6 +1032,23 @@
         }
         createFloatingHearts();
 
+        // 3D PARALLAX EFFECT
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            
+            const polaroids = document.querySelectorAll('.polaroid');
+            const cards = document.querySelectorAll('.open-when-left-card');
+            
+            polaroids.forEach(polaroid => {
+                polaroid.style.transform = `rotate(${polaroid.classList.contains('left') ? -2 : 2}deg) translateX(${x * 0.5}px) translateY(${y * 0.5}px) translateZ(${Math.abs(x) + Math.abs(y)}px)`;
+            });
+            
+            cards.forEach(card => {
+                card.style.transform = `translateX(${x * 0.3}px) translateY(${y * 0.3}px) translateZ(${Math.abs(x) + Math.abs(y)}px)`;
+            });
+        });
+
         // HEARTS CURSOR
         document.addEventListener('mousemove', (e) => {
             if (Math.random() < 0.15) {
@@ -1225,7 +1078,7 @@
         `;
         document.head.appendChild(style);
 
-        // ===== ORIGINAL MESSAGE FOR LOUISE =====
+        // ORIGINAL MESSAGE
         const messageForLouise = `My Dearest kairi(lowisie, loys, Louise),
 
 Mahal na mahal kita palagi kahit mayat maya tayo nag away hahahah tangina i miss you. Ever since the day we met, I am constantly inlove with you. YES, INLOVE hindi yung pabawas or what. SOBRA KITANG MAHAL KAHIT NA ANONG MANGYARE.
@@ -1239,7 +1092,7 @@ Mahal na mahal kita, palagi.
 ikaw at ikaw lang ang lagi,
 Dalevx ❤️`;
 
-        // ===== ORIGINAL OPEN WHEN MESSAGES =====
+        // OPEN WHEN LETTERS (ORIGINAL)
         const openWhenLetters = [
             { 
                 icon: 'fa-face-frown', 
@@ -1367,7 +1220,7 @@ Dalevx ❤️`;
             }
         });
 
-        // LOAD MEMORIES FROM JSON
+        // LOAD MEMORIES
         async function loadMemories() {
             const galleryGrid = document.getElementById('galleryGrid');
             galleryGrid.innerHTML = '<div class="loading"><i class="fas fa-heart"></i><br>loading memories...</div>';
@@ -1394,7 +1247,6 @@ Dalevx ❤️`;
                 });
             } catch (error) {
                 galleryGrid.innerHTML = '<div class="loading" style="color:#b57c8c;">error loading memories</div>';
-                console.error('Error loading memories:', error);
             }
         }
 

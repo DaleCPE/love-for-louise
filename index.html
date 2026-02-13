@@ -11,7 +11,6 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Same CSS as before - paste mo lang yung CSS from previous code */
         * {
             margin: 0;
             padding: 0;
@@ -202,7 +201,7 @@
 
         .modal-content {
             background: #fff5f5;
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
@@ -266,7 +265,7 @@
             50% { border-color: #ff6b8b; }
         }
 
-        /* GALLERY STYLES */
+        /* GALLERY STYLES - FIXED */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -282,7 +281,6 @@
             transition: all 0.3s ease;
             border: 3px solid white;
             box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
-            position: relative;
         }
 
         .gallery-item:hover {
@@ -294,7 +292,10 @@
             width: 100%;
             aspect-ratio: 1/1;
             overflow: hidden;
-            position: relative;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .gallery-image-container img {
@@ -309,18 +310,17 @@
         }
 
         .gallery-caption {
-            padding: 12px;
+            padding: 10px;
             background: linear-gradient(145deg, #fff5f5, #ffe9e9);
             font-family: 'Caveat', cursive;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #5a4e4e;
             text-align: center;
             border-top: 2px dashed #ffb6c1;
-            min-height: 60px;
+            min-height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            line-height: 1.4;
         }
 
         /* Lightbox with Story */
@@ -438,7 +438,10 @@
             transform: scale(1.05);
         }
 
-        .upload-btn i {
+        .error-message {
+            color: #ff6b8b;
+            text-align: center;
+            padding: 20px;
             font-size: 1.2rem;
         }
 
@@ -454,6 +457,11 @@
             
             .lightbox-description {
                 font-size: 1rem;
+            }
+            
+            .modal-content {
+                padding: 20px;
+                width: 95%;
             }
         }
     </style>
@@ -554,19 +562,19 @@
         // Message for Louise
         const messageForLouise = `My Dearest Louise,
 
-    Mahal na mahal kita. 
+Mahal na mahal kita. 
 
-    Hindi ko maipaliwanag ang saya na dala mo sa buhay ko. Sa bawat araw na kasama kita, lalo kitang minamahal.
+Hindi ko maipaliwanag ang saya na dala mo sa buhay ko. Sa bawat araw na kasama kita, lalo kitang minamahal.
 
-    Ikaw ang:
-    • Dahilan ng aking ngiti
-    • Kausap sa mga panaginip
-    • Tahanan ng puso ko
+Ikaw ang:
+• Dahilan ng aking ngiti
+• Kausap sa mga panaginip
+• Tahanan ng puso ko
 
-    Mahal na mahal kita, palagi.
+Mahal na mahal kita, palagi.
 
-    Forever yours,
-    Dale ❤️`;
+Forever yours,
+Dale ❤️`;
 
         // Load memories from JSON file
         async function loadMemories() {
@@ -574,23 +582,49 @@
             galleryGrid.innerHTML = '<div class="loading"><i class="fas fa-heart"></i><br>Loading memories...</div>';
             
             try {
-                const response = await fetch('memories.json');
+                // Add timestamp to prevent caching
+                const response = await fetch(`memories.json?t=${Date.now()}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
                 const data = await response.json();
+                
+                if (!data.memories || data.memories.length === 0) {
+                    galleryGrid.innerHTML = '<div class="error-message">No memories yet. Click "Add New Memory" to start!</div>';
+                    return;
+                }
                 
                 galleryGrid.innerHTML = '';
                 
-                data.memories.forEach(memory => {
+                // Sort memories by id to ensure order
+                const sortedMemories = data.memories.sort((a, b) => a.id - b.id);
+                
+                sortedMemories.forEach(memory => {
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
                     
-                    item.innerHTML = `
-                        <div class="gallery-image-container">
-                            <img src="${memory.url}" alt="${memory.title}">
-                        </div>
-                        <div class="gallery-caption">
-                            <i class="fas fa-heart"></i> ${memory.title} <i class="fas fa-heart"></i>
-                        </div>
-                    `;
+                    // Create image with error handling
+                    const img = document.createElement('img');
+                    img.src = memory.url;
+                    img.alt = memory.title;
+                    img.onerror = function() {
+                        this.onerror = null;
+                        this.src = 'https://via.placeholder.com/300x300/ffb6c1/ffffff?text=Photo+Not+Found';
+                        console.log(`Failed to load: ${memory.url}`);
+                    };
+                    
+                    const imgContainer = document.createElement('div');
+                    imgContainer.className = 'gallery-image-container';
+                    imgContainer.appendChild(img);
+                    
+                    const caption = document.createElement('div');
+                    caption.className = 'gallery-caption';
+                    caption.innerHTML = `<i class="fas fa-heart"></i> ${memory.title} <i class="fas fa-heart"></i>`;
+                    
+                    item.appendChild(imgContainer);
+                    item.appendChild(caption);
                     
                     item.addEventListener('click', () => {
                         document.getElementById('lightboxImg').src = memory.url;
@@ -601,9 +635,16 @@
                     
                     galleryGrid.appendChild(item);
                 });
+                
+                console.log(`Loaded ${sortedMemories.length} memories successfully`);
+                
             } catch (error) {
-                galleryGrid.innerHTML = '<div style="color: #ff6b8b; text-align: center; padding: 20px;">Failed to load memories. Please try again.</div>';
                 console.error('Error loading memories:', error);
+                galleryGrid.innerHTML = `<div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i><br>
+                    Failed to load memories.<br>
+                    <small>${error.message}</small>
+                </div>`;
             }
         }
 
@@ -655,6 +696,16 @@
             if (e.target.classList.contains('lightbox')) {
                 e.target.style.display = 'none';
             }
+        });
+
+        // Pre-load first few images for better performance
+        window.addEventListener('load', function() {
+            // Optional: pre-load first 4 images
+            const imagesToPreload = ['us1.jpeg', 'us2.jpeg', 'us3.jpeg', 'us4.jpeg'];
+            imagesToPreload.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
         });
     </script>
 </body>

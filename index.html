@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>for louise. ❤️</title>
-    <!-- Google Fonts - Modern & Elegant -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Confetti -->
@@ -24,31 +24,89 @@
             height: 100vh;
             overflow: hidden;
             position: relative;
-            background: #faf7f5;
         }
 
-        /* MODERN BACKGROUND - Soft Gradient */
-        .modern-bg {
+        /* ===== ENHANCED BACKGROUND ===== */
+        .gradient-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #fdf2f4 0%, #f8e8ec 50%, #f2dfe5 100%);
+            background: linear-gradient(125deg, #fdf2f4 0%, #f9e6ec 40%, #f5dde5 70%, #f2d5df 100%);
+            z-index: -3;
+        }
+
+        /* ANIMATED BUBBLES */
+        .bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -2;
+            overflow: hidden;
         }
 
-        /* Subtle Pattern Overlay */
-        .pattern-overlay {
+        .bubble {
+            position: absolute;
+            background: rgba(255, 220, 230, 0.15);
+            border-radius: 50%;
+            backdrop-filter: blur(1px);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+            33% { transform: translateY(-30px) translateX(20px) rotate(120deg); }
+            66% { transform: translateY(20px) translateX(-20px) rotate(240deg); }
+        }
+
+        /* BUBBLE POSITIONS */
+        .b1 { width: 300px; height: 300px; top: 10%; left: 5%; animation-duration: 25s; }
+        .b2 { width: 400px; height: 400px; bottom: 10%; right: 5%; animation-duration: 30s; background: rgba(230, 200, 210, 0.1); }
+        .b3 { width: 200px; height: 200px; top: 30%; right: 20%; animation-duration: 20s; }
+        .b4 { width: 350px; height: 350px; bottom: 20%; left: 15%; animation-duration: 28s; background: rgba(240, 210, 220, 0.1); }
+        .b5 { width: 150px; height: 150px; top: 70%; right: 30%; animation-duration: 18s; }
+
+        /* FLOATING HEARTS */
+        .floating-hearts {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: radial-gradient(rgba(255, 200, 210, 0.2) 1px, transparent 1px);
-            background-size: 30px 30px;
             z-index: -1;
-            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .floating-heart {
+            position: absolute;
+            color: rgba(255, 180, 200, 0.15);
+            font-size: 24px;
+            animation: floatHeart 15s infinite linear;
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* PATTERN OVERLAY */
+        .pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px, 80px 80px;
+            z-index: -1;
+            opacity: 0.5;
         }
 
         /* MAIN CONTAINER */
@@ -60,35 +118,52 @@
             z-index: 2;
         }
 
-        /* ===== LEFT SIDE - MODERN OPEN WHEN ===== */
+        /* ===== LEFT SIDE - ELEGANT OPEN WHEN ===== */
         .left-side {
-            width: 320px;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px);
-            border-right: 1px solid rgba(255, 255, 255, 0.5);
-            padding: 40px 20px;
+            width: 340px;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-right: 1px solid rgba(255, 255, 255, 0.6);
+            padding: 40px 25px;
             overflow-y: auto;
-            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.03);
-        }
-
-        .left-side h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 400;
-            color: #2d2d2d;
-            text-align: center;
-            margin-bottom: 35px;
-            letter-spacing: 0.5px;
+            box-shadow: 5px 0 40px rgba(0, 0, 0, 0.03);
             position: relative;
         }
 
-        .left-side h2::after {
+        /* DECORATIVE LINE */
+        .left-side::before {
             content: '';
-            display: block;
-            width: 50px;
-            height: 2px;
-            background: #e0a5b5;
-            margin: 15px auto 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, #e8b8c8, #d8a8b8, #e8b8c8, transparent);
+        }
+
+        .left-side h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #6d4c5c;
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+            position: relative;
+        }
+
+        .left-side h2 i {
+            color: #d68e9e;
+            margin: 0 10px;
+            font-size: 2rem;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
 
         .open-when-left-grid {
@@ -98,104 +173,218 @@
         }
 
         .open-when-left-card {
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 16px;
-            padding: 16px 18px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 18px 20px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
             border: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 5px 20px rgba(180, 140, 150, 0.05);
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 18px;
             backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .open-when-left-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .open-when-left-card:hover::before {
+            left: 100%;
         }
 
         .open-when-left-card:hover {
             background: white;
-            transform: translateX(6px);
-            border-color: #eac0c9;
-            box-shadow: 0 8px 25px rgba(220, 150, 170, 0.15);
+            transform: translateX(8px) scale(1.02);
+            border-color: #eac0d0;
+            box-shadow: 0 15px 35px rgba(200, 150, 170, 0.2);
         }
 
         .open-when-left-card i {
-            font-size: 1.6rem;
+            font-size: 2rem;
             color: #c28b9b;
-            width: 36px;
+            width: 45px;
             text-align: center;
-            transition: transform 0.2s;
+            transition: all 0.3s;
+            filter: drop-shadow(0 2px 5px rgba(200, 150, 170, 0.3));
         }
 
         .open-when-left-card:hover i {
-            transform: scale(1.1);
+            transform: scale(1.2) rotate(5deg);
             color: #b57c8c;
         }
 
         .open-when-left-card .letter-info h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 500;
-            color: #3a3a3a;
-            margin-bottom: 4px;
+            color: #4a3a3a;
+            margin-bottom: 5px;
         }
 
         .open-when-left-card .letter-info p {
             font-size: 0.8rem;
-            color: #8f8f8f;
-            letter-spacing: 0.3px;
+            color: #a98d95;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        /* ===== RIGHT SIDE - MODERN POLAROIDS ===== */
+        .open-when-left-card .letter-info p i {
+            font-size: 0.7rem;
+            width: auto;
+            color: #d6a2b2;
+        }
+
+        /* ===== RIGHT SIDE - ENHANCED POLAROIDS ===== */
         .right-side {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 40px;
+            position: relative;
+        }
+
+        /* DECORATIVE FRAMES */
+        .right-side::before {
+            content: '✦';
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            font-size: 2rem;
+            color: rgba(200, 150, 170, 0.3);
+            animation: rotate 20s linear infinite;
+        }
+
+        .right-side::after {
+            content: '✧';
+            position: absolute;
+            bottom: 30px;
+            left: 50px;
+            font-size: 2.5rem;
+            color: rgba(200, 150, 170, 0.3);
+            animation: rotate 15s linear infinite reverse;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .polaroid-container {
             display: flex;
-            gap: 50px;
+            gap: 60px;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
+            position: relative;
         }
 
-        /* MODERN POLAROID DESIGN */
+        /* GLOWING ORB BACKGROUND */
+        .polaroid-container::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(240, 210, 220, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse 5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+
+        /* ENHANCED POLAROID */
         .polaroid {
             width: 380px;
             background: white;
-            padding: 20px 20px 30px 20px;
-            border-radius: 20px;
-            box-shadow: 0 30px 50px -20px rgba(80, 50, 60, 0.3);
+            padding: 20px 20px 35px 20px;
+            border-radius: 24px;
+            box-shadow: 
+                0 30px 50px -20px rgba(100, 70, 80, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.8) inset,
+                0 0 20px rgba(255, 255, 255, 0.5);
             transition: all 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
             cursor: pointer;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(2px);
         }
 
         .polaroid.left {
-            transform: rotate(-1.5deg);
+            transform: rotate(-2deg);
         }
 
         .polaroid.right {
-            transform: rotate(1.5deg);
+            transform: rotate(2deg);
         }
 
         .polaroid:hover {
-            transform: rotate(0deg) translateY(-15px);
-            box-shadow: 0 40px 60px -15px rgba(160, 100, 120, 0.4);
+            transform: rotate(0deg) translateY(-20px) scale(1.02);
+            box-shadow: 
+                0 40px 70px -15px rgba(150, 100, 120, 0.5),
+                0 0 0 2px rgba(255, 255, 255, 0.9) inset,
+                0 0 30px rgba(230, 180, 200, 0.3);
         }
 
-        /* MODERN PHOTO CONTAINER */
+        /* DECORATIVE CORNERS */
+        .polaroid::before,
+        .polaroid::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid rgba(210, 160, 180, 0.2);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .polaroid::before {
+            top: 10px;
+            left: 10px;
+            border-top-color: transparent;
+            border-right-color: transparent;
+        }
+
+        .polaroid::after {
+            bottom: 10px;
+            right: 10px;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+        }
+
+        .polaroid:hover::before {
+            animation: cornerGlow 1s ease;
+        }
+
+        @keyframes cornerGlow {
+            0% { border-color: rgba(210, 160, 180, 0.2); }
+            50% { border-color: rgba(210, 160, 180, 0.8); transform: scale(1.1); }
+            100% { border-color: rgba(210, 160, 180, 0.2); }
+        }
+
         .photo-container {
             width: 100%;
             aspect-ratio: 1/1;
-            border-radius: 16px;
+            border-radius: 18px;
             overflow: hidden;
             position: relative;
             background: #f0e6e9;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
         }
 
         .photo {
@@ -204,14 +393,26 @@
             object-fit: cover;
             transition: transform 0.8s ease;
             display: block;
-            filter: brightness(1.02) contrast(1.02);
+            filter: brightness(1.02) contrast(1.02) saturate(1.05);
         }
 
         .polaroid:hover .photo {
-            transform: scale(1.06);
+            transform: scale(1.08);
         }
 
-        /* MODERN HOVER TEXT - Minimal */
+        /* VIGNETTE EFFECT */
+        .photo-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.05);
+            pointer-events: none;
+            border-radius: 18px;
+        }
+
         .hover-text {
             position: absolute;
             top: 50%;
@@ -219,101 +420,119 @@
             transform: translate(-50%, -50%);
             background: rgba(255, 255, 255, 0.95);
             color: #b57c8c;
-            padding: 12px 28px;
-            border-radius: 40px;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
+            padding: 15px 35px;
+            border-radius: 60px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
             font-weight: 400;
             opacity: 0;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.8);
             letter-spacing: 1px;
             backdrop-filter: blur(5px);
             pointer-events: none;
             white-space: nowrap;
+            z-index: 10;
         }
 
         .polaroid:hover .hover-text {
             opacity: 1;
-            transform: translate(-50%, -50%) scale(1.05);
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 20px 45px rgba(180, 120, 140, 0.3);
         }
 
-        /* MODERN CAPTION */
         .caption {
             text-align: center;
             margin-top: 20px;
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 400;
-            color: #4a4a4a;
-            border-top: 1px solid #f0d9df;
-            padding-top: 18px;
+            color: #5a4a4a;
+            border-top: 2px solid #f8e0e8;
+            padding-top: 20px;
             letter-spacing: 0.5px;
+            position: relative;
         }
 
         .caption i {
             color: #d6a2b2;
-            margin: 0 6px;
-            font-size: 1.3rem;
+            margin: 0 8px;
+            font-size: 1.4rem;
+            animation: sparkle 3s infinite;
         }
 
-        /* MODERN TAPE - Minimal */
         .tape {
             position: absolute;
-            top: -8px;
-            width: 70px;
-            height: 30px;
+            top: -10px;
+            width: 90px;
+            height: 35px;
             background: rgba(255, 255, 255, 0.6);
             border-radius: 30px;
             transform: rotate(-3deg);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
             backdrop-filter: blur(3px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .left .tape {
-            left: 25px;
+            left: 20px;
         }
 
         .right .tape {
-            right: 25px;
+            right: 20px;
             transform: rotate(3deg);
         }
 
-        /* MODERN VALENTINE BUTTON */
+        /* ===== ENHANCED VALENTINE BUTTON ===== */
         .valentine-btn {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: white;
+            bottom: 35px;
+            right: 35px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
             color: #b57c8c;
             border: none;
-            padding: 14px 38px;
-            border-radius: 50px;
-            font-family: 'Quicksand', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 500;
+            padding: 16px 40px;
+            border-radius: 60px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6rem;
+            font-weight: 400;
             cursor: pointer;
-            box-shadow: 0 10px 25px rgba(180, 120, 140, 0.2);
-            transition: all 0.3s ease;
+            box-shadow: 0 15px 35px rgba(180, 130, 150, 0.2);
+            transition: all 0.4s ease;
             z-index: 100;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            letter-spacing: 0.5px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: buttonPulse 3s infinite;
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .valentine-btn:hover {
             background: #b57c8c;
             color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(160, 100, 120, 0.3);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 25px 45px rgba(160, 110, 130, 0.3);
+            animation: none;
         }
 
         .valentine-btn i {
-            margin-right: 8px;
+            font-size: 1.8rem;
+            transition: transform 0.3s;
         }
 
-        /* MODERN MODALS */
+        .valentine-btn:hover i {
+            transform: scale(1.2);
+        }
+
+        /* ===== ENHANCED MODALS ===== */
         .modal {
             display: none;
             position: fixed;
@@ -321,7 +540,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(8px);
             z-index: 1000;
             justify-content: center;
@@ -332,26 +551,26 @@
         .modal-content {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            max-width: 520px;
+            max-width: 550px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
-            padding: 40px;
-            border-radius: 32px;
+            padding: 45px;
+            border-radius: 50px;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 40px 70px -20px rgba(80, 50, 60, 0.3);
-            animation: modalFade 0.4s ease;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 50px 100px -30px rgba(100, 70, 80, 0.4);
+            animation: modalAppear 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
         }
 
-        @keyframes modalFade {
-            from {
+        @keyframes modalAppear {
+            0% {
                 opacity: 0;
-                transform: scale(0.9);
+                transform: scale(0.8) translateY(30px);
             }
-            to {
+            100% {
                 opacity: 1;
-                transform: scale(1);
+                transform: scale(1) translateY(0);
             }
         }
 
@@ -359,73 +578,99 @@
             position: absolute;
             top: 20px;
             right: 25px;
-            font-size: 2rem;
+            width: 45px;
+            height: 45px;
+            font-size: 2.2rem;
             cursor: pointer;
             color: #b0b0b0;
-            transition: all 0.2s;
-            width: 40px;
-            height: 40px;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
         }
 
         .close-modal:hover {
             color: #b57c8c;
-            background: rgba(220, 150, 170, 0.1);
+            background: white;
+            transform: rotate(90deg);
         }
 
         .modal-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 400;
-            color: #2d2d2d;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: #6d4c5c;
             margin-bottom: 25px;
             text-align: center;
+            border-bottom: 2px dashed #eac0d0;
+            padding-bottom: 20px;
+            line-height: 1.2;
         }
 
         .typewriter-text {
             font-size: 1.1rem;
-            line-height: 1.8;
-            color: #4a4a4a;
+            line-height: 1.9;
+            color: #5a4a4a;
             white-space: pre-wrap;
             min-height: 150px;
-            padding: 10px;
+            padding: 15px;
             font-family: 'Quicksand', sans-serif;
             font-weight: 300;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
-        /* MODERN GALLERY */
+        /* ENHANCED GALLERY */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 18px;
             margin-top: 20px;
         }
 
         .gallery-item {
             background: white;
-            border-radius: 16px;
+            border-radius: 25px;
             overflow: hidden;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
-            border: 1px solid #f0f0f0;
+            transition: all 0.4s;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
+            border: 3px solid white;
+            position: relative;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 60%, rgba(255, 255, 255, 0.3));
+            pointer-events: none;
         }
 
         .gallery-item:hover {
-            transform: scale(1.02);
-            box-shadow: 0 12px 25px rgba(180, 120, 140, 0.1);
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 20px 35px rgba(180, 130, 150, 0.2);
+            border-color: #eac0d0;
         }
 
         .gallery-item img {
             width: 100%;
             aspect-ratio: 1/1;
             object-fit: cover;
+            transition: transform 0.5s;
         }
 
-        /* MODERN VALENTINE MODAL */
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* ENHANCED VALENTINE MODAL */
         .valentine-modal {
             display: none;
             position: fixed;
@@ -433,8 +678,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(10px);
             z-index: 3000;
             justify-content: center;
             align-items: center;
@@ -442,42 +687,81 @@
         }
 
         .valentine-content {
-            background: white;
-            max-width: 420px;
+            background: rgba(255, 255, 255, 0.98);
+            max-width: 450px;
             width: 90%;
-            padding: 45px 35px;
-            border-radius: 40px;
+            padding: 50px 40px;
+            border-radius: 80px 80px 40px 40px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 40px 70px -20px rgba(80, 50, 60, 0.3);
+            border: 3px solid white;
+            box-shadow: 0 50px 100px -30px rgba(150, 100, 120, 0.5);
+            animation: valentinePop 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .valentine-content::before {
+            content: '❤️';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            font-size: 100px;
+            opacity: 0.05;
+            transform: rotate(15deg);
+        }
+
+        .valentine-content::after {
+            content: '❤️';
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            font-size: 120px;
+            opacity: 0.05;
+            transform: rotate(-15deg);
+        }
+
+        @keyframes valentinePop {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
         }
 
         .valentine-question {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            font-weight: 400;
-            color: #2d2d2d;
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #6d4c5c;
             margin-bottom: 30px;
-            line-height: 1.3;
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
         }
 
         .button-container {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
-            margin-top: 25px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
         }
 
         .yes-btn, .no-btn {
-            padding: 12px 30px;
-            border-radius: 40px;
+            padding: 15px 35px;
+            border-radius: 60px;
             font-family: 'Quicksand', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 500;
+            font-size: 1.5rem;
+            font-weight: 600;
             cursor: pointer;
             border: none;
-            transition: all 0.2s;
+            transition: all 0.3s;
             flex: 1;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
         }
 
         .yes-btn {
@@ -487,7 +771,8 @@
 
         .yes-btn:hover {
             background: #a56c7c;
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(180, 120, 140, 0.3);
         }
 
         .no-btn {
@@ -500,12 +785,16 @@
             color: #5a5a5a;
         }
 
+        .no-btn.active:hover {
+            transform: translateY(-3px);
+        }
+
         .no-btn.disabled {
             opacity: 0.3;
             pointer-events: none;
         }
 
-        /* MODERN LIGHTBOX */
+        /* ENHANCED LIGHTBOX */
         .lightbox {
             display: none;
             position: fixed;
@@ -513,8 +802,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             z-index: 2000;
             justify-content: center;
             align-items: center;
@@ -525,9 +814,15 @@
             max-width: 700px;
             width: 90%;
             background: white;
-            border-radius: 32px;
+            border-radius: 50px;
             overflow: hidden;
-            box-shadow: 0 50px 80px -20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 60px 120px -40px rgba(0, 0, 0, 0.4);
+            animation: lightboxAppear 0.5s;
+        }
+
+        @keyframes lightboxAppear {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         .lightbox-image-container {
@@ -535,6 +830,18 @@
             max-height: 60vh;
             overflow: hidden;
             background: #f5f5f5;
+            position: relative;
+        }
+
+        .lightbox-image-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1);
+            pointer-events: none;
         }
 
         .lightbox-image-container img {
@@ -544,42 +851,56 @@
         }
 
         .lightbox-story {
-            padding: 30px;
+            padding: 35px;
             background: white;
         }
 
         .lightbox-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: #2d2d2d;
+            font-size: 2rem;
+            color: #6d4c5c;
             margin-bottom: 15px;
             font-weight: 400;
+            border-left: 4px solid #eac0d0;
+            padding-left: 20px;
         }
 
         .lightbox-description {
-            font-size: 1rem;
-            line-height: 1.7;
+            font-size: 1.1rem;
+            line-height: 1.8;
             color: #5a5a5a;
             font-family: 'Quicksand', sans-serif;
+            font-weight: 300;
+            padding: 0 10px;
         }
 
         .close-lightbox {
             position: absolute;
-            top: 30px;
-            right: 35px;
+            top: 35px;
+            right: 40px;
             color: white;
-            font-size: 2.5rem;
+            font-size: 3rem;
             cursor: pointer;
             z-index: 2001;
             opacity: 0.8;
-            transition: opacity 0.2s;
+            transition: all 0.3s;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
         }
 
         .close-lightbox:hover {
             opacity: 1;
+            transform: rotate(90deg) scale(1.1);
+            background: rgba(0, 0, 0, 0.3);
         }
 
-        /* MODERN OPEN MODAL */
+        /* ENHANCED OPEN MODAL */
         .open-modal {
             display: none;
             position: fixed;
@@ -587,8 +908,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
             z-index: 4000;
             justify-content: center;
             align-items: center;
@@ -596,81 +917,111 @@
         }
 
         .open-modal-content {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.97);
             backdrop-filter: blur(20px);
-            max-width: 500px;
+            max-width: 520px;
             width: 90%;
-            border-radius: 40px;
-            padding: 45px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 40px 70px -20px rgba(80, 50, 60, 0.2);
+            border-radius: 70px 70px 40px 40px;
+            padding: 50px 45px;
+            border: 3px solid white;
+            box-shadow: 0 50px 100px -30px rgba(120, 80, 100, 0.4);
+            animation: openAppear 0.6s;
+            position: relative;
+        }
+
+        @keyframes openAppear {
+            0% { opacity: 0; transform: translateY(50px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .open-modal-header {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            color: #2d2d2d;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: #6d4c5c;
             text-align: center;
-            margin-bottom: 25px;
-            font-weight: 400;
+            margin-bottom: 30px;
+            border-bottom: 2px dashed #eac0d0;
+            padding-bottom: 20px;
         }
 
         .open-modal-body {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #4a4a4a;
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: #5a4a4a;
             white-space: pre-wrap;
             padding: 25px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 28px;
-            border: 1px solid #f0d9df;
+            background: rgba(250, 240, 245, 0.5);
+            border-radius: 40px;
+            border: 2px solid white;
             font-family: 'Quicksand', sans-serif;
+            font-weight: 300;
         }
 
         .open-close-btn {
             background: #b57c8c;
             color: white;
             border: none;
-            padding: 14px 35px;
-            border-radius: 40px;
+            padding: 16px 40px;
+            border-radius: 60px;
             font-family: 'Quicksand', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 500;
             cursor: pointer;
-            margin-top: 25px;
+            margin-top: 30px;
             width: 100%;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 25px rgba(180, 130, 150, 0.2);
         }
 
         .open-close-btn:hover {
             background: #a56c7c;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(160, 110, 130, 0.3);
         }
 
-        /* Scrollbar Styling */
+        /* SCROLLBAR */
         .left-side::-webkit-scrollbar {
-            width: 4px;
+            width: 5px;
         }
 
         .left-side::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
         }
 
         .left-side::-webkit-scrollbar-thumb {
             background: #d6b0bc;
-            border-radius: 4px;
+            border-radius: 5px;
         }
 
-        /* Loading State */
+        .left-side::-webkit-scrollbar-thumb:hover {
+            background: #c28b9b;
+        }
+
+        /* LOADING */
         .loading {
             text-align: center;
-            padding: 30px;
+            padding: 40px;
             color: #b57c8c;
+            font-size: 1.2rem;
         }
 
-        /* Mobile Responsive */
+        .loading i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            animation: spin 2s infinite linear;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* MOBILE */
         @media (max-width: 1000px) {
             .polaroid {
-                width: 300px;
+                width: 320px;
             }
         }
 
@@ -681,9 +1032,9 @@
             
             .left-side {
                 width: 100%;
-                height: 240px;
+                height: 250px;
                 border-right: none;
-                border-bottom: 1px solid rgba(255,255,255,0.5);
+                border-bottom: 2px solid rgba(255,255,255,0.6);
                 padding: 25px 15px;
             }
             
@@ -694,7 +1045,12 @@
             }
             
             .open-when-left-card {
-                min-width: 240px;
+                min-width: 260px;
+            }
+            
+            .right-side::before,
+            .right-side::after {
+                display: none;
             }
             
             .polaroid {
@@ -709,21 +1065,49 @@
                 bottom: 20px;
                 right: 20px;
                 padding: 12px 25px;
-                font-size: 1rem;
+                font-size: 1.3rem;
+            }
+            
+            .modal-content,
+            .open-modal-content {
+                padding: 30px 20px;
+            }
+            
+            .modal-title,
+            .open-modal-header {
+                font-size: 2.2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- MODERN BACKGROUND -->
-    <div class="modern-bg"></div>
-    <div class="pattern-overlay"></div>
+    <!-- ENHANCED BACKGROUND -->
+    <div class="gradient-bg"></div>
+    
+    <!-- BUBBLES -->
+    <div class="bubbles">
+        <div class="bubble b1"></div>
+        <div class="bubble b2"></div>
+        <div class="bubble b3"></div>
+        <div class="bubble b4"></div>
+        <div class="bubble b5"></div>
+    </div>
+    
+    <!-- FLOATING HEARTS -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <!-- PATTERN -->
+    <div class="pattern"></div>
 
     <!-- MAIN CONTAINER -->
     <div class="main-container">
         <!-- LEFT SIDE - OPEN WHEN LETTERS -->
         <div class="left-side">
-            <h2>open when...</h2>
+            <h2>
+                <i class="fas fa-envelope-open-text"></i> 
+                open when... 
+                <i class="fas fa-envelope-open-text"></i>
+            </h2>
             <div class="open-when-left-grid" id="openWhenLeftGrid"></div>
         </div>
 
@@ -738,7 +1122,7 @@
                         <div class="hover-text">for louise</div>
                     </div>
                     <div class="caption">
-                        <i class="fas fa-star"></i> louise <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i> my louise <i class="fas fa-star"></i>
                     </div>
                 </div>
 
@@ -759,7 +1143,7 @@
 
     <!-- VALENTINE BUTTON -->
     <button class="valentine-btn" id="valentineBtn">
-        <i class="far fa-heart"></i> valentine?
+        <i class="far fa-heart"></i> be my valentine?
     </button>
 
     <!-- MODALS -->
@@ -774,7 +1158,7 @@
     <div class="modal" id="galleryModal">
         <div class="modal-content">
             <span class="close-modal" id="closeGalleryModal">&times;</span>
-            <div class="modal-title">our memories</div>
+            <div class="modal-title">our precious memories</div>
             <div id="galleryGrid" class="gallery-grid"></div>
         </div>
     </div>
@@ -786,7 +1170,7 @@
                 <button class="yes-btn" id="yesBtn">yes</button>
                 <button class="no-btn" id="noBtn">no</button>
             </div>
-            <div id="valentineResponse" style="display: none; margin-top: 25px; font-size: 1.2rem; color: #b57c8c;">
+            <div id="valentineResponse" style="display: none; margin-top: 30px; font-size: 1.4rem; color: #b57c8c; font-family: 'Dancing Script', cursive;">
                 <i class="fas fa-heart"></i> chat me "heart" <i class="fas fa-heart"></i>
             </div>
         </div>
@@ -814,22 +1198,37 @@
     </div>
 
     <script>
+        // FLOATING HEARTS
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 15 + 's';
+                heart.style.fontSize = (Math.random() * 30 + 15) + 'px';
+                container.appendChild(heart);
+            }
+        }
+        createFloatingHearts();
+
         // HEARTS CURSOR
         document.addEventListener('mousemove', (e) => {
-            if (Math.random() < 0.1) {
+            if (Math.random() < 0.15) {
                 const heart = document.createElement('div');
                 heart.innerHTML = '❤️';
                 heart.style.position = 'fixed';
                 heart.style.left = (e.pageX - 10) + 'px';
                 heart.style.top = (e.pageY - 10) + 'px';
-                heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+                heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
                 heart.style.pointerEvents = 'none';
                 heart.style.zIndex = '9999';
-                heart.style.opacity = '0.6';
-                heart.style.animation = 'float 1.5s ease-out forwards';
+                heart.style.opacity = '0.5';
+                heart.style.animation = 'float 1.8s ease-out forwards';
                 document.body.appendChild(heart);
 
-                setTimeout(() => heart.remove(), 1500);
+                setTimeout(() => heart.remove(), 1800);
             }
         });
 
@@ -837,8 +1236,8 @@
         const style = document.createElement('style');
         style.textContent = `
             @keyframes float {
-                0% { opacity: 0.6; transform: translateY(0) rotate(0deg); }
-                100% { opacity: 0; transform: translateY(-100px) rotate(20deg); }
+                0% { opacity: 0.5; transform: translateY(0) rotate(0deg); }
+                100% { opacity: 0; transform: translateY(-120px) rotate(25deg); }
             }
         `;
         document.head.appendChild(style);
@@ -848,9 +1247,9 @@
 
 i love you. i miss you.
 
-sorry sa mga away natin.
+sorry sa mga away natin. hindi kita kayang mawala.
 
-ikaw at ikaw pa rin.
+ikaw at ikaw pa rin palagi.
 
 - dale ❤️`;
 
@@ -886,22 +1285,27 @@ ikaw at ikaw pa rin.
             noBtn.style.display = 'none';
             yesBtn.style.display = 'none';
             valentineResponse.style.display = 'block';
-            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            confetti({
+                particleCount: 200,
+                spread: 120,
+                origin: { y: 0.6 },
+                colors: ['#ff9a9e', '#fad0c4', '#fbc2c2', '#fecfef']
+            });
         });
         
         noBtn.addEventListener('click', function() {
             noClickCount++;
             
             if (noClickCount === 1) {
-                const randomX = Math.random() * 150 - 75;
-                const randomY = Math.random() * 50 - 25;
+                const randomX = Math.random() * 200 - 100;
+                const randomY = Math.random() * 80 - 40;
                 noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
                 noBtn.textContent = 'sure?';
             } else if (noClickCount === 2) {
-                const randomX = Math.random() * 200 - 100;
-                const randomY = Math.random() * 100 - 50;
+                const randomX = Math.random() * 300 - 150;
+                const randomY = Math.random() * 150 - 75;
                 noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
-                noBtn.textContent = 'isipin mo';
+                noBtn.textContent = 'isipin mo?';
             } else if (noClickCount === 3) {
                 noBtn.classList.remove('active');
                 noBtn.classList.add('disabled');
@@ -913,7 +1317,7 @@ ikaw at ikaw pa rin.
         // LOAD MEMORIES
         async function loadMemories() {
             const galleryGrid = document.getElementById('galleryGrid');
-            galleryGrid.innerHTML = '<div class="loading">loading...</div>';
+            galleryGrid.innerHTML = '<div class="loading"><i class="fas fa-heart"></i><br>loading memories...</div>';
             
             try {
                 const response = await fetch(`memories.json?t=${Date.now()}`);
@@ -942,14 +1346,14 @@ ikaw at ikaw pa rin.
 
         // OPEN WHEN LETTERS
         const openWhenLetters = [
-            { icon: 'fa-face-frown', title: "you're sad", message: "remember when we planned our future together? we'll get there." },
-            { icon: 'fa-face-smile', title: "you're happy", message: "your smile is my favorite. keep smiling." },
-            { icon: 'fa-face-angry', title: "you're angry", message: "breathe. drink water. i'm here." },
-            { icon: 'fa-face-tired', title: "you're tired", message: "rest now. think of me holding you." },
-            { icon: 'fa-face-kiss', title: "you miss me", message: "look at our photos. remember our first date. i miss you too." },
-            { icon: 'fa-star', title: "need reminded", message: "i love you. always. kahit anong mangyari." },
-            { icon: 'fa-heart', title: "just because", message: "you're my number one. walang magbabago." },
-            { icon: 'fa-music', title: "need a song", message: "play 'you!' by ten2five. 🎵" }
+            { icon: 'fa-face-frown', title: "you're sad", message: "remember when we planned our future together? we'll get there. i promise." },
+            { icon: 'fa-face-smile', title: "you're happy", message: "your smile is my favorite thing in the world. keep smiling, love." },
+            { icon: 'fa-face-angry', title: "you're angry", message: "breathe. drink water. i'm here. we'll talk when you're ready." },
+            { icon: 'fa-face-tired', title: "you're tired", message: "rest now. think of me holding you close. i'm always here." },
+            { icon: 'fa-face-kiss', title: "you miss me", message: "look at our photos. remember our first date. i miss you too, so much." },
+            { icon: 'fa-star', title: "need reminded", message: "i love you. always. kahit anong mangyari, ikaw pa rin." },
+            { icon: 'fa-heart', title: "just because", message: "you're my number one. walang magbabago. i love you." },
+            { icon: 'fa-music', title: "need a song", message: "play 'you!' by ten2five. close your eyes. that's for you." }
         ];
 
         const leftGrid = document.getElementById('openWhenLeftGrid');
@@ -961,7 +1365,7 @@ ikaw at ikaw pa rin.
                 <i class="fas ${letter.icon}"></i>
                 <div class="letter-info">
                     <h3>${letter.title}</h3>
-                    <p>open letter →</p>
+                    <p><i class="fas fa-arrow-right"></i> open this letter</p>
                 </div>
             `;
             
@@ -975,7 +1379,7 @@ ikaw at ikaw pa rin.
         });
 
         // TYPEWRITER
-        function typeWriter(element, text, speed = 30) {
+        function typeWriter(element, text, speed = 25) {
             let i = 0;
             element.innerHTML = '';
             function typing() {
@@ -991,7 +1395,7 @@ ikaw at ikaw pa rin.
         // EVENT LISTENERS
         document.getElementById('leftPolaroid').addEventListener('click', () => {
             document.getElementById('messageModal').style.display = 'flex';
-            typeWriter(document.getElementById('typewriterMessage'), messageForLouise, 30);
+            typeWriter(document.getElementById('typewriterMessage'), messageForLouise, 25);
         });
 
         document.getElementById('rightPolaroid').addEventListener('click', () => {

@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Louise ❤️</title>
+    <!-- Google Fonts for handwritten feel -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Same CSS as before - paste mo lang yung nasa previous code ko */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Patrick Hand', cursive;
             background: linear-gradient(145deg, #fce4e4 0%, #ffe9e9 50%, #fef0f0 100%);
@@ -23,21 +25,392 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
-        /* I-paste mo lahat ng CSS from previous code here */
-        .container { /* ... */ }
-        .polaroid { /* ... */ }
-        /* ... and all other styles ... */
+
+        /* Hearts Cursor Effect */
+        .heart-cursor {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 20px;
+            animation: floatUp 1.5s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(1.2);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Polaroid Frames */
+        .polaroid {
+            flex: 1 1 300px;
+            min-width: 280px;
+            max-width: 450px;
+            background: #fff9f9;
+            padding: 15px 15px 35px 15px;
+            border-radius: 8px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .polaroid:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 25px 40px rgba(255, 105, 180, 0.3);
+        }
+
+        .polaroid.left {
+            transform: rotate(-1deg);
+        }
+
+        .polaroid.right {
+            transform: rotate(1deg);
+        }
+
+        .polaroid.left:hover {
+            transform: rotate(0deg) translateY(-10px);
+        }
+
+        .polaroid.right:hover {
+            transform: rotate(0deg) translateY(-10px);
+        }
+
+        /* Photo Container */
+        .photo-container {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: #e0d5d5;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+
+        .polaroid:hover .photo {
+            transform: scale(1.05);
+        }
+
+        /* Hover Text */
+        .hover-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            color: #ff6b8b;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+            border: 2px solid white;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .polaroid:hover .hover-text {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Caption */
+        .caption {
+            text-align: center;
+            margin-top: 15px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+            color: #5a4e4e;
+            border-top: 1px dashed #ffb6c1;
+            padding-top: 10px;
+        }
+
+        .caption i {
+            color: #ff6b8b;
+            margin: 0 5px;
+        }
+
+        /* Tape Effect */
+        .tape {
+            position: absolute;
+            top: -10px;
+            width: 50px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 2px;
+            transform: rotate(-5deg);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .left .tape {
+            left: 20px;
+        }
+
+        .right .tape {
+            right: 20px;
+            transform: rotate(5deg);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #fff5f5;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 30px;
+            border-radius: 20px;
+            position: relative;
+            border: 5px solid white;
+            animation: modalOpen 0.4s ease;
+        }
+
+        @keyframes modalOpen {
+            from {
+                opacity: 0;
+                transform: scale(0.7);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #ff6b8b;
+            transition: transform 0.2s;
+        }
+
+        .close-modal:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-title {
+            font-family: 'Caveat', cursive;
+            font-size: 2.2rem;
+            color: #ff6b8b;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px dashed #ffb6c1;
+            padding-bottom: 10px;
+        }
+
+        /* Typewriter Effect */
+        .typewriter-text {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #4a3f3f;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            min-height: 100px;
+            border-right: 3px solid #ff6b8b;
+            animation: blink 0.75s step-end infinite;
+            padding: 5px;
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: #ff6b8b; }
+        }
+
+        /* Gallery Styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1/1;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+            border: 3px solid white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-caption {
+            text-align: center;
+            margin-top: 20px;
+            color: #ff6b8b;
+            font-size: 1.2rem;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border: 5px solid white;
+            border-radius: 10px;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                gap: 20px;
+            }
+            
+            .polaroid {
+                min-width: 250px;
+            }
+            
+            .caption {
+                font-size: 1.3rem;
+            }
+            
+            .hover-text {
+                font-size: 1.2rem;
+                padding: 8px 16px;
+            }
+            
+            .modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+            
+            .typewriter-text {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .polaroid {
+                padding: 10px 10px 25px 10px;
+            }
+            
+            .caption {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Floating hearts background */
+        .bg-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-hearts i {
+            position: absolute;
+            color: rgba(255, 107, 139, 0.1);
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Background floating hearts -->
+    <div class="bg-hearts" id="bgHearts"></div>
+
     <div class="container">
         <!-- Left Polaroid - Louise -->
         <div class="polaroid left" id="leftPolaroid">
             <div class="tape"></div>
             <div class="photo-container">
-                <!-- ITO ANG IMAGES - relative paths lang -->
-                <img src="louise.jpg" alt="Louise" class="photo">
+                <img src="louise.jpg" alt="Louise" class="photo" id="louisePhoto">
                 <div class="hover-text">
                     <i class="fas fa-envelope"></i> For Louise <i class="fas fa-heart"></i>
                 </div>
@@ -51,7 +424,7 @@
         <div class="polaroid right" id="rightPolaroid">
             <div class="tape"></div>
             <div class="photo-container">
-                <img src="us-main.jpg" alt="Us" class="photo">
+                <img src="us-main.jpg" alt="Us" class="photo" id="usPhoto">
                 <div class="hover-text">
                     <i class="fas fa-camera"></i> Our Memories <i class="fas fa-heart"></i>
                 </div>
@@ -78,20 +451,23 @@
         <div class="modal-content">
             <span class="close-modal" id="closeGalleryModal">&times;</span>
             <div class="modal-title">
-                <i class="fas fa-images"></i> Our Memories
+                <i class="fas fa-images"></i> Our Beautiful Memories
             </div>
             <div class="gallery-grid" id="galleryGrid"></div>
+            <div class="gallery-caption">
+                <i class="fas fa-heart"></i> Each picture, a memory I treasure <i class="fas fa-heart"></i>
+            </div>
         </div>
     </div>
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
         <span class="close-lightbox" id="closeLightbox">&times;</span>
-        <img src="" alt="Enlarged" id="lightboxImg">
+        <img src="" alt="Enlarged memory" id="lightboxImg">
     </div>
 
     <script>
-        // Hearts cursor effect
+        // Hearts Cursor Effect
         document.addEventListener('mousemove', function(e) {
             if (Math.random() < 0.1) {
                 const heart = document.createElement('div');
@@ -99,11 +475,7 @@
                 heart.innerHTML = '❤️';
                 heart.style.left = (e.pageX - 10) + 'px';
                 heart.style.top = (e.pageY - 10) + 'px';
-                heart.style.position = 'fixed';
-                heart.style.pointerEvents = 'none';
-                heart.style.zIndex = '9999';
                 heart.style.fontSize = Math.random() * 15 + 15 + 'px';
-                heart.style.animation = 'floatUp 1.5s ease-out forwards';
                 document.body.appendChild(heart);
 
                 setTimeout(() => {
@@ -112,7 +484,21 @@
             }
         });
 
-        // Message for Louise - I-EDIT MO ITO!
+        // Background floating hearts
+        function createBgHearts() {
+            const bgHearts = document.getElementById('bgHearts');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('i');
+                heart.className = 'fas fa-heart';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = Math.random() * 30 + 10 + 'px';
+                bgHearts.appendChild(heart);
+            }
+        }
+        createBgHearts();
+
+        // Message for Louise - EDIT THIS!
         const messageForLouise = `My Dearest Louise,
 
     Mahal na mahal kita. 
@@ -127,27 +513,27 @@
     Mahal na mahal kita, palagi.
 
     Forever yours,
-    [Name mo] ❤️`;
+    [Your Name] ❤️`;
 
-        // Gallery images - relative paths lang
+        // Gallery Images - palitan kapag naka-upload na ang images
         const galleryImages = [
-            { url: 'us1.jpg', caption: 'Us 1' },
-            { url: 'us2.jpg', caption: 'Us 2' },
-            { url: 'us3.jpg', caption: 'Us 3' },
-            { url: 'us4.jpg', caption: 'Us 4' }
+            { url: 'us1.jpg', caption: 'Us - Photo 1' },
+            { url: 'us2.jpg', caption: 'Us - Photo 2' },
+            { url: 'us3.jpg', caption: 'Us - Photo 3' },
+            { url: 'us4.jpg', caption: 'Us - Photo 4' }
         ];
 
         // Populate gallery
         const galleryGrid = document.getElementById('galleryGrid');
         galleryImages.forEach(img => {
-            const item = document.createElement('div');
-            item.className = 'gallery-item';
-            item.innerHTML = `<img src="${img.url}" alt="${img.caption}">`;
-            item.addEventListener('click', function() {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            galleryItem.innerHTML = `<img src="${img.url}" alt="${img.caption}">`;
+            galleryItem.addEventListener('click', function() {
                 document.getElementById('lightboxImg').src = this.querySelector('img').src;
                 document.getElementById('lightbox').style.display = 'flex';
             });
-            galleryGrid.appendChild(item);
+            galleryGrid.appendChild(galleryItem);
         });
 
         // Typewriter effect
@@ -198,29 +584,6 @@
                 e.target.style.display = 'none';
             }
         });
-
-        // Add animation style
-        const style = document.createElement('style');
-        style.textContent = `
-            .heart-cursor {
-                position: fixed;
-                pointer-events: none;
-                z-index: 9999;
-                font-size: 20px;
-                animation: floatUp 1.5s ease-out forwards;
-            }
-            @keyframes floatUp {
-                0% {
-                    opacity: 1;
-                    transform: translateY(0) scale(0.5);
-                }
-                100% {
-                    opacity: 0;
-                    transform: translateY(-100px) scale(1.2);
-                }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>

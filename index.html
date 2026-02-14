@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>for louise. ❤️</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,7 @@
             font-family: 'Quicksand', sans-serif;
             height: 100vh;
             width: 100vw;
-            overflow: hidden;
+            overflow: hidden; /* Desktop: no scroll */
             position: fixed;
             top: 0;
             left: 0;
@@ -107,7 +107,7 @@
             display: none;
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            overflow: hidden; /* Desktop: no scroll */
             position: relative;
         }
 
@@ -199,10 +199,10 @@
             width: 100%;
             position: relative;
             z-index: 2;
-            overflow: hidden;
+            overflow: hidden; /* Desktop: no scroll */
         }
 
-        /* ===== LEFT SIDE - OPEN WHEN (MOBILE FRIENDLY) ===== */
+        /* ===== LEFT SIDE - OPEN WHEN ===== */
         .left-side {
             width: min(360px, 35%);
             background: rgba(20, 10, 15, 0.7);
@@ -213,7 +213,7 @@
             display: flex;
             flex-direction: column;
             height: 100%;
-            overflow: hidden;
+            overflow: hidden; /* Desktop: no scroll sa left side */
         }
 
         .left-side h2 {
@@ -340,7 +340,7 @@
             gap: 5px;
         }
 
-        /* ===== RIGHT SIDE - POLAROIDS (MOBILE FRIENDLY) ===== */
+        /* ===== RIGHT SIDE - POLAROIDS ===== */
         .right-side {
             flex: 1;
             display: flex;
@@ -533,7 +533,7 @@
             transform: scale(0.95);
         }
 
-        /* MODALS - Mobile Friendly */
+        /* MODALS */
         .modal, .valentine-modal, .lightbox, .open-modal {
             display: none;
             position: fixed;
@@ -941,33 +941,115 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Mobile-specific adjustments */
+        /* ===== MOBILE STYLES - WITH VERTICAL SCROLL ===== */
         @media (max-width: 768px) {
+            body {
+                overflow-y: auto; /* Mobile: pwedeng mag-scroll */
+                position: relative;
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            #main-dashboard {
+                overflow-y: auto; /* Mobile: pwedeng mag-scroll */
+                height: auto;
+                min-height: 100vh;
+                position: relative;
+            }
+            
             .main-container {
                 flex-direction: column;
+                overflow-y: visible; /* Mobile: kita ang scroll */
+                height: auto;
+                min-height: 100vh;
             }
             
             .left-side {
                 width: 100%;
-                height: 45vh;
+                height: auto;
+                min-height: auto;
                 border-right: none;
                 border-bottom: 1px solid rgba(255,105,180,0.2);
-                padding: 15px 12px;
+                padding: 20px 15px;
+                overflow-y: visible; /* Mobile: pwedeng mag-scroll sa loob */
             }
             
             .left-side h2 {
-                font-size: 1.8rem;
-                margin-bottom: 10px;
+                font-size: 2rem;
+                margin-bottom: 15px;
+                position: sticky;
+                top: 0;
+                background: rgba(20, 10, 15, 0.9);
+                backdrop-filter: blur(15px);
+                z-index: 10;
+                padding: 10px 0;
+                border-radius: 10px;
             }
             
             .open-when-left-grid {
-                gap: 8px;
-                height: calc(45vh - 60px);
+                height: auto;
+                gap: 12px;
+                padding-bottom: 20px;
             }
             
             .open-when-left-card {
-                height: 70px;
-                padding: 10px 12px;
+                height: 80px;
+                padding: 12px 15px;
+            }
+            
+            .right-side {
+                height: auto;
+                min-height: 50vh;
+                padding: 30px 15px;
+            }
+            
+            .right-side::before {
+                top: 15px;
+            }
+            
+            .polaroid-container {
+                gap: 25px;
+                flex-direction: column;
+                padding: 10px 0;
+            }
+            
+            .polaroid {
+                width: min(320px, 95%);
+            }
+            
+            .valentine-btn {
+                position: fixed;
+                bottom: 15px;
+                right: 15px;
+                padding: 12px 24px;
+                font-size: 1.3rem;
+                z-index: 1000;
+            }
+            
+            /* Gradient para malaman na pwedeng mag-scroll */
+            .scroll-hint {
+                display: block;
+                text-align: center;
+                color: #ffb6c1;
+                font-size: 0.9rem;
+                margin: 10px 0;
+                animation: bounce 2s infinite;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(5px); }
+        }
+
+        /* Small phones */
+        @media (max-width: 480px) {
+            .left-side h2 {
+                font-size: 1.8rem;
+            }
+            
+            .open-when-left-card {
+                height: 75px;
             }
             
             .open-when-left-card i {
@@ -976,76 +1058,18 @@
             }
             
             .open-when-left-card .letter-info h3 {
-                font-size: 1rem;
-            }
-            
-            .right-side {
-                height: 55vh;
-                padding: 10px;
-            }
-            
-            .right-side::before {
-                top: 20px;
-            }
-            
-            .polaroid-container {
-                gap: 15px;
-            }
-            
-            .polaroid {
-                width: min(280px, 85%);
-            }
-            
-            .valentine-btn {
-                bottom: 15px;
-                right: 15px;
-                padding: 10px 20px;
-                font-size: 1.2rem;
-            }
-        }
-
-        /* Small phones */
-        @media (max-width: 480px) {
-            .left-side {
-                height: 40vh;
-                padding: 12px 10px;
-            }
-            
-            .left-side h2 {
-                font-size: 1.5rem;
-            }
-            
-            .open-when-left-card {
-                height: 65px;
-                padding: 8px 10px;
-            }
-            
-            .open-when-left-card i {
-                font-size: 1.3rem;
-                width: 30px;
-            }
-            
-            .open-when-left-card .letter-info h3 {
-                font-size: 0.9rem;
-            }
-            
-            .right-side {
-                height: 60vh;
-            }
-            
-            .polaroid {
-                width: min(240px, 90%);
-            }
-            
-            .caption {
                 font-size: 1.1rem;
+            }
+            
+            .polaroid {
+                width: min(280px, 98%);
             }
             
             .valentine-btn {
                 bottom: 10px;
                 right: 10px;
-                padding: 8px 16px;
-                font-size: 1rem;
+                padding: 10px 20px;
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -1078,6 +1102,10 @@
             <div class="left-side">
                 <h2><i class="fas fa-envelope-open-text"></i> open when... <i class="fas fa-envelope-open-text"></i></h2>
                 <div class="open-when-left-grid" id="openWhenLeftGrid"></div>
+                <!-- Scroll hint for mobile -->
+                <div class="scroll-hint">
+                    <i class="fas fa-chevron-down"></i> scroll for more <i class="fas fa-chevron-down"></i>
+                </div>
             </div>
 
             <!-- RIGHT SIDE - POLAROIDS -->

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>for louise. ❤️</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,24 +17,30 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             font-family: 'Quicksand', sans-serif;
             height: 100vh;
+            width: 100vw;
             overflow: hidden;
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
         }
 
         /* HEARTS CURSOR ANIMATION */
         @keyframes floatUp {
             0% {
-                opacity: 0.6;
+                opacity: 0.8;
                 transform: translateY(0) scale(0.5);
             }
             100% {
                 opacity: 0;
-                transform: translateY(-100px) scale(1.2);
+                transform: translateY(-100px) scale(1.5);
             }
         }
 
@@ -66,6 +72,7 @@
             width: 100%;
             height: 100%;
             display: block;
+            touch-action: none;
         }
 
         .intro-text {
@@ -73,12 +80,13 @@
             z-index: 10001;
             color: rgba(255, 105, 180, 0.8);
             font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 5vw, 2rem);
             text-align: center;
             pointer-events: none;
             text-shadow: 0 0 20px #ff69b4;
             animation: textPulse 2s infinite;
             opacity: 0.7;
+            padding: 20px;
         }
 
         @keyframes textPulse {
@@ -88,7 +96,7 @@
 
         .intro-text small {
             display: block;
-            font-size: 1rem;
+            font-size: clamp(0.8rem, 3vw, 1rem);
             font-family: 'Quicksand', sans-serif;
             color: rgba(255, 182, 193, 0.5);
             margin-top: 10px;
@@ -100,6 +108,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
+            position: relative;
         }
 
         .dark-bg {
@@ -120,6 +129,7 @@
             height: 100%;
             z-index: -2;
             overflow: hidden;
+            pointer-events: none;
         }
 
         .bubble {
@@ -136,11 +146,11 @@
             66% { transform: translateY(20px) translateX(-20px) rotate(240deg); }
         }
 
-        .b1 { width: 300px; height: 300px; top: 10%; left: 5%; animation-duration: 25s; }
-        .b2 { width: 400px; height: 400px; bottom: 10%; right: 5%; animation-duration: 30s; }
-        .b3 { width: 200px; height: 200px; top: 30%; right: 20%; animation-duration: 20s; }
-        .b4 { width: 350px; height: 350px; bottom: 20%; left: 15%; animation-duration: 28s; }
-        .b5 { width: 150px; height: 150px; top: 70%; right: 30%; animation-duration: 18s; }
+        .b1 { width: min(300px, 30vw); height: min(300px, 30vw); top: 10%; left: 5%; animation-duration: 25s; }
+        .b2 { width: min(400px, 40vw); height: min(400px, 40vw); bottom: 10%; right: 5%; animation-duration: 30s; }
+        .b3 { width: min(200px, 20vw); height: min(200px, 20vw); top: 30%; right: 20%; animation-duration: 20s; }
+        .b4 { width: min(350px, 35vw); height: min(350px, 35vw); bottom: 20%; left: 15%; animation-duration: 28s; }
+        .b5 { width: min(150px, 15vw); height: min(150px, 15vw); top: 70%; right: 30%; animation-duration: 18s; }
 
         .floating-hearts {
             position: fixed;
@@ -155,7 +165,7 @@
         .floating-heart {
             position: absolute;
             color: rgba(255, 105, 180, 0.1);
-            font-size: 24px;
+            font-size: clamp(15px, 4vw, 24px);
             animation: floatHeart 15s infinite linear;
             filter: drop-shadow(0 0 5px #ff69b4);
         }
@@ -176,48 +186,51 @@
             background-image: 
                 radial-gradient(circle at 30% 40%, rgba(255, 105, 180, 0.05) 1px, transparent 1px),
                 radial-gradient(circle at 70% 60%, rgba(255, 182, 193, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px, 80px 80px;
+            background-size: min(50px, 5vw) min(50px, 5vw), min(80px, 8vw) min(80px, 8vw);
             z-index: -1;
             opacity: 0.5;
+            pointer-events: none;
         }
 
         /* MAIN CONTAINER */
         .main-container {
             display: flex;
-            height: 100vh;
-            width: 100vw;
+            height: 100%;
+            width: 100%;
             position: relative;
             z-index: 2;
             overflow: hidden;
         }
 
-        /* ===== LEFT SIDE - OPEN WHEN ===== */
+        /* ===== LEFT SIDE - OPEN WHEN (MOBILE FRIENDLY) ===== */
         .left-side {
-            width: 360px;
+            width: min(360px, 35%);
             background: rgba(20, 10, 15, 0.7);
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border-right: 1px solid rgba(255, 105, 180, 0.2);
-            padding: 25px 20px;
+            padding: clamp(15px, 2vh, 25px) clamp(10px, 1.5vw, 20px);
             display: flex;
             flex-direction: column;
-            height: 100vh;
+            height: 100%;
             overflow: hidden;
         }
 
         .left-side h2 {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.3rem;
+            font-size: clamp(1.5rem, 3vw, 2.3rem);
             color: #ffb6c1;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: clamp(10px, 1.5vh, 20px);
             text-shadow: 0 0 10px #ff69b4;
             flex-shrink: 0;
+            line-height: 1.2;
         }
 
         .left-side h2 i {
             color: #ff69b4;
-            margin: 0 8px;
-            font-size: 2rem;
+            margin: 0 clamp(3px, 1vw, 8px);
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
             animation: sparkle 2s infinite;
         }
 
@@ -229,8 +242,8 @@
         .open-when-left-grid {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            height: calc(100vh - 100px);
+            gap: clamp(8px, 1.2vh, 12px);
+            height: calc(100% - clamp(50px, 8vh, 80px));
             overflow: visible;
             justify-content: space-between;
         }
@@ -238,28 +251,32 @@
         .open-when-left-card {
             background: rgba(30, 15, 20, 0.7);
             backdrop-filter: blur(10px);
-            border-radius: 18px 18px 18px 6px;
-            padding: 16px 18px;
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: clamp(12px, 2vw, 18px) clamp(12px, 2vw, 18px) clamp(12px, 2vw, 18px) clamp(4px, 1vw, 6px);
+            padding: clamp(10px, 1.5vh, 16px) clamp(10px, 1.5vw, 18px);
             cursor: pointer;
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 105, 180, 0.2);
-            box-shadow: 0 6px 18px rgba(255, 105, 180, 0.1);
+            box-shadow: 0 clamp(4px, 1vh, 6px) clamp(12px, 2vh, 18px) rgba(255, 105, 180, 0.1);
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: clamp(8px, 1.5vw, 15px);
             position: relative;
             flex-shrink: 0;
-            height: 85px;
+            height: clamp(70px, 10vh, 85px);
             width: 100%;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         .open-when-left-card::before {
             content: '';
             position: absolute;
             top: -5px;
-            left: 20px;
-            width: 28px;
-            height: 10px;
+            left: clamp(15px, 2vw, 20px);
+            width: clamp(20px, 3vw, 28px);
+            height: clamp(8px, 1vh, 10px);
             background: rgba(255, 105, 180, 0.2);
             border-radius: 10px 10px 0 0;
             border: 1px solid rgba(255, 105, 180, 0.3);
@@ -270,11 +287,11 @@
             content: '❤️';
             position: absolute;
             top: -8px;
-            right: 25px;
-            font-size: 12px;
+            right: clamp(15px, 2vw, 25px);
+            font-size: clamp(10px, 1.5vw, 12px);
             background: #ff69b4;
-            width: 24px;
-            height: 24px;
+            width: clamp(20px, 3vw, 24px);
+            height: clamp(20px, 3vw, 24px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -290,10 +307,14 @@
             box-shadow: 0 12px 25px rgba(255, 105, 180, 0.3);
         }
 
+        .open-when-left-card:active {
+            transform: scale(0.98);
+        }
+
         .open-when-left-card i {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 3vw, 2rem);
             color: #ffb6c1;
-            width: 45px;
+            width: clamp(35px, 5vw, 45px);
             text-align: center;
             filter: drop-shadow(0 0 8px #ff69b4);
         }
@@ -305,26 +326,27 @@
 
         .open-when-left-card .letter-info h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 2vw, 1.3rem);
             color: #ffb6c1;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
+            line-height: 1.2;
         }
 
         .open-when-left-card .letter-info p {
-            font-size: 0.85rem;
+            font-size: clamp(0.7rem, 1.5vw, 0.85rem);
             color: #d88ca0;
             display: flex;
             align-items: center;
             gap: 5px;
         }
 
-        /* ===== RIGHT SIDE ===== */
+        /* ===== RIGHT SIDE - POLAROIDS (MOBILE FRIENDLY) ===== */
         .right-side {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: clamp(10px, 2vh, 20px);
             position: relative;
             overflow: hidden;
         }
@@ -332,7 +354,7 @@
         .right-side::before {
             content: '';
             position: absolute;
-            top: 40px;
+            top: clamp(20px, 5vh, 40px);
             left: 0;
             width: 100%;
             height: 2px;
@@ -342,20 +364,22 @@
 
         .polaroid-container {
             display: flex;
-            gap: 60px;
+            gap: clamp(20px, 4vw, 60px);
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
             position: relative;
             z-index: 2;
+            width: 100%;
+            max-width: min(900px, 90vw);
         }
 
         .polaroid {
-            width: 360px;
+            width: min(360px, 80vw);
             background: #fff5f5;
-            padding: 18px 18px 38px 18px;
-            border-radius: 12px;
-            box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.6),
+            padding: clamp(10px, 2vw, 18px) clamp(10px, 2vw, 18px) clamp(20px, 3vh, 38px) clamp(10px, 2vw, 18px);
+            border-radius: clamp(8px, 1.5vw, 12px);
+            box-shadow: 0 clamp(15px, 3vh, 25px) clamp(25px, 4vh, 35px) -12px rgba(0, 0, 0, 0.6),
                         0 0 0 1px rgba(255, 255, 255, 0.3) inset;
             transition: all 0.4s ease;
             cursor: pointer;
@@ -372,8 +396,8 @@
             top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 45px;
-            height: 22px;
+            width: min(45px, 8vw);
+            height: min(22px, 3vh);
             background: rgba(180, 140, 150, 0.4);
             border-radius: 10px 10px 5px 5px;
             border: 1px solid rgba(255, 255, 255, 0.4);
@@ -387,8 +411,8 @@
             top: -16px;
             left: 50%;
             transform: translateX(-50%);
-            width: 22px;
-            height: 7px;
+            width: min(22px, 4vw);
+            height: min(7px, 1.5vh);
             background: rgba(200, 170, 180, 0.5);
             border-radius: 4px;
             border: 1px solid rgba(255, 255, 255, 0.4);
@@ -401,6 +425,10 @@
                         0 0 0 2px rgba(255, 255, 255, 0.5) inset,
                         0 0 35px #ff69b4;
             background: #ffffff;
+        }
+
+        .polaroid:active {
+            transform: rotate(0deg) translateY(-10px) scale(0.98);
         }
 
         .photo-container {
@@ -431,10 +459,10 @@
             transform: translate(-50%, -50%);
             background: rgba(255, 255, 255, 0.9);
             color: #ff69b4;
-            padding: 12px 30px;
+            padding: clamp(8px, 2vw, 12px) clamp(15px, 3vw, 30px);
             border-radius: 50px;
             font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
             font-weight: 400;
             opacity: 0;
             transition: all 0.3s ease;
@@ -452,39 +480,41 @@
 
         .caption {
             text-align: center;
-            margin-top: 18px;
+            margin-top: clamp(10px, 2vh, 18px);
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
             color: #5a4a4a;
             border-top: 1px solid #ffb6c1;
-            padding-top: 15px;
+            padding-top: clamp(8px, 1.5vh, 15px);
         }
 
         .caption i {
             color: #ff69b4;
-            margin: 0 6px;
-            font-size: 1.2rem;
+            margin: 0 clamp(3px, 1vw, 6px);
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
         }
 
         .valentine-btn {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: clamp(15px, 3vh, 30px);
+            right: clamp(15px, 3vw, 30px);
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             color: #ffb6c1;
             border: 1px solid rgba(255, 105, 180, 0.3);
-            padding: 15px 35px;
+            padding: clamp(10px, 2vh, 15px) clamp(20px, 3vw, 35px);
             border-radius: 60px;
             font-family: 'Dancing Script', cursive;
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
             cursor: pointer;
             box-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: clamp(8px, 1.5vw, 12px);
             animation: buttonPulse 3s infinite;
             z-index: 100;
+            -webkit-tap-highlight-color: transparent;
         }
 
         @keyframes buttonPulse {
@@ -499,7 +529,11 @@
             box-shadow: 0 0 45px #ff69b4;
         }
 
-        /* MODALS */
+        .valentine-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* MODALS - Mobile Friendly */
         .modal, .valentine-modal, .lightbox, .open-modal {
             display: none;
             position: fixed;
@@ -509,31 +543,33 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: clamp(10px, 2vh, 20px);
         }
 
         .modal-content {
             background: rgba(255, 255, 255, 0.95);
-            max-width: 550px;
-            width: 90%;
+            max-width: min(550px, 90%);
+            width: 100%;
             max-height: 80vh;
             overflow-y: auto;
-            padding: 30px;
-            border-radius: 30px;
+            padding: clamp(20px, 4vh, 30px);
+            border-radius: clamp(20px, 4vw, 30px);
             border: 2px solid white;
             box-shadow: 0 0 40px rgba(255, 105, 180, 0.3);
+            -webkit-overflow-scrolling: touch;
         }
 
         .close-modal {
             position: absolute;
-            top: 15px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            font-size: 2rem;
+            top: clamp(10px, 2vh, 15px);
+            right: clamp(15px, 3vw, 20px);
+            width: clamp(35px, 5vw, 40px);
+            height: clamp(35px, 5vw, 40px);
+            font-size: clamp(1.5rem, 4vw, 2rem);
             cursor: pointer;
             color: #b57c8c;
             display: flex;
@@ -542,6 +578,7 @@
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.5);
             z-index: 10;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .close-modal:hover {
@@ -549,45 +586,51 @@
             transform: rotate(90deg);
         }
 
+        .close-modal:active {
+            transform: rotate(90deg) scale(0.9);
+        }
+
         .modal-title {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.2rem;
+            font-size: clamp(1.8rem, 5vw, 2.2rem);
             color: #b57c8c;
-            margin-bottom: 20px;
+            margin-bottom: clamp(15px, 2vh, 20px);
             text-align: center;
             border-bottom: 1px dashed #ffb6c1;
-            padding-bottom: 15px;
+            padding-bottom: clamp(10px, 1.5vh, 15px);
         }
 
         .typewriter-text {
-            font-size: 1rem;
-            line-height: 1.7;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            line-height: 1.6;
             color: #4a3f3f;
             white-space: pre-wrap;
-            padding: 15px;
+            padding: clamp(10px, 2vh, 15px);
             background: rgba(255, 255, 255, 0.5);
-            border-radius: 20px;
+            border-radius: clamp(15px, 3vw, 20px);
             border: 1px solid #ffb6c1;
         }
 
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 15px;
+            gap: clamp(10px, 2vw, 15px);
+            margin-top: clamp(10px, 2vh, 15px);
         }
 
         .gallery-item {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(5px);
-            border-radius: 15px 15px 15px 5px;
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: clamp(12px, 2vw, 15px) clamp(12px, 2vw, 15px) clamp(12px, 2vw, 15px) clamp(3px, 1vw, 5px);
             overflow: hidden;
             cursor: pointer;
             border: 3px solid white;
-            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.2);
+            box-shadow: 0 clamp(5px, 1vh, 8px) clamp(15px, 2vh, 20px) rgba(255, 105, 180, 0.2);
             aspect-ratio: 1/1;
             position: relative;
             transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .gallery-item::before {
@@ -596,8 +639,8 @@
             top: -6px;
             left: 50%;
             transform: translateX(-50%);
-            width: 25px;
-            height: 12px;
+            width: clamp(20px, 4vw, 25px);
+            height: clamp(10px, 1.5vh, 12px);
             background: rgba(180, 140, 150, 0.3);
             border-radius: 8px 8px 4px 4px;
             border: 1px solid rgba(255, 255, 255, 0.5);
@@ -606,7 +649,8 @@
             transition: opacity 0.3s;
         }
 
-        .gallery-item:hover::before {
+        .gallery-item:hover::before,
+        .gallery-item:active::before {
             opacity: 1;
         }
 
@@ -618,13 +662,15 @@
             display: block;
         }
 
-        .gallery-item:hover {
+        .gallery-item:hover,
+        .gallery-item:active {
             transform: translateY(-8px) scale(1.02);
             border-color: #ff69b4;
             box-shadow: 0 15px 30px #ff69b4;
         }
 
-        .gallery-item:hover img {
+        .gallery-item:hover img,
+        .gallery-item:active img {
             transform: scale(1.05);
         }
 
@@ -633,14 +679,15 @@
             position: absolute;
             bottom: 5px;
             right: 8px;
-            font-size: 1rem;
+            font-size: clamp(0.8rem, 2vw, 1rem);
             color: white;
             text-shadow: 0 0 5px #ff69b4;
             opacity: 0;
             transition: opacity 0.3s;
         }
 
-        .gallery-item:hover::after {
+        .gallery-item:hover::after,
+        .gallery-item:active::after {
             opacity: 0.8;
         }
 
@@ -653,17 +700,18 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 2000;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: clamp(10px, 2vh, 20px);
         }
 
         .lightbox-content {
-            max-width: 600px;
-            width: 90%;
+            max-width: min(600px, 90%);
+            width: 100%;
             background: white;
-            border-radius: 30px;
+            border-radius: clamp(20px, 4vw, 30px);
             overflow: hidden;
             box-shadow: 0 0 50px #ff69b4;
         }
@@ -682,21 +730,21 @@
         }
 
         .lightbox-story {
-            padding: 25px;
+            padding: clamp(15px, 3vh, 25px);
             background: white;
         }
 
         .lightbox-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
             color: #b57c8c;
-            margin-bottom: 10px;
+            margin-bottom: clamp(8px, 1.5vh, 10px);
             border-left: 4px solid #ff69b4;
-            padding-left: 15px;
+            padding-left: clamp(10px, 2vw, 15px);
         }
 
         .lightbox-description {
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
             line-height: 1.6;
             color: #4a3f3f;
             white-space: pre-wrap;
@@ -704,23 +752,26 @@
 
         .close-lightbox {
             position: absolute;
-            top: 25px;
-            right: 30px;
+            top: clamp(15px, 3vh, 25px);
+            right: clamp(20px, 4vw, 30px);
             color: white;
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 5vw, 2.5rem);
             cursor: pointer;
-            width: 50px;
-            height: 50px;
+            width: clamp(40px, 6vw, 50px);
+            height: clamp(40px, 6vw, 50px);
             display: flex;
             align-items: center;
             justify-content: center;
             background: rgba(255, 105, 180, 0.3);
             border-radius: 50%;
             backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             border: 1px solid white;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .close-lightbox:hover {
+        .close-lightbox:hover,
+        .close-lightbox:active {
             transform: rotate(90deg);
             background: #ff69b4;
         }
@@ -734,18 +785,19 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 3000;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: clamp(10px, 2vh, 20px);
         }
 
         .valentine-content {
             background: rgba(255, 255, 255, 0.95);
-            max-width: 400px;
-            width: 90%;
-            padding: 40px;
-            border-radius: 50px;
+            max-width: min(400px, 90%);
+            width: 100%;
+            padding: clamp(25px, 5vh, 40px);
+            border-radius: clamp(30px, 6vw, 50px);
             text-align: center;
             border: 3px solid white;
             box-shadow: 0 0 50px #ff69b4;
@@ -753,26 +805,27 @@
 
         .valentine-question {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             color: #b57c8c;
-            margin-bottom: 25px;
+            margin-bottom: clamp(15px, 3vh, 25px);
         }
 
         .button-container {
             display: flex;
-            gap: 15px;
+            gap: clamp(10px, 2vw, 15px);
             justify-content: center;
         }
 
         .yes-btn, .no-btn {
-            padding: 12px 28px;
+            padding: clamp(10px, 2vh, 12px) clamp(15px, 3vw, 28px);
             border-radius: 50px;
             font-family: 'Quicksand', sans-serif;
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 3vw, 1.3rem);
             cursor: pointer;
             border: none;
             transition: all 0.3s;
             flex: 1;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .yes-btn {
@@ -780,7 +833,8 @@
             color: white;
         }
 
-        .yes-btn:hover {
+        .yes-btn:hover,
+        .yes-btn:active {
             background: #ff4d9e;
             transform: translateY(-3px);
             box-shadow: 0 0 30px #ff69b4;
@@ -791,7 +845,8 @@
             color: #666;
         }
 
-        .no-btn.active:hover {
+        .no-btn.active:hover,
+        .no-btn.active:active {
             background: #e0e0e0;
             transform: translateY(-2px);
         }
@@ -810,40 +865,41 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 4000;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: clamp(10px, 2vh, 20px);
         }
 
         .open-modal-content {
             background: rgba(255, 255, 255, 0.95);
-            max-width: 450px;
-            width: 90%;
-            padding: 35px;
-            border-radius: 40px;
+            max-width: min(450px, 90%);
+            width: 100%;
+            padding: clamp(20px, 4vh, 35px);
+            border-radius: clamp(30px, 5vw, 40px);
             border: 2px solid white;
             box-shadow: 0 0 40px #ff69b4;
         }
 
         .open-modal-header {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.2rem;
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
             color: #b57c8c;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: clamp(15px, 2vh, 20px);
             border-bottom: 1px dashed #ffb6c1;
-            padding-bottom: 15px;
+            padding-bottom: clamp(10px, 1.5vh, 15px);
         }
 
         .open-modal-body {
-            font-size: 1.1rem;
-            line-height: 1.7;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            line-height: 1.6;
             color: #4a3f3f;
             white-space: pre-wrap;
-            padding: 20px;
+            padding: clamp(15px, 3vh, 20px);
             background: rgba(255, 255, 255, 0.5);
-            border-radius: 20px;
+            border-radius: clamp(15px, 3vw, 20px);
             border: 1px solid #ffb6c1;
         }
 
@@ -851,16 +907,18 @@
             background: #ff69b4;
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: clamp(10px, 2vh, 12px) clamp(20px, 4vw, 30px);
             border-radius: 50px;
             font-family: 'Quicksand', sans-serif;
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: clamp(15px, 2vh, 20px);
             width: 100%;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .open-close-btn:hover {
+        .open-close-btn:hover,
+        .open-close-btn:active {
             background: #ff4d9e;
             transform: translateY(-2px);
             box-shadow: 0 0 20px #ff69b4;
@@ -868,13 +926,14 @@
 
         .loading {
             text-align: center;
-            padding: 30px;
+            padding: clamp(20px, 4vh, 30px);
             color: #b57c8c;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
         }
 
         .loading i {
             animation: spin 1s infinite linear;
+            display: inline-block;
         }
 
         @keyframes spin {
@@ -882,17 +941,112 @@
             to { transform: rotate(360deg); }
         }
 
-        @media (max-width: 1000px) {
-            .polaroid { width: 300px; }
-            .left-side { width: 320px; }
+        /* Mobile-specific adjustments */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .left-side {
+                width: 100%;
+                height: 45vh;
+                border-right: none;
+                border-bottom: 1px solid rgba(255,105,180,0.2);
+                padding: 15px 12px;
+            }
+            
+            .left-side h2 {
+                font-size: 1.8rem;
+                margin-bottom: 10px;
+            }
+            
+            .open-when-left-grid {
+                gap: 8px;
+                height: calc(45vh - 60px);
+            }
+            
+            .open-when-left-card {
+                height: 70px;
+                padding: 10px 12px;
+            }
+            
+            .open-when-left-card i {
+                font-size: 1.5rem;
+                width: 35px;
+            }
+            
+            .open-when-left-card .letter-info h3 {
+                font-size: 1rem;
+            }
+            
+            .right-side {
+                height: 55vh;
+                padding: 10px;
+            }
+            
+            .right-side::before {
+                top: 20px;
+            }
+            
+            .polaroid-container {
+                gap: 15px;
+            }
+            
+            .polaroid {
+                width: min(280px, 85%);
+            }
+            
+            .valentine-btn {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px 20px;
+                font-size: 1.2rem;
+            }
         }
 
-        @media (max-width: 768px) {
-            .main-container { flex-direction: column; }
-            .left-side { width: 100%; height: auto; border-right: none; border-bottom: 1px solid rgba(255,105,180,0.2); }
-            .open-when-left-grid { height: auto; }
-            .polaroid { width: 260px; }
-            .polaroid-container { gap: 30px; }
+        /* Small phones */
+        @media (max-width: 480px) {
+            .left-side {
+                height: 40vh;
+                padding: 12px 10px;
+            }
+            
+            .left-side h2 {
+                font-size: 1.5rem;
+            }
+            
+            .open-when-left-card {
+                height: 65px;
+                padding: 8px 10px;
+            }
+            
+            .open-when-left-card i {
+                font-size: 1.3rem;
+                width: 30px;
+            }
+            
+            .open-when-left-card .letter-info h3 {
+                font-size: 0.9rem;
+            }
+            
+            .right-side {
+                height: 60vh;
+            }
+            
+            .polaroid {
+                width: min(240px, 90%);
+            }
+            
+            .caption {
+                font-size: 1.1rem;
+            }
+            
+            .valentine-btn {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 16px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -1004,9 +1158,9 @@
     </div>
 
     <script>
-        // HEARTS CURSOR EFFECT - BALIK NA!
+        // HEARTS CURSOR EFFECT - 50% CHANCE!
         document.addEventListener('mousemove', function(e) {
-            if (Math.random() < 0.15) { // 15% chance na mag-appear ang heart
+            if (Math.random() < 0.5) { // 50% chance na mag-appear ang heart
                 const heart = document.createElement('div');
                 heart.innerHTML = '❤️';
                 heart.style.position = 'fixed';
@@ -1016,8 +1170,32 @@
                 heart.style.color = '#ff69b4';
                 heart.style.pointerEvents = 'none';
                 heart.style.zIndex = '9999';
-                heart.style.opacity = '0.6';
-                heart.style.filter = 'drop-shadow(0 0 5px #ff69b4)';
+                heart.style.opacity = '0.8';
+                heart.style.filter = 'drop-shadow(0 0 8px #ff69b4)';
+                heart.style.animation = 'floatUp 1.5s ease-out forwards';
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 1500);
+            }
+        });
+
+        // Touch support for mobile - hearts on touch
+        document.addEventListener('touchmove', function(e) {
+            if (Math.random() < 0.3) { // 30% chance on touch para hindi masyadong marami
+                const touch = e.touches[0];
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'fixed';
+                heart.style.left = (touch.pageX - 10) + 'px';
+                heart.style.top = (touch.pageY - 10) + 'px';
+                heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
+                heart.style.color = '#ff69b4';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '9999';
+                heart.style.opacity = '0.8';
+                heart.style.filter = 'drop-shadow(0 0 8px #ff69b4)';
                 heart.style.animation = 'floatUp 1.5s ease-out forwards';
                 document.body.appendChild(heart);
 
@@ -1033,8 +1211,12 @@
         const canvas = document.getElementById('intro-canvas');
         const ctx = canvas.getContext('2d');
         
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        resizeCanvas();
         
         let particles = [];
         const particleCount = 500;
@@ -1044,18 +1226,23 @@
         let holdProgress = 0;
         let heartFormed = false;
         
-        for (let i = 0; i < particleCount; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                vx: (Math.random() - 0.5) * 1.5,
-                vy: (Math.random() - 0.5) * 1.5,
-                size: Math.random() * 4 + 1,
-                color: `rgba(255, ${Math.floor(100 + Math.random() * 80)}, 180, ${0.2 + Math.random() * 0.6})`,
-                originalX: Math.random() * canvas.width,
-                originalY: Math.random() * canvas.height
-            });
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 1.5,
+                    vy: (Math.random() - 0.5) * 1.5,
+                    size: Math.random() * 4 + 1,
+                    color: `rgba(255, ${Math.floor(100 + Math.random() * 80)}, 180, ${0.2 + Math.random() * 0.6})`,
+                    originalX: Math.random() * canvas.width,
+                    originalY: Math.random() * canvas.height
+                });
+            }
         }
+        
+        initParticles();
         
         canvas.addEventListener('mousemove', (e) => {
             const rect = canvas.getBoundingClientRect();
@@ -1079,6 +1266,7 @@
             isHolding = false;
         });
         
+        // Touch events for mobile
         canvas.addEventListener('touchmove', (e) => {
             e.preventDefault();
             const rect = canvas.getBoundingClientRect();
@@ -1186,12 +1374,13 @@
         animate();
         
         window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            resizeCanvas();
+            initParticles();
         });
 
         function createFloatingHearts() {
             const container = document.getElementById('floatingHearts');
+            container.innerHTML = '';
             for (let i = 0; i < 30; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'floating-heart';
@@ -1228,6 +1417,7 @@ Dalevx ❤️`;
         ];
 
         const leftGrid = document.getElementById('openWhenLeftGrid');
+        leftGrid.innerHTML = '';
         openWhenLetters.forEach(letter => {
             const card = document.createElement('div');
             card.className = 'open-when-left-card';
